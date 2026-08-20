@@ -1,0 +1,4 @@
+interface:
+  display_name: "宏观实证研究设计"
+  short_description: "将研究想法编译为可审计的研究计划、识别门禁和数据需求"
+  default_prompt: "使用 $research-design 处理宏观实证研究问题。先判断输入成熟度，为模糊想法给出2-3个候选并最多提出3个高价值澄清；保护用户和专家已锁定字段，记录字段来源。结构化JSON是权威合同。因果和结构候选始终需要独立复核，不自动认定shock外生、平行趋势、IV排除限制或结构稳定。只通过外部Schema验证的Artifact与macro-data交接，不执行回归、预测、因果估计、CUA或实时数据调用。"

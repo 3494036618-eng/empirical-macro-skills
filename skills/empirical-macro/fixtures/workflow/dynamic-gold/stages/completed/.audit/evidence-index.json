@@ -1,0 +1,1002 @@
+{
+  "evidence": [
+    {
+      "artifact_path": "reproduction/data-and-evidence/research-design/research_request.json",
+      "artifact_sha256": "sha256:1e3a8d82c8a9def288750c91d254a5c19bad8ddf13794d53dba0d0fd324ff37d",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-9d715d193bc16b9d97a7b84d0b712dd8",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/research_question"
+      },
+      "semantic_role": "research_question",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/research-design/research_plan.json",
+      "artifact_sha256": "sha256:658cd4280ee3df380d1a1c70666c30092a2c19682e3a275a1b70d2707fac8eae",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-601aabd616e668c89bc6e40f3d32a382",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/estimand"
+      },
+      "semantic_role": "estimand",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/research-design/identification_audit.json",
+      "artifact_sha256": "sha256:7b849072788f119233c5e00ee12182dffdfee9d34487df9a802d956042b44a9e",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-7749d9829ae52faa9bf867cefa435e29",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/identification_status"
+      },
+      "semantic_role": "identification",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/macro-data/source-manifest.json",
+      "artifact_sha256": "sha256:2a3720475d82f1f1c3646ed0f1763fdb7a24f02c15dcabc56108514246de8c0b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c7b330d88024becb68b93f6a669c5b42",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/source_commit"
+      },
+      "semantic_role": "data_identity",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/macro-data/source-manifest.json",
+      "artifact_sha256": "sha256:2a3720475d82f1f1c3646ed0f1763fdb7a24f02c15dcabc56108514246de8c0b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-e6e4d4b800487b9393700ce8998fbf22",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/license"
+      },
+      "semantic_role": "license",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-a5560c8d401b65dc1414d1e227cf2697",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/0/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-bf7163bd7cbbf6e9a1b0dd7dca3aa6a0",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/0/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-4307d2b3b729497cd7ac349be83701f9",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/0/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-4a04aa6e261763ca98b690062ec83438",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/0/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-0d1318bf012c257d0d4be263b8c55380",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/1/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c91526a535798587b587b90577a47280",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/1/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-6cc9b402ee64a54f01f9af61e6dc985e",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/1/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-610086ff1e4cddf26a1e4319b659dbf5",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/1/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-a9178b7089a73bcac92ed5d679032182",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/2/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-978cb837e554d5caa179020852c75ef8",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/2/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-f755e0546738894aba4fca49f3e5dbc4",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/2/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-6b654e18a3304e097ae5dbd7137d40bc",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/2/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-7ca93094253f6e14048b7e232db2ea76",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/3/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-42b44610ab7f8adf190258191cf979d8",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/3/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-d1e619f721025126ebd0181f8444b150",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/3/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-ff79cbaf3f42d676469941fb21b0663f",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/3/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-4945acee98a8aa626261ff8b786f0f91",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/4/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-3f2070747e37e9a58cd8d06a4932350f",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/4/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-3b31536311ad0717b344fee9a00d5783",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/4/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c024334386a5d7d77c2392177abfcf6c",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/4/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-978af10a1c616e7e8758ceabfd9cbb25",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/5/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-27c15113d939d2920ad5e46b9517cd6b",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/5/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-0dfb70ef8f96573928b898590ef10b91",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/5/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c9e169dcd35542d85504f8812404a513",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/5/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c6cc5798c4ac427362d16e06ce93a081",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/6/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-b2b31ee2386be773d720218f56589863",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/6/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-8d1ea4a10e0e8200955a358c2e23c84b",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/6/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-6fe9f7f53ce3b222373129630d884894",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/6/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-24af650ba9064229415ed5e3c77194dc",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/7/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-1fc420729cde707ee0dc97104221cb0e",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/7/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-1be8b6dc49e334c9d2d65ecce6937d46",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/7/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-0fa4db0935faacb71492f96bfab56c2c",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/7/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-b3ec185727f9fbb004723cc5c5a04dda",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/8/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-ec705e1fe748072346a76fbfd9e81f24",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/8/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-820069c8795a79e4ab0fe2af6eac208c",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/8/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-873303799a4d5cc03cf930d09b8fdfed",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/8/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-612065c533be538cf9d91eef9f5044d7",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/9/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-80a83d3257e5b1278fa2e1e0cae66e91",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/9/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-20105871f34c1da189e800d908084dcb",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/9/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-fd1041ffbbce6bdf6bbdccce067deddc",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/9/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-853d2e71a49aa04ab4f72e5ec875dc38",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/10/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-b43997bba88df1b27225087693c43b1e",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/10/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-a5bef633f0152041a0ce381c0d39a042",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/10/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c9226878ea7a8576658e6783d6ae62d1",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/10/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-0226a9b199194d9d90645f929d51fc5f",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/11/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-cc64f601460cec94c91da36957296c6e",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/11/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-e71cfd522531b1fdd752f44c597363a5",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/11/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c28c0a3987c03d5db3dbe7ba404e4ceb",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/11/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-a0f6a8182aee7ac037d9325ec7bdea7b",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/12/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-2208b01099902909862841f62ee6d60e",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/12/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-11d9abde276b8df58734fad9bb3d2a01",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/12/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-9f3c3f351919c03dc6b815390a07e7e7",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/12/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-fc12bce6574cc024b69ed8e7358da9f3",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/13/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-6e04a8f9a609138342fd522fc706d7d8",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/13/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-fc119efc2d7fce7989d923f24f5ec137",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/13/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-332e3ed0a489334e9a0ded77d992d332",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/13/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-677a1c5874d97d3e539db0d8382f402f",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/14/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-165870e9acfa78a8b2750057229871cd",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/14/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-6ffa681aadb094bc48cf078cf94d5002",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/14/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-97424fa705d93b2cd4a941f03b3496bb",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/14/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-ca9de3ac912c5478e1d156ee488054f6",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/15/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-7877213a637e6b25da7a4ba3df39e0cf",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/15/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-8dfc642f44023ee997eb87dfe9062175",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/15/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-f73506172cb1e959e5d59d07ba11db3f",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/15/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-c1430517ebbe309102f41833d5540866",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/16/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-3c670e21a5462480135ca5588da3e443",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/16/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-4da58886f29cc26dc32029f200d7c491",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/16/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-316e977778d58ad522b0fe1bce252b36",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/16/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-d27bac94f12516dd04b31de27b1f8065",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/17/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-ce2395311f21af64770dd287da5552b6",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/17/standard_error"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-79f2c8de49ed5db5cae33b345631d2bc",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/17/confidence_lower"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/estimator/result.json",
+      "artifact_sha256": "sha256:dd7dccebdcb79fdc85136efc9bcec6e970b5bbf57a6f2ae167b8bef610b50b5b",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-7c0e5d84f22725eec1029aacff7f5a22",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/17/confidence_upper"
+      },
+      "semantic_role": "uncertainty",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/robustness-audit/audit-result.json",
+      "artifact_sha256": "sha256:3029cf4571ff54090d4b96ab652211b1c61cbea35664295408117926cba30cfe",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-5fc0f3566de3aa6dcf7f1dcb6276104e",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/assessment"
+      },
+      "semantic_role": "assessment",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/robustness-audit/check-results.json",
+      "artifact_sha256": "sha256:947479d04665d4f24400c99892c083424676ca121b646b9111bd8c761b858709",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-029ebc73e1c7e3f852a01e983249bcbf",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/0"
+      },
+      "semantic_role": "robustness_check",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/robustness-audit/check-results.json",
+      "artifact_sha256": "sha256:947479d04665d4f24400c99892c083424676ca121b646b9111bd8c761b858709",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-813a18f9d2318f0c003c830f9ed05548",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/1"
+      },
+      "semantic_role": "robustness_check",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/robustness-audit/check-results.json",
+      "artifact_sha256": "sha256:947479d04665d4f24400c99892c083424676ca121b646b9111bd8c761b858709",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-7a448c2e1015feab159fc1f45ef4bee0",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/2"
+      },
+      "semantic_role": "robustness_check",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/robustness-audit/check-results.json",
+      "artifact_sha256": "sha256:947479d04665d4f24400c99892c083424676ca121b646b9111bd8c761b858709",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-f9f34615102081bfd9647dcb95047c6c",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/3"
+      },
+      "semantic_role": "robustness_check",
+      "status": "verified"
+    },
+    {
+      "artifact_path": "reproduction/data-and-evidence/robustness-audit/check-results.json",
+      "artifact_sha256": "sha256:947479d04665d4f24400c99892c083424676ca121b646b9111bd8c761b858709",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-770cf01abb1d13d3075fcb361dae273c",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/4"
+      },
+      "semantic_role": "robustness_check",
+      "status": "verified"
+    }
+  ],
+  "evidence_index_id": "rs-evidence-index-1c1f89896b1aa7ae3d30fb4bc12a503c",
+  "schema_version": "0.1.0"
+}

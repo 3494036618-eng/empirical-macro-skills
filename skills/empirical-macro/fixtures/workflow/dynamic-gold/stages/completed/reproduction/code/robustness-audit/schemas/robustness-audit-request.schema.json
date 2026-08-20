@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:robustness-audit:request:0.1.0",
+  "title": "robustness-audit request",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "audit_request_id",
+    "robustness_handoff_ref",
+    "baseline_bundle_ref",
+    "baseline_request_ref",
+    "adapter_id",
+    "requested_output"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "audit_request_id": {
+      "type": "string",
+      "pattern": "^ra-request-[a-f0-9]{32,64}$"
+    },
+    "robustness_handoff_ref": {
+      "type": "string",
+      "pattern": "^rd-robustness-[a-f0-9]{16,64}$"
+    },
+    "baseline_bundle_ref": {
+      "type": "string",
+      "pattern": "^tsd-run-[a-f0-9]{32,64}$"
+    },
+    "baseline_request_ref": {
+      "type": "string",
+      "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "adapter_id": {"const": "time-series-dynamics"},
+    "requested_output": {"const": "declared_robustness_audit"}
+  },
+  "additionalProperties": false
+}

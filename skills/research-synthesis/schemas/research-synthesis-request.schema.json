@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-synthesis:request:0.1.0",
+  "title": "research-synthesis 请求",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request_id",
+    "research_title",
+    "report_language",
+    "bundle_refs",
+    "external_sources",
+    "output_policy",
+    "render_policy",
+    "release_context"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^rs-request-[a-f0-9]{32}$"
+    },
+    "research_title": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "report_language": {
+      "const": "zh-CN"
+    },
+    "bundle_refs": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/research_design_ref"
+        },
+        {
+          "$ref": "#/$defs/macro_data_ref"
+        },
+        {
+          "$ref": "#/$defs/estimator_ref"
+        },
+        {
+          "$ref": "#/$defs/robustness_ref"
+        }
+      ],
+      "items": false
+    },
+    "external_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/external_source"
+      }
+    },
+    "output_policy": {
+      "type": "object",
+      "required": [
+        "primary_output",
+        "copy_evidence_files",
+        "recompute_estimates",
+        "regenerate_figures",
+        "allow_numeric_extraction_from_markdown",
+        "allow_claim_upgrade",
+        "expose_audit_files_as_primary_output",
+        "include_runtime_logs"
+      ],
+      "properties": {
+        "primary_output": {
+          "const": "research-report.md"
+        },
+        "copy_evidence_files": {
+          "const": true
+        },
+        "recompute_estimates": {
+          "const": false
+        },
+        "regenerate_figures": {
+          "const": false
+        },
+        "allow_numeric_extraction_from_markdown": {
+          "const": false
+        },
+        "allow_claim_upgrade": {
+          "const": false
+        },
+        "expose_audit_files_as_primary_output": {
+          "const": false
+        },
+        "include_runtime_logs": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "render_policy": {
+      "type": "object",
+      "required": [
+        "authoritative_report_format",
+        "supporting_formats",
+        "optional_renderer",
+        "execute_code"
+      ],
+      "properties": {
+        "authoritative_report_format": {
+          "const": "markdown"
+        },
+        "supporting_formats": {
+          "const": [
+            "csv",
+            "png"
+          ]
+        },
+        "optional_renderer": {
+          "const": "none"
+        },
+        "execute_code": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "release_context": {
+      "const": "local_review"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "bundle_ref": {
+      "type": "object",
+      "required": [
+        "bundle_ref_id",
+        "artifact_role",
+        "skill_name",
+        "skill_version",
+        "bundle_path",
+        "manifest_path",
+        "expected_manifest_sha256",
+        "expected_ids",
+        "required"
+      ],
+      "properties": {
+        "bundle_ref_id": {
+          "type": "string",
+          "pattern": "^rs-bundle-ref-[a-f0-9]{32}$"
+        },
+        "artifact_role": {
+          "type": "string"
+        },
+        "skill_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "skill_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bundle_path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\.\\.)[^*?]+$"
+        },
+        "manifest_path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\.\\.)[^*?]+\\.json$"
+        },
+        "expected_manifest_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "expected_ids": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "research_design_ref": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bundle_ref"
+        },
+        {
+          "properties": {
+            "artifact_role": {
+              "const": "research_design"
+            }
+          }
+        }
+      ]
+    },
+    "macro_data_ref": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bundle_ref"
+        },
+        {
+          "properties": {
+            "artifact_role": {
+              "const": "macro_data"
+            }
+          }
+        }
+      ]
+    },
+    "estimator_ref": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bundle_ref"
+        },
+        {
+          "properties": {
+            "artifact_role": {
+              "const": "estimator"
+            }
+          }
+        }
+      ]
+    },
+    "robustness_ref": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bundle_ref"
+        },
+        {
+          "properties": {
+            "artifact_role": {
+              "const": "robustness_audit"
+            }
+          }
+        }
+      ]
+    },
+    "external_source": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "source_class",
+        "title",
+        "url",
+        "accessed_at",
+        "supports",
+        "does_not_support"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^rs-source-[a-f0-9]{32}$"
+        },
+        "source_class": {
+          "enum": [
+            "methodological_source",
+            "external_context"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "accessed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "does_not_support": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

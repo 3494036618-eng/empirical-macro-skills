@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1.0-beta",
+  "action": "method_not_implemented",
+  "target_skill": "research-design",
+  "issue_codes": [
+    "method_not_implemented"
+  ],
+  "user_message": "Try another method."
+}

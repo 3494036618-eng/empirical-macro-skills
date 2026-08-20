@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0-draft",
+  "plan_id": "research-plan-0123456789abcdef",
+  "request_id": "rd-request-0123456789abcdef",
+  "research_family": "dynamic_shock_response",
+  "intended_claim": "causal",
+  "analysis_track": "identified_shock_irf",
+  "primary_design": "local_projection",
+  "claim_eligibility": "causal_candidate",
+  "design_readiness": "review_required",
+  "review_required": true
+}

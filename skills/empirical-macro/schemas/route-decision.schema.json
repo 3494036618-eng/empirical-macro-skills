@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:route-decision:0.1.0-beta",
+  "title": "Empirical Macro Route Decision",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "action",
+    "target_skill",
+    "issue_codes",
+    "user_message"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-beta"
+    },
+    "action": {
+      "enum": [
+        "route_research_design",
+        "route_macro_data",
+        "route_time_series_dynamics",
+        "route_robustness_audit",
+        "route_research_synthesis",
+        "method_not_implemented",
+        "out_of_scope",
+        "stopped",
+        "completed"
+      ]
+    },
+    "target_skill": {
+      "oneOf": [
+        {
+          "enum": [
+            "research-design",
+            "macro-data",
+            "time-series-dynamics",
+            "robustness-audit",
+            "research-synthesis"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "issue_codes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true
+    },
+    "user_message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "method_not_implemented"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "type": "null"
+          },
+          "issue_codes": {
+            "contains": {
+              "const": "method_not_implemented"
+            },
+            "minContains": 1
+          },
+          "user_message": {
+            "const": "当前版本不能执行该方法"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "out_of_scope",
+              "stopped",
+              "completed"
+            ]
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "type": "null"
+          },
+          "user_message": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "route_research_design"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "const": "research-design"
+          },
+          "user_message": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "route_macro_data"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "const": "macro-data"
+          },
+          "user_message": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "route_time_series_dynamics"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "const": "time-series-dynamics"
+          },
+          "user_message": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "route_robustness_audit"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "const": "robustness-audit"
+          },
+          "user_message": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "route_research_synthesis"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target_skill": {
+            "const": "research-synthesis"
+          },
+          "user_message": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.2.0-beta",
+  "result_id": "macro-result-0123456789abcdef",
+  "research_use": "dynamic_response",
+  "execution_status": "success",
+  "research_readiness": "ready",
+  "delivery_eligibility": "analysis_ready",
+  "eligible_for_estimation": true,
+  "review_required": false,
+  "frequency": "Q",
+  "observation_period": {
+    "start": "1985Q1",
+    "end": "2007Q4"
+  },
+  "source_checksum": "19ca23c02ff86dd1f7c78018e4052eea98de4ecca879f467c3a9d57f55b38d2c",
+  "source": {
+    "provider": "research_replication_artifact",
+    "dataset": "Jorda-Taylor JEL Example 5",
+    "version": "655696c1c576b7537c5a939d2c261f0a111ae663",
+    "license": "CC0-1.0"
+  },
+  "variables": [
+    "rr_shock",
+    "lcpi",
+    "lrgdp",
+    "stir",
+    "dlcpi",
+    "dlrgdp",
+    "dstir"
+  ],
+  "provenance_complete": true
+}

@@ -1,0 +1,9 @@
+{
+  "fixture_type": "synthetic",
+  "response": {
+    "code": 5000,
+    "msg": "synthetic provider failure",
+    "dataset_type": "macro",
+    "items": []
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "check_family": "exact_rerun",
+    "required": true,
+    "patches": [{}],
+    "anchor_horizons": [0, 4, 8, 12, 17],
+    "metrics": ["canonical_result_equality"],
+    "decision_rules": ["exact_match_required"],
+    "threat_refs": [],
+    "diagnostic_refs": ["independent_rerun_required"]
+  },
+  {
+    "check_family": "lag_sensitivity",
+    "required": true,
+    "patches": [{"lags": 3}, {"lags": 4}, {"lags": 5}],
+    "anchor_horizons": [0, 4, 8, 12, 17],
+    "metrics": ["max_standardized_path_deviation", "anchor_sign_changes"],
+    "decision_rules": ["max_standardized_deviation_le_1_96"],
+    "threat_refs": [],
+    "diagnostic_refs": ["horizon_diagnostics"]
+  },
+  {
+    "check_family": "covariance_sensitivity",
+    "required": true,
+    "patches": [{"hac_maxlags": 8}, {"hac_maxlags": 17}],
+    "anchor_horizons": [0, 4, 8, 12, 17],
+    "metrics": ["coefficient_delta", "standard_error_ratio"],
+    "decision_rules": ["coefficient_delta_le_1e_12"],
+    "threat_refs": ["multiple_testing"],
+    "diagnostic_refs": ["horizon_diagnostics"]
+  },
+  {
+    "check_family": "sample_policy_sensitivity",
+    "required": true,
+    "patches": [
+      {"sample_policy": "horizon_specific"},
+      {"sample_policy": "common_sample"}
+    ],
+    "anchor_horizons": [0, 4, 8, 12, 17],
+    "metrics": ["max_standardized_path_deviation", "nobs_delta"],
+    "decision_rules": ["report_only"],
+    "threat_refs": ["sample_selection"],
+    "diagnostic_refs": []
+  },
+  {
+    "check_family": "sample_window_sensitivity",
+    "required": true,
+    "patches": [
+      {"sample_window": {"start": "1986Q1", "end": "2007Q4"}},
+      {"sample_window": {"start": "1985Q1", "end": "2006Q4"}}
+    ],
+    "anchor_horizons": [0, 4, 8, 12, 17],
+    "metrics": ["max_standardized_path_deviation", "nobs_delta"],
+    "decision_rules": ["report_only"],
+    "threat_refs": ["sample_selection", "structural_break"],
+    "diagnostic_refs": []
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "evidence": [
+    {
+      "artifact_path": "evidence/result.json",
+      "artifact_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "evidence_class": "project_evidence",
+      "evidence_id": "rs-evidence-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "locator": {
+        "type": "json_pointer",
+        "value": "/horizon_results/0/estimate"
+      },
+      "semantic_role": "estimate",
+      "status": "verified"
+    }
+  ],
+  "evidence_index_id": "rs-evidence-index-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "0.1.0"
+}

@@ -1,0 +1,216 @@
+{
+  "adapter_contract_version": "0.1.0",
+  "adapter_id": "time-series-dynamics",
+  "alternatives": [
+    {
+      "alternative_id": "ra-alt-ed5c2aa2a14eddfa516c629020579ddc",
+      "check_id": "ra-check-4381c1fabc0180978aec15efc6c64e44",
+      "patch": {
+        "lags": 3
+      }
+    },
+    {
+      "alternative_id": "ra-alt-d520ffb46adc8874ef66966e28441c52",
+      "check_id": "ra-check-4381c1fabc0180978aec15efc6c64e44",
+      "patch": {
+        "lags": 5
+      }
+    },
+    {
+      "alternative_id": "ra-alt-43e0051a2f5b919d8317bfb8649c4e88",
+      "check_id": "ra-check-077835ba64641086db09119bd2ac2655",
+      "patch": {
+        "hac_maxlags": 8
+      }
+    },
+    {
+      "alternative_id": "ra-alt-3a0e72ad4d76d2df661f8835ccea7b8e",
+      "check_id": "ra-check-3a9fe68cc441b45c1a8ccb68c340ea1c",
+      "patch": {
+        "sample_policy": "common_sample"
+      }
+    },
+    {
+      "alternative_id": "ra-alt-4ac79a1a6ebcf54b54441e27454cef89",
+      "check_id": "ra-check-bc473607aa39a18e94dfdbf98833cdc5",
+      "patch": {
+        "sample_window": {
+          "end": "2007Q4",
+          "start": "1986Q1"
+        }
+      }
+    },
+    {
+      "alternative_id": "ra-alt-ceb642a657cd2fdbd53606433880f7b9",
+      "check_id": "ra-check-bc473607aa39a18e94dfdbf98833cdc5",
+      "patch": {
+        "sample_window": {
+          "end": "2006Q4",
+          "start": "1985Q1"
+        }
+      }
+    }
+  ],
+  "analysis_track": "identified_shock_irf",
+  "audit_plan_id": "ra-plan-f5827e8808cba1802b8f4dd0f75f6d15",
+  "audit_request_id": "ra-request-0123456789abcdef0123456789abcdef",
+  "baseline_bundle_ref": "tsd-run-47c8f67cbc8772d6b7eb64b7f6db520d",
+  "baseline_estimand_fingerprint": "sha256:0c4c3b667952c6f326738172b59b68fa0f8ad876d6be30ae70bf2f18ae88680a",
+  "baseline_request_ref": "tsd-request-0123456789abcdef",
+  "checks": [
+    {
+      "anchor_horizons": [
+        0,
+        4,
+        8,
+        12,
+        17
+      ],
+      "check_family": "exact_rerun",
+      "check_id": "ra-check-93904c8f1da58963089e6bd0364f92b8",
+      "decision_rule_ids": [
+        "exact_match_required"
+      ],
+      "failure_policy": "stop_ship",
+      "metrics": [
+        "canonical_result_equality"
+      ],
+      "required": true,
+      "same_estimand_required": true,
+      "uses_randomness": false
+    },
+    {
+      "anchor_horizons": [
+        0,
+        4,
+        8,
+        12,
+        17
+      ],
+      "check_family": "lag_sensitivity",
+      "check_id": "ra-check-4381c1fabc0180978aec15efc6c64e44",
+      "decision_rule_ids": [
+        "max_standardized_deviation_le_1_96"
+      ],
+      "failure_policy": "review_required",
+      "metrics": [
+        "max_standardized_path_deviation",
+        "anchor_sign_changes"
+      ],
+      "required": true,
+      "same_estimand_required": true,
+      "uses_randomness": false
+    },
+    {
+      "anchor_horizons": [
+        0,
+        4,
+        8,
+        12,
+        17
+      ],
+      "check_family": "covariance_sensitivity",
+      "check_id": "ra-check-077835ba64641086db09119bd2ac2655",
+      "decision_rule_ids": [
+        "coefficient_delta_le_1e_12"
+      ],
+      "failure_policy": "review_required",
+      "metrics": [
+        "coefficient_delta",
+        "standard_error_ratio"
+      ],
+      "required": true,
+      "same_estimand_required": true,
+      "uses_randomness": false
+    },
+    {
+      "anchor_horizons": [
+        0,
+        4,
+        8,
+        12,
+        17
+      ],
+      "check_family": "sample_policy_sensitivity",
+      "check_id": "ra-check-3a9fe68cc441b45c1a8ccb68c340ea1c",
+      "decision_rule_ids": [
+        "report_only"
+      ],
+      "failure_policy": "review_required",
+      "metrics": [
+        "max_standardized_path_deviation",
+        "nobs_delta"
+      ],
+      "required": true,
+      "same_estimand_required": true,
+      "uses_randomness": false
+    },
+    {
+      "anchor_horizons": [
+        0,
+        4,
+        8,
+        12,
+        17
+      ],
+      "check_family": "sample_window_sensitivity",
+      "check_id": "ra-check-bc473607aa39a18e94dfdbf98833cdc5",
+      "decision_rule_ids": [
+        "report_only"
+      ],
+      "failure_policy": "review_required",
+      "metrics": [
+        "max_standardized_path_deviation",
+        "nobs_delta"
+      ],
+      "required": true,
+      "same_estimand_required": true,
+      "uses_randomness": false
+    }
+  ],
+  "checksum": "sha256:558f07c742664feda904219284e75a285f519de71419ca782df13eac09f998f4",
+  "claim_eligibility": "causal_candidate",
+  "created_at": "2026-08-16T22:37:30.892679Z",
+  "decision_rules": [
+    {
+      "metric": "coefficient_delta",
+      "operator": "less_than_or_equal",
+      "rule_id": "coefficient_delta_le_1e_12",
+      "threshold": 1e-12
+    },
+    {
+      "metric": "canonical_result_equality",
+      "operator": "equal",
+      "rule_id": "exact_match_required",
+      "threshold": true
+    },
+    {
+      "metric": "max_standardized_path_deviation",
+      "operator": "less_than_or_equal",
+      "rule_id": "max_standardized_deviation_le_1_96",
+      "threshold": 1.96
+    },
+    {
+      "metric": "max_standardized_path_deviation",
+      "operator": "report_only",
+      "rule_id": "report_only",
+      "threshold": null
+    }
+  ],
+  "execution_budget": {
+    "max_parallel_jobs": 1,
+    "max_runtime_seconds": 600,
+    "max_variants": 7
+  },
+  "plan_timing": "post_result_exploratory",
+  "pre_result_binding": null,
+  "provenance": {
+    "complete": true,
+    "source": "research-design-handoff"
+  },
+  "randomness": {
+    "required": false,
+    "seed": null
+  },
+  "schema_version": "0.1.0"
+}

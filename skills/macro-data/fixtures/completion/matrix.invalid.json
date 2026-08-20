@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.3.0-beta",
+  "matrix_id": "macro-matrix-11111111111111111111111111111111",
+  "request_id": "macro-request-22222222222222222222222222222222",
+  "request_checksum": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "cells": [
+    {
+      "cell_id": "macro-cell-44444444444444444444444444444444",
+      "key": {
+        "indicator_code": "FP.CPI.TOTL",
+        "entity_code": "CHN",
+        "frequency": "A"
+      },
+      "status": "datapro_locked"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+.DS_Store
+.coverage
+.env
+.env.*
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+__pycache__/
+*.py[cod]
+*.pem
+*.key
+*.p12
+*.pfx
+agent-runs/
+sanitized-live/

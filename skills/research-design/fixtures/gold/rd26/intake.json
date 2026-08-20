@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-0000001a",
+      "intended_claim_candidate": "predictive",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "forecasting_nowcasting",
+      "research_question": "能否用最终修订数据回测过去的历史预测？",
+      "risk_level": "high",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "能否用最终修订数据回测过去的历史预测？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-000000000000001a",
+  "output_language": "zh-CN",
+  "raw_user_input": "能否用最终修订数据回测过去的历史预测？",
+  "recommended_candidate_id": "rd-candidate-0000001a",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

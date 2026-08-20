@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-design:data-requirements:0.1.0-draft",
+  "title": "research-design data requirements",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "requirement_id",
+    "request_id",
+    "research_family",
+    "variables",
+    "data_structure",
+    "point_in_time_required",
+    "treatment_timing_required",
+    "license_requirement",
+    "coverage_policy",
+    "macro_data_requests",
+    "status",
+    "unresolved_requirements"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-draft"
+    },
+    "requirement_id": {
+      "type": "string",
+      "pattern": "^data-req-[a-f0-9]{16,64}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^rd-request-[a-f0-9]{16,64}$"
+    },
+    "research_family": {
+      "enum": [
+        "descriptive_measurement",
+        "panel_association",
+        "dynamic_shock_response",
+        "causal_policy_evaluation",
+        "forecasting_nowcasting",
+        "structural_modeling",
+        "undetermined"
+      ]
+    },
+    "variables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/variable_requirement"
+      }
+    },
+    "data_structure": {
+      "type": "object",
+      "required": [
+        "shape",
+        "entity_key",
+        "time_key",
+        "frequency",
+        "balanced_panel_required",
+        "minimum_entities",
+        "minimum_periods"
+      ],
+      "properties": {
+        "shape": {
+          "enum": [
+            "cross_section",
+            "time_series",
+            "panel",
+            "repeated_cross_section",
+            "event_panel",
+            "mixed_frequency_panel"
+          ]
+        },
+        "entity_key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "time_key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "frequency": {
+          "enum": [
+            "D",
+            "W",
+            "M",
+            "Q",
+            "A",
+            "mixed"
+          ]
+        },
+        "balanced_panel_required": {
+          "type": "boolean"
+        },
+        "minimum_entities": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_periods": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "point_in_time_required": {
+      "type": "boolean"
+    },
+    "treatment_timing_required": {
+      "type": "boolean"
+    },
+    "license_requirement": {
+      "enum": [
+        "internal_research",
+        "user_export",
+        "public_redistribution"
+      ]
+    },
+    "coverage_policy": {
+      "type": "object",
+      "required": [
+        "scope_may_shrink",
+        "missingness_must_be_reported",
+        "selection_rule_pre_registered"
+      ],
+      "properties": {
+        "scope_may_shrink": {
+          "const": false
+        },
+        "missingness_must_be_reported": {
+          "const": true
+        },
+        "selection_rule_pre_registered": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "macro_data_requests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/macro_data_request_reference"
+      }
+    },
+    "status": {
+      "enum": [
+        "ready_for_macro_data",
+        "review_required",
+        "blocked"
+      ]
+    },
+    "unresolved_requirements": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "research_family": {
+            "const": "forecasting_nowcasting"
+          }
+        },
+        "required": [
+          "research_family"
+        ]
+      },
+      "then": {
+        "properties": {
+          "point_in_time_required": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "research_family": {
+            "const": "causal_policy_evaluation"
+          }
+        },
+        "required": [
+          "research_family"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treatment_timing_required": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ready_for_macro_data"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "unresolved_requirements": {
+            "maxItems": 0
+          },
+          "macro_data_requests": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "macro_data_request_reference": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "artifact_path",
+        "schema_id",
+        "checksum_sha256",
+        "validation_status",
+        "research_use"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^macro-data-request-[a-f0-9]{16,64}$"
+        },
+        "artifact_path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*\\.\\.)[A-Za-z0-9._/-]+\\.json$"
+        },
+        "schema_id": {
+          "const": "urn:empirical-macro:macro-data:request:0.2.0-beta"
+        },
+        "checksum_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "validation_status": {
+          "const": "validated"
+        },
+        "research_use": {
+          "enum": [
+            "descriptive_latest",
+            "panel_analysis",
+            "forecasting",
+            "real_time"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "variable_requirement": {
+      "type": "object",
+      "required": [
+        "variable_id",
+        "role",
+        "concept",
+        "definition_constraints",
+        "entity_scope",
+        "frequency",
+        "unit",
+        "seasonal_adjustment",
+        "price_basis",
+        "currency",
+        "release_or_vintage",
+        "source_policy"
+      ],
+      "properties": {
+        "variable_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "role": {
+          "enum": [
+            "outcome",
+            "exposure",
+            "treatment",
+            "shock",
+            "predictor",
+            "control",
+            "instrument",
+            "moderator",
+            "forecast_target"
+          ]
+        },
+        "concept": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "definition_constraints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        "entity_scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        },
+        "frequency": {
+          "enum": [
+            "D",
+            "W",
+            "M",
+            "Q",
+            "A",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "seasonal_adjustment": {
+          "enum": [
+            "NSA",
+            "CA",
+            "SA",
+            "SCA",
+            "source_native",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "price_basis": {
+          "enum": [
+            "nominal",
+            "real",
+            "index",
+            "source_native",
+            "unknown"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]{3}$"
+        },
+        "release_or_vintage": {
+          "enum": [
+            "latest",
+            "release_date",
+            "as_of",
+            "specific_vintage",
+            "not_applicable"
+          ]
+        },
+        "source_policy": {
+          "enum": [
+            "datapro_first",
+            "official_required",
+            "specific_source_required",
+            "unresolved"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

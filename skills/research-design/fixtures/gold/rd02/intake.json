@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-00000002",
+      "intended_claim_candidate": "descriptive",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "descriptive_measurement",
+      "research_question": "哪些国家的增长呈现何种收敛？",
+      "risk_level": "low",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "哪些国家的增长呈现何种收敛？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-0000000000000002",
+  "output_language": "zh-CN",
+  "raw_user_input": "哪些国家的增长呈现何种收敛？",
+  "recommended_candidate_id": "rd-candidate-00000002",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

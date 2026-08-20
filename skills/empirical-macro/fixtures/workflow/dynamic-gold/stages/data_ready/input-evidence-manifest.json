@@ -1,0 +1,20 @@
+{
+  "evidence_id": "tsd-input-evidence-1afbb5cbe867beb4182310bacc1c1a86",
+  "file_checksums": {
+    "aggregatedata_final.dta": "19ca23c02ff86dd1f7c78018e4052eea98de4ecca879f467c3a9d57f55b38d2c",
+    "macro-data-handoff.json": "bfc289cef5ed44182f9c07cb2ad4e2a6fb52e0bea730f0e52e588e18e6da15a6",
+    "shock-identification-artifact.json": "677487c2e7d846c9f5e03a34b484bcc1b88ceec931d6f9933ad078637e86789d",
+    "source-manifest.json": "2a3720475d82f1f1c3646ed0f1763fdb7a24f02c15dcabc56108514246de8c0b"
+  },
+  "frequency": "Q",
+  "license": "CC0-1.0",
+  "macro_result_id": "macro-result-0123456789abcdef",
+  "sample_window": {
+    "end": "2007Q4",
+    "start": "1985Q1"
+  },
+  "schema_version": "0.1.0",
+  "secrets_recorded": false,
+  "shock_id": "shock-artifact-0123456789abcdef",
+  "source_commit": "655696c1c576b7537c5a939d2c261f0a111ae663"
+}

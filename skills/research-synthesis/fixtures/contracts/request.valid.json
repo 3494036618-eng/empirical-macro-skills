@@ -1,0 +1,81 @@
+{
+  "bundle_refs": [
+    {
+      "artifact_role": "research_design",
+      "bundle_path": "design",
+      "bundle_ref_id": "rs-bundle-ref-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expected_ids": {
+        "plan_id": "research-plan-0123456789abcdef"
+      },
+      "expected_manifest_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "manifest_path": "research-design-run-manifest.json",
+      "required": true,
+      "skill_name": "research-design",
+      "skill_version": "0.1.0"
+    },
+    {
+      "artifact_role": "macro_data",
+      "bundle_path": "data",
+      "bundle_ref_id": "rs-bundle-ref-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "expected_ids": {
+        "evidence_id": "tsd-input-evidence-1afbb5cbe867beb4182310bacc1c1a86"
+      },
+      "expected_manifest_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "manifest_path": "input-evidence-manifest.json",
+      "required": true,
+      "skill_name": "time-series-dynamics",
+      "skill_version": "0.1.0"
+    },
+    {
+      "artifact_role": "estimator",
+      "bundle_path": "estimator",
+      "bundle_ref_id": "rs-bundle-ref-cccccccccccccccccccccccccccccccc",
+      "expected_ids": {
+        "run_id": "tsd-run-47c8f67cbc8772d6b7eb64b7f6db520d"
+      },
+      "expected_manifest_sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "manifest_path": "run-manifest.json",
+      "required": true,
+      "skill_name": "time-series-dynamics",
+      "skill_version": "0.1.0"
+    },
+    {
+      "artifact_role": "robustness_audit",
+      "bundle_path": "robustness",
+      "bundle_ref_id": "rs-bundle-ref-dddddddddddddddddddddddddddddddd",
+      "expected_ids": {
+        "run_id": "ra-run-7f56707a01380d7ba7e7b7b7b9be043a"
+      },
+      "expected_manifest_sha256": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "manifest_path": "run-manifest.json",
+      "required": true,
+      "skill_name": "robustness-audit",
+      "skill_version": "0.1.0"
+    }
+  ],
+  "external_sources": [],
+  "output_policy": {
+    "allow_claim_upgrade": false,
+    "allow_numeric_extraction_from_markdown": false,
+    "copy_evidence_files": true,
+    "expose_audit_files_as_primary_output": false,
+    "include_runtime_logs": true,
+    "primary_output": "research-report.md",
+    "recompute_estimates": false,
+    "regenerate_figures": false
+  },
+  "release_context": "local_review",
+  "render_policy": {
+    "authoritative_report_format": "markdown",
+    "execute_code": false,
+    "optional_renderer": "none",
+    "supporting_formats": [
+      "csv",
+      "png"
+    ]
+  },
+  "report_language": "zh-CN",
+  "request_id": "rs-request-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "research_title": "一次已识别的意外货币政策收紧如何影响美国季度通胀路径",
+  "schema_version": "0.1.0"
+}

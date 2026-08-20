@@ -1,0 +1,17 @@
+{
+  "limitations": [
+    {
+      "affected_claim_refs": [],
+      "category": "unknown",
+      "limitation_id": "invalid",
+      "mitigation": "",
+      "release_impact": "none",
+      "severity": "none",
+      "source_refs": [],
+      "statement": "",
+      "status": "closed"
+    }
+  ],
+  "limitations_id": "invalid",
+  "schema_version": "9.9.9"
+}

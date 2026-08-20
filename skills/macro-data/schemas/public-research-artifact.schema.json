@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:macro-data:public-research-artifact:0.2.0-beta",
+  "title": "Pinned public research artifact import",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "provider",
+    "retrieved_at",
+    "source",
+    "raw_artifact",
+    "data_artifact",
+    "entity",
+    "frequency",
+    "series"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.0-beta"},
+    "provider": {"const": "public_research_archive"},
+    "retrieved_at": {"type": "string", "format": "date-time"},
+    "source": {
+      "type": "object",
+      "required": [
+        "source_system",
+        "dataset_id",
+        "dataset_name",
+        "title",
+        "url",
+        "version",
+        "source_last_updated",
+        "license"
+      ],
+      "properties": {
+        "source_system": {"type": "string", "minLength": 1},
+        "dataset_id": {"type": "string", "minLength": 1},
+        "dataset_name": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "format": "uri"},
+        "version": {"type": "string", "minLength": 1},
+        "source_last_updated": {"type": "string", "format": "date"},
+        "license": {
+          "type": "object",
+          "required": [
+            "id",
+            "url",
+            "attribution",
+            "use_status",
+            "allows_requested_use"
+          ],
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "url": {"type": "string", "format": "uri"},
+            "attribution": {"type": "string", "minLength": 1},
+            "use_status": {"const": "allowed"},
+            "allows_requested_use": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "raw_artifact": {"$ref": "#/$defs/artifact"},
+    "data_artifact": {
+      "type": "object",
+      "required": ["path", "sha256", "format", "period_column"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "format": {"const": "csv"},
+        "period_column": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "entity": {
+      "type": "object",
+      "required": ["code", "name"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "frequency": {"enum": ["M", "Q", "A"]},
+    "series": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "column",
+          "series_key",
+          "indicator_code",
+          "indicator_name",
+          "definition",
+          "unit",
+          "seasonal_adjustment",
+          "price_basis"
+        ],
+        "properties": {
+          "column": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "series_key": {"type": "string", "minLength": 1},
+          "indicator_code": {"type": "string", "minLength": 1},
+          "indicator_name": {"type": "string", "minLength": 1},
+          "definition": {"type": "string", "minLength": 1},
+          "unit": {"type": ["string", "null"]},
+          "seasonal_adjustment": {"type": ["string", "null"]},
+          "price_basis": {
+            "type": ["object", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

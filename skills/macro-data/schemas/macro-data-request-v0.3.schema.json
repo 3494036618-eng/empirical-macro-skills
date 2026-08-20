@@ -1,0 +1,762 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:macro-data:request:0.3.0-beta",
+  "title": "macro-data DataPro-first request",
+  "description": "DataPro-first、missing-only 缺口补全请求合同。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "research_question",
+    "research_use",
+    "concepts",
+    "indicators",
+    "entities",
+    "time_range",
+    "frequency",
+    "unit",
+    "seasonal_adjustment",
+    "price_basis",
+    "currency",
+    "release_or_vintage",
+    "preferred_sources",
+    "fallback_policy",
+    "transformation_policy",
+    "output_format"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.3.0-beta"
+    },
+    "research_question": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 2000
+    },
+    "research_use": {
+      "enum": [
+        "descriptive_latest",
+        "panel_analysis",
+        "dynamic_response",
+        "forecasting",
+        "real_time"
+      ]
+    },
+    "concepts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "concept",
+          "role",
+          "definition_constraints"
+        ],
+        "properties": {
+          "concept": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "role": {
+            "enum": [
+              "outcome",
+              "exposure",
+              "shock",
+              "instrument",
+              "control",
+              "context"
+            ]
+          },
+          "definition_constraints": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "indicators": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "name_or_code",
+          "required_definition"
+        ],
+        "properties": {
+          "name_or_code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "required_definition": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "name_or_code",
+          "entity_type",
+          "code_scheme"
+        ],
+        "properties": {
+          "name_or_code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "entity_type": {
+            "enum": [
+              "country",
+              "territory",
+              "region",
+              "industry",
+              "custom_aggregate"
+            ]
+          },
+          "code_scheme": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "time_range": {
+      "$ref": "#/$defs/time_range"
+    },
+    "frequency": {
+      "$ref": "#/$defs/frequency"
+    },
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "seasonal_adjustment": {
+      "$ref": "#/$defs/seasonal_adjustment"
+    },
+    "price_basis": {
+      "$ref": "#/$defs/price_basis"
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z]{3}$"
+    },
+    "release_or_vintage": {
+      "$ref": "#/$defs/vintage_constraint"
+    },
+    "preferred_sources": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "prefixItems": [
+        {
+          "const": "datapro"
+        }
+      ],
+      "items": {
+        "$ref": "#/$defs/provider"
+      }
+    },
+    "fallback_policy": {
+      "$ref": "#/$defs/fallback_policy"
+    },
+    "transformation_policy": {
+      "$ref": "#/$defs/transformation_policy"
+    },
+    "transformation_parameters": {
+      "$ref": "#/$defs/transformation_parameters"
+    },
+    "output_format": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "parquet",
+          "csv",
+          "json"
+        ]
+      }
+    },
+    "product_authorization": {
+      "$ref": "#/$defs/product_authorization"
+    },
+    "native_source_constraints": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_system",
+          "dataset_name",
+          "indicator_code"
+        ],
+        "properties": {
+          "source_system": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "dataset_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          },
+          "indicator_code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "transformation_policy": {
+            "properties": {
+              "requested_transformations": {
+                "contains": {
+                  "const": "unit_scale"
+                }
+              }
+            },
+            "required": [
+              "requested_transformations"
+            ]
+          }
+        },
+        "required": [
+          "transformation_policy"
+        ]
+      },
+      "then": {
+        "required": [
+          "transformation_parameters"
+        ],
+        "properties": {
+          "transformation_parameters": {
+            "required": [
+              "unit_scale"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transformation_policy": {
+            "properties": {
+              "requested_transformations": {
+                "contains": {
+                  "const": "downsample"
+                }
+              }
+            },
+            "required": [
+              "requested_transformations"
+            ]
+          }
+        },
+        "required": [
+          "transformation_policy"
+        ]
+      },
+      "then": {
+        "required": [
+          "transformation_parameters"
+        ],
+        "properties": {
+          "transformation_parameters": {
+            "required": [
+              "downsample"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "period": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{4}|[0-9]{4}-Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2])|[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))$"
+    },
+    "time_range": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/period"
+        },
+        "end": {
+          "$ref": "#/$defs/period"
+        }
+      },
+      "additionalProperties": false
+    },
+    "frequency": {
+      "enum": [
+        "D",
+        "W",
+        "M",
+        "Q",
+        "A",
+        "source_native"
+      ]
+    },
+    "seasonal_adjustment": {
+      "enum": [
+        "NSA",
+        "CA",
+        "SA",
+        "SCA",
+        "source_native"
+      ]
+    },
+    "price_basis": {
+      "type": "object",
+      "required": [
+        "type",
+        "base_period",
+        "chain_linked"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "nominal",
+            "real",
+            "volume",
+            "index",
+            "source_native"
+          ]
+        },
+        "base_period": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}(?:=100)?$"
+        },
+        "chain_linked": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "vintage_constraint": {
+      "type": "object",
+      "required": [
+        "mode",
+        "value"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "latest",
+            "as_of",
+            "specific_vintage"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "mode": {
+              "const": "latest"
+            },
+            "value": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "mode",
+            "value"
+          ]
+        },
+        {
+          "properties": {
+            "mode": {
+              "enum": [
+                "as_of",
+                "specific_vintage"
+              ]
+            },
+            "value": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "required": [
+            "mode",
+            "value"
+          ]
+        }
+      ]
+    },
+    "provider": {
+      "enum": [
+        "datapro",
+        "imf",
+        "world_bank",
+        "oecd",
+        "bis",
+        "fred",
+        "eurostat",
+        "national"
+      ]
+    },
+    "official_provider": {
+      "enum": [
+        "imf",
+        "world_bank",
+        "oecd",
+        "bis",
+        "fred",
+        "eurostat",
+        "national"
+      ]
+    },
+    "fallback_policy": {
+      "type": "object",
+      "required": [
+        "mode",
+        "allowed_sources",
+        "completion_scope",
+        "preserve_datapro_observations",
+        "replace_primary_observations",
+        "allow_semantic_substitute",
+        "allow_cross_source_stitching",
+        "identity_match_policy",
+        "overlap_policy"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "never",
+            "ask",
+            "allow_official_missing_only"
+          ]
+        },
+        "allowed_sources": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/official_provider"
+          }
+        },
+        "completion_scope": {
+          "const": "missing_cells_only"
+        },
+        "preserve_datapro_observations": {
+          "const": true
+        },
+        "replace_primary_observations": {
+          "const": false
+        },
+        "allow_semantic_substitute": {
+          "const": false
+        },
+        "allow_cross_source_stitching": {
+          "const": false
+        },
+        "identity_match_policy": {
+          "const": "exact_native_or_approved_mapping"
+        },
+        "overlap_policy": {
+          "const": "validate_without_replacement"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "mode": {
+              "const": "never"
+            },
+            "allowed_sources": {
+              "maxItems": 0
+            }
+          },
+          "required": [
+            "mode",
+            "allowed_sources"
+          ]
+        },
+        {
+          "properties": {
+            "mode": {
+              "enum": [
+                "ask",
+                "allow_official_missing_only"
+              ]
+            },
+            "allowed_sources": {
+              "minItems": 1
+            }
+          },
+          "required": [
+            "mode",
+            "allowed_sources"
+          ]
+        }
+      ]
+    },
+    "transformation_policy": {
+      "type": "object",
+      "required": [
+        "allow_unit_scaling",
+        "allow_currency_conversion",
+        "allow_downsampling",
+        "allow_upsampling",
+        "allow_imputation",
+        "allow_self_seasonal_adjustment",
+        "allow_rebasing",
+        "requested_transformations"
+      ],
+      "properties": {
+        "allow_unit_scaling": {
+          "type": "boolean"
+        },
+        "allow_currency_conversion": {
+          "const": false
+        },
+        "allow_downsampling": {
+          "type": "boolean"
+        },
+        "allow_upsampling": {
+          "const": false
+        },
+        "allow_imputation": {
+          "const": false
+        },
+        "allow_self_seasonal_adjustment": {
+          "const": false
+        },
+        "allow_rebasing": {
+          "const": false
+        },
+        "requested_transformations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "unit_scale",
+              "downsample",
+              "filter_period",
+              "filter_entity",
+              "select_source_native_variant"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "requested_transformations": {
+                "contains": {
+                  "const": "unit_scale"
+                }
+              }
+            },
+            "required": [
+              "requested_transformations"
+            ]
+          },
+          "then": {
+            "properties": {
+              "allow_unit_scaling": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "requested_transformations": {
+                "contains": {
+                  "const": "downsample"
+                }
+              }
+            },
+            "required": [
+              "requested_transformations"
+            ]
+          },
+          "then": {
+            "properties": {
+              "allow_downsampling": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "transformation_parameters": {
+      "type": "object",
+      "properties": {
+        "unit_scale": {
+          "type": "object",
+          "required": [
+            "multiplier",
+            "from_unit",
+            "to_unit"
+          ],
+          "properties": {
+            "multiplier": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "from_unit": {
+              "type": "string",
+              "minLength": 1
+            },
+            "to_unit": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "downsample": {
+          "type": "object",
+          "required": [
+            "source_frequency",
+            "target_frequency",
+            "method"
+          ],
+          "properties": {
+            "source_frequency": {
+              "enum": [
+                "M",
+                "Q"
+              ]
+            },
+            "target_frequency": {
+              "enum": [
+                "Q",
+                "A"
+              ]
+            },
+            "method": {
+              "enum": [
+                "sum",
+                "mean",
+                "last"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "product_authorization": {
+      "type": "object",
+      "required": [
+        "authorization_id",
+        "authorization_basis",
+        "data_use_scope",
+        "allowed_scopes",
+        "public_payload_policy"
+      ],
+      "properties": {
+        "authorization_id": {
+          "type": "string",
+          "pattern": "^product-auth-[a-f0-9]{32}$"
+        },
+        "authorization_basis": {
+          "const": "product_owner_directive"
+        },
+        "data_use_scope": {
+          "enum": [
+            "first_party_product_development",
+            "internal_research",
+            "controlled_public_demo",
+            "public_payload_redistribution"
+          ]
+        },
+        "allowed_scopes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "first_party_product_development",
+              "internal_research",
+              "controlled_public_demo",
+              "public_payload_redistribution"
+            ]
+          }
+        },
+        "public_payload_policy": {
+          "enum": [
+            "metadata_only",
+            "authorized"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.2.0-beta",
+  "spec_id": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "concept": "实际国内生产总值",
+  "indicator_query": "中国实际国内生产总值",
+  "definition_constraints": [],
+  "entity_constraints": [],
+  "frequency_constraint": "A",
+  "unit_constraint": null,
+  "seasonal_adjustment_constraint": "source_native",
+  "price_basis_constraint": null,
+  "currency_constraint": null,
+  "time_range": {
+    "start": "2000",
+    "end": "2025"
+  },
+  "vintage_constraint": {
+    "mode": "latest",
+    "value": null
+  },
+  "candidate_status": "ambiguous",
+  "selected_candidate": {
+    "provider": "datapro",
+    "dataset_id": "guessed-dataset",
+    "native_series_id": null,
+    "dimension_key": {
+      "indicator": "GUESSED"
+    },
+    "selection_basis": "unique_full_identity_match"
+  },
+  "review_required": false
+}

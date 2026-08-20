@@ -1,0 +1,76 @@
+{
+  "schema_version": "0.1.0-draft",
+  "intake_id": "rd-intake-aaaaaaaaaaaaaaaa",
+  "raw_user_input": "为什么疫情后通胀这么高？",
+  "input_maturity": "idea_only",
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-aaaaaaaa",
+      "research_question": "疫情后能源、食品和住房分项分别贡献了多少通胀？",
+      "intended_claim_candidate": "descriptive",
+      "research_family_candidate": "descriptive_measurement",
+      "plain_language_explanation": "先拆解通胀构成，不把分项变化解释成因果效应。",
+      "risk_level": "low",
+      "locked_user_fields": [
+        "topic=疫情后通胀"
+      ],
+      "unresolved_decisions": [
+        "国家或地区范围",
+        "疫情后时间范围"
+      ]
+    },
+    {
+      "candidate_id": "rd-candidate-bbbbbbbb",
+      "research_question": "能源价格冲击后总体和核心通胀在未来若干季度如何响应？",
+      "intended_claim_candidate": "causal",
+      "research_family_candidate": "dynamic_shock_response",
+      "plain_language_explanation": "研究动态响应，但必须先定义可辩护的外生能源冲击。",
+      "risk_level": "high",
+      "locked_user_fields": [
+        "topic=疫情后通胀"
+      ],
+      "unresolved_decisions": [
+        "外生冲击定义",
+        "响应期",
+        "国家或地区范围"
+      ]
+    }
+  ],
+  "recommended_candidate_id": "rd-candidate-aaaaaaaa",
+  "field_provenance": [
+    {
+      "field_path": "topic",
+      "source": "user_provided",
+      "evidence_text": "疫情后通胀",
+      "confidence": "high"
+    },
+    {
+      "field_path": "intended_claim",
+      "source": "recommended_default",
+      "evidence_text": "用户未指定政策或外生冲击，先采用描述性设计",
+      "confidence": "medium"
+    },
+    {
+      "field_path": "target_population",
+      "source": "unresolved",
+      "evidence_text": null,
+      "confidence": "not_applicable"
+    }
+  ],
+  "clarifications": [
+    {
+      "question_id": "clarify-aaaaaaaa",
+      "prompt": "你更想拆解通胀由哪些部分推动，还是评估某项具体政策或冲击？",
+      "decision_impact": "决定采用描述测量还是高风险的因果或动态冲击设计。",
+      "status": "pending",
+      "answer": null
+    }
+  ],
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "status": "clarification_needed",
+  "output_language": "zh-CN"
+}

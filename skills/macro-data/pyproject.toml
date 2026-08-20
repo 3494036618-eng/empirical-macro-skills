@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "macro-data-skill"
+version = "0.2.0b0"
+description = "Deterministic preparation and audit of macroeconomic research data."
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "jsonschema>=4.26,<5",
+  "pyarrow>=21,<22",
+]
+
+[dependency-groups]
+dev = [
+  "mypy==1.20.2",
+  "pytest==8.4.2",
+  "pytest-cov==7.1.0",
+  "ruff==0.16.3",
+  "types-jsonschema==4.26.0.20260518",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/macro_data"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --cov=macro_data --cov-branch --cov-fail-under=90"
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+markers = ["external: requires an explicitly enabled network call"]
+
+[tool.coverage.run]
+source = ["macro_data"]
+branch = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "EXE", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["pyarrow", "pyarrow.*"]
+ignore_missing_imports = true

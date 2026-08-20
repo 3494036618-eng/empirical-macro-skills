@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0-beta",
+  "research_question": "比较中国和美国2019年至2024年的年度居民消费价格指数面板。",
+  "research_use": "panel_analysis",
+  "concepts": [
+    {
+      "concept": "居民消费价格指数",
+      "role": "outcome",
+      "definition_constraints": [
+        "Consumer price index (2010 = 100)"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "name_or_code": "FP.CPI.TOTL",
+      "required_definition": "Consumer price index (2010 = 100)"
+    }
+  ],
+  "entities": [
+    {
+      "name_or_code": "CHN",
+      "entity_type": "country",
+      "code_scheme": "ISO-3166-1-alpha-3"
+    },
+    {
+      "name_or_code": "USA",
+      "entity_type": "country",
+      "code_scheme": "ISO-3166-1-alpha-3"
+    }
+  ],
+  "time_range": {
+    "start": "2019",
+    "end": "2024"
+  },
+  "frequency": "A",
+  "unit": "index, 2010=100",
+  "seasonal_adjustment": "source_native",
+  "price_basis": {
+    "type": "index",
+    "base_period": "2010=100",
+    "chain_linked": null
+  },
+  "currency": null,
+  "release_or_vintage": {
+    "mode": "latest",
+    "value": null
+  },
+  "preferred_sources": [
+    "datapro",
+    "world_bank"
+  ],
+  "native_source_constraints": [
+    {
+      "source_system": "WORLD_BANK",
+      "dataset_name": "World Development Indicators",
+      "indicator_code": "FP.CPI.TOTL"
+    }
+  ],
+  "fallback_policy": {
+    "mode": "allow_official",
+    "allowed_sources": [
+      "world_bank"
+    ],
+    "allow_semantic_substitute": false,
+    "allow_cross_source_stitching": false
+  },
+  "transformation_policy": {
+    "allow_unit_scaling": false,
+    "allow_currency_conversion": false,
+    "allow_downsampling": false,
+    "allow_upsampling": false,
+    "allow_imputation": false,
+    "allow_self_seasonal_adjustment": false,
+    "allow_rebasing": false,
+    "requested_transformations": []
+  },
+  "transformation_parameters": {},
+  "output_format": [
+    "csv",
+    "parquet",
+    "json"
+  ]
+}

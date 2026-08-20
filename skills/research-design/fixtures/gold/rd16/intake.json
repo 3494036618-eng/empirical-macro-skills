@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-00000010",
+      "intended_claim_candidate": "causal",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "dynamic_shock_response",
+      "research_question": "局部投影和向量自回归哪个方法一定更好？",
+      "risk_level": "high",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "局部投影和向量自回归哪个方法一定更好？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-0000000000000010",
+  "output_language": "zh-CN",
+  "raw_user_input": "局部投影和向量自回归哪个方法一定更好？",
+  "recommended_candidate_id": "rd-candidate-00000010",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-synthesis:bundle-reference:0.1.0",
+  "title": "research-synthesis 显式 bundle reference",
+  "type": "object",
+  "required": [
+    "bundle_ref_id",
+    "artifact_role",
+    "skill_name",
+    "skill_version",
+    "bundle_path",
+    "manifest_path",
+    "expected_manifest_sha256",
+    "expected_ids",
+    "required"
+  ],
+  "properties": {
+    "bundle_ref_id": {
+      "type": "string",
+      "pattern": "^rs-bundle-ref-[a-f0-9]{32}$"
+    },
+    "artifact_role": {
+      "enum": [
+        "research_design",
+        "macro_data",
+        "estimator",
+        "robustness_audit"
+      ]
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "skill_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "bundle_path": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)[^*?]+$"
+    },
+    "manifest_path": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)[^*?]+\\.json$"
+    },
+    "expected_manifest_sha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "expected_ids": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "required": {
+      "const": true
+    }
+  },
+  "additionalProperties": false
+}

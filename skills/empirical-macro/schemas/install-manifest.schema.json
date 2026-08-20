@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:install-manifest:0.1.0-beta",
+  "title": "Empirical Macro Install Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "installed_at",
+    "host",
+    "target_root",
+    "source_snapshot_checksum",
+    "files"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-beta"
+    },
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^install-[0-9a-f]{32}$"
+    },
+    "installed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "host": {
+      "enum": [
+        "generic",
+        "trae",
+        "codex",
+        "claude-code"
+      ]
+    },
+    "target_root": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "source_snapshot_checksum": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "skill",
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "skill": {
+            "enum": [
+              "empirical-macro",
+              "macro-data",
+              "research-design",
+              "research-synthesis",
+              "robustness-audit",
+              "time-series-dynamics"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

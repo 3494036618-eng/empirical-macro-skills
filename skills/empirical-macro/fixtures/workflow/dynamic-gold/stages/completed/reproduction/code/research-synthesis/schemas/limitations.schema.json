@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-synthesis:limitations:0.1.0",
+  "title": "research-synthesis limitations ledger",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "limitations_id",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "limitations_id": {
+      "type": "string",
+      "pattern": "^rs-limitations-[a-f0-9]{32}$"
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "limitation_id",
+          "category",
+          "severity",
+          "status",
+          "statement",
+          "source_refs",
+          "affected_claim_refs",
+          "mitigation",
+          "release_impact"
+        ],
+        "properties": {
+          "limitation_id": {
+            "type": "string",
+            "pattern": "^rs-limitation-[a-f0-9]{32}$"
+          },
+          "category": {
+            "enum": [
+              "design",
+              "identification",
+              "data",
+              "measurement",
+              "sample",
+              "estimation",
+              "inference",
+              "robustness",
+              "reproduction",
+              "license",
+              "external_validity"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "material"
+            ]
+          },
+          "status": {
+            "enum": [
+              "open",
+              "mitigated",
+              "not_applicable"
+            ]
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "source_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^rs-evidence-[a-f0-9]{32}$"
+            }
+          },
+          "affected_claim_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^rs-claim-[a-f0-9]{32}$"
+            }
+          },
+          "mitigation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 3000
+          },
+          "release_impact": {
+            "enum": [
+              "none",
+              "review_required",
+              "stop_ship"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

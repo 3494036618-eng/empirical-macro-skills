@@ -1,0 +1,11 @@
+{
+  "expected_claim_eligibility": "associational_only",
+  "expected_family": "panel_association",
+  "expected_readiness": "blocked",
+  "forbidden_claim_eligibility": [
+    "structural_candidate",
+    "causal_candidate"
+  ],
+  "gold_id": "RD08",
+  "required_issue_codes": []
+}

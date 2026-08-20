@@ -1,0 +1,84 @@
+{
+  "bundle_refs": [
+    {
+      "artifact_role": "research_design",
+      "bundle_path": "30_宏观经济实证Skill/02_模块开发/research-design/.artifacts/jel-example5-design",
+      "bundle_ref_id": "rs-bundle-ref-da6d3c74e2f1327f77a5533382c344ac",
+      "expected_ids": {
+        "plan_id": "research-plan-0123456789abcdef"
+      },
+      "expected_manifest_sha256": "sha256:eb59897ca6a799ad6c073c734469cacb0c4bfac96d4db478d9ac3bd44c9bf3b5",
+      "manifest_path": "research-design-run-manifest.json",
+      "required": true,
+      "skill_name": "research-design",
+      "skill_version": "0.1.0"
+    },
+    {
+      "artifact_role": "macro_data",
+      "bundle_path": "30_宏观经济实证Skill/02_模块开发/time-series-dynamics/.artifacts/jel-example5-input-evidence",
+      "bundle_ref_id": "rs-bundle-ref-03dca94e36d0b94e5150193eaeca3bb6",
+      "expected_ids": {
+        "evidence_id": "tsd-input-evidence-1afbb5cbe867beb4182310bacc1c1a86"
+      },
+      "expected_manifest_sha256": "sha256:03dca94e36d0b94e5150193eaeca3bb6b7443eb75f36ee7437e57eab515ec360",
+      "manifest_path": "input-evidence-manifest.json",
+      "required": true,
+      "skill_name": "time-series-dynamics",
+      "skill_version": "0.1.0"
+    },
+    {
+      "artifact_role": "estimator",
+      "bundle_path": "30_宏观经济实证Skill/02_模块开发/time-series-dynamics/.artifacts/jel-example5-causal",
+      "bundle_ref_id": "rs-bundle-ref-d7ec3814959ff696039c2acc3bcc98a1",
+      "expected_ids": {
+        "request_id": "tsd-request-0123456789abcdef",
+        "result_id": "tsd-result-45561d2a6374d9dccabcfdba6b6c9a6d",
+        "run_id": "tsd-run-47c8f67cbc8772d6b7eb64b7f6db520d"
+      },
+      "expected_manifest_sha256": "sha256:d7ec3814959ff696039c2acc3bcc98a1097edd879a7945cd7c566808e04f9f1c",
+      "manifest_path": "run-manifest.json",
+      "required": true,
+      "skill_name": "time-series-dynamics",
+      "skill_version": "0.1.0"
+    },
+    {
+      "artifact_role": "robustness_audit",
+      "bundle_path": "30_宏观经济实证Skill/02_模块开发/robustness-audit/.artifacts/jel-example5-robustness",
+      "bundle_ref_id": "rs-bundle-ref-c571309a683da1f92cf1048ce6a09f5c",
+      "expected_ids": {
+        "audit_result_id": "ra-result-dbaf513e89f215e68f6ecb5609900a5d",
+        "run_id": "ra-run-7f56707a01380d7ba7e7b7b7b9be043a"
+      },
+      "expected_manifest_sha256": "sha256:c571309a683da1f92cf1048ce6a09f5c5e6c8daa096f0ac49c2a7434b808ef9a",
+      "manifest_path": "run-manifest.json",
+      "required": true,
+      "skill_name": "robustness-audit",
+      "skill_version": "0.1.0"
+    }
+  ],
+  "external_sources": [],
+  "output_policy": {
+    "allow_claim_upgrade": false,
+    "allow_numeric_extraction_from_markdown": false,
+    "copy_evidence_files": true,
+    "expose_audit_files_as_primary_output": false,
+    "include_runtime_logs": true,
+    "primary_output": "research-report.md",
+    "recompute_estimates": false,
+    "regenerate_figures": false
+  },
+  "release_context": "local_review",
+  "render_policy": {
+    "authoritative_report_format": "markdown",
+    "execute_code": false,
+    "optional_renderer": "none",
+    "supporting_formats": [
+      "csv",
+      "png"
+    ]
+  },
+  "report_language": "zh-CN",
+  "request_id": "rs-request-11111111111111111111111111111111",
+  "research_title": "一次已识别的意外货币政策收紧如何影响美国季度通胀路径",
+  "schema_version": "0.1.0"
+}

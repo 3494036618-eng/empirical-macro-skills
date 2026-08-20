@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.2.0-beta",
+  "run_id": "run-0123456789abcdef",
+  "generated_at": "2026-08-13T00:02:00Z",
+  "input_mode": "synthetic",
+  "request_artifact": "request/request_manifest.json",
+  "raw_artifacts": [
+    "raw/provider_response.json"
+  ],
+  "normalized_artifacts": [
+    "normalized/observations.parquet"
+  ],
+  "activities": [
+    {
+      "activity_id": "activity-0123456789abcdef",
+      "type": "retrieve",
+      "agent": "macro-data-connector",
+      "started_at": "2026-08-13T00:00:00Z",
+      "ended_at": "2026-08-13T00:00:30Z",
+      "used": [
+        "request/request_manifest.json"
+      ],
+      "generated": [
+        "raw/provider_response.json"
+      ],
+      "software": {
+        "name": "macro-data",
+        "version": "0.2.0-beta"
+      },
+      "parameters": {
+        "provider": "fixture"
+      }
+    },
+    {
+      "activity_id": "activity-fedcba9876543210",
+      "type": "normalize",
+      "agent": "macro-data-normalizer",
+      "started_at": "2026-08-13T00:01:00Z",
+      "ended_at": "2026-08-13T00:02:00Z",
+      "used": [
+        "raw/provider_response.json"
+      ],
+      "generated": [
+        "normalized/observations.parquet"
+      ],
+      "software": {
+        "name": "macro-data",
+        "version": "0.2.0-beta"
+      },
+      "parameters": {
+        "sort": "series_period"
+      }
+    }
+  ],
+  "checksums": {
+    "request/request_manifest.json": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "raw/provider_response.json": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "normalized/observations.parquet": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "complete": true,
+  "unresolved_links": 0
+}

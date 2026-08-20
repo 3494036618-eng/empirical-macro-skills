@@ -1,0 +1,4 @@
+interface:
+  display_name: "宏观经济实证动态研究"
+  short_description: "路由并执行当前支持的宏观动态研究工作流"
+  default_prompt: "Use $empirical-macro for supported end-to-end empirical macro research. Compile a candidate ResearchIntent, validate it, call the deterministic router, and obey RouteDecision. Never mutate WorkflowState directly. Only dynamic_shock_response and conditional_dynamic_association are executable. For every unsupported method, return exactly 当前版本不能执行该方法 and no additional user-facing content."

@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.2.0-beta",
+  "run_id": "run-0123456789abcdef",
+  "generated_at": "2026-08-13T00:02:00Z",
+  "input_mode": "synthetic",
+  "request_artifact": "request/request_manifest.json",
+  "raw_artifacts": [
+    "raw/provider_response.json"
+  ],
+  "normalized_artifacts": [
+    "normalized/observations.parquet"
+  ],
+  "activities": [],
+  "checksums": {
+    "request/request_manifest.json": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "complete": true,
+  "unresolved_links": 1
+}

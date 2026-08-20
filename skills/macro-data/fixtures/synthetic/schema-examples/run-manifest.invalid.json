@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2.0-beta",
+  "run_id": "run-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "request": {},
+  "connector": "world_bank",
+  "input_mode": "mock",
+  "fixture_provenance": {},
+  "artifacts": {},
+  "execution_status": "success",
+  "research_readiness": "ready",
+  "delivery_eligibility": "analysis_ready",
+  "eligible_for_estimation": true,
+  "secrets_recorded": false
+}

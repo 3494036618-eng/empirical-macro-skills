@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.1.0-beta",
+  "domain": "empirical_macro",
+  "request_kind": "dynamic_analysis",
+  "method_family": "imaginary_method",
+  "has_research_plan": true,
+  "has_macro_data_bundle": true,
+  "has_estimator_bundle": false,
+  "has_robustness_bundle": false,
+  "has_workflow_state": false
+}

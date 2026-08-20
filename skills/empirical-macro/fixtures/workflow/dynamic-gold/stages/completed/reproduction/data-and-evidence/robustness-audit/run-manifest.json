@@ -1,0 +1,44 @@
+{
+  "alternative_bundle_checksums": {
+    "exact-rerun": "3251ed103294b0ec2b40176e56e36847be4f85a9ead611e3efab9fca6319745c",
+    "ra-alt-3a0e72ad4d76d2df661f8835ccea7b8e": "6b2133cf8285b5e4d3fe1ae7aa6ba6b938576dc89f32ebfc163a29c10a7323fb",
+    "ra-alt-43e0051a2f5b919d8317bfb8649c4e88": "2f63dd0aadc0004d19e386c7f487a3a45ca467fe3c506c880e4c3b9ef8be5ca2",
+    "ra-alt-4ac79a1a6ebcf54b54441e27454cef89": "dbedcaa450bd9605df83cc34b561327d72bc5bf1770b57e3cb60ed8d11701a6f",
+    "ra-alt-ceb642a657cd2fdbd53606433880f7b9": "502f69f4d8fe86bc948025086b5da2ff0a2b7fcf24ceb6653046d96c2d2c0187",
+    "ra-alt-d520ffb46adc8874ef66966e28441c52": "f79e3a285e86e3976472ca65b8d92fd8dca1303d344c7582d04f7cba260d63f9",
+    "ra-alt-ed5c2aa2a14eddfa516c629020579ddc": "8e7ffb9dc24f55c5fc65a799b1c1027a9d6719108bde167abed4ec03ebb6d8b9"
+  },
+  "audit_plan_ref": "ra-plan-f5827e8808cba1802b8f4dd0f75f6d15",
+  "audit_request_ref": "ra-request-0123456789abcdef0123456789abcdef",
+  "generated_at": "2026-08-16T23:31:02.657747Z",
+  "input_checksums": {
+    "audit_plan": "d96880854e83a44aae9806fcfceb9eed74dcd2a592a757e4cb01fcd9a180a553",
+    "audit_request": "8c0a220ca205081e4f6ad4dfffaa84473da884d180a332e0f0576e9c4ccd9e2a",
+    "baseline_bundle": "e8c6740034bbe80ac78329b69f3f98f274d74486155ac8343a2aa0179b8478d4",
+    "baseline_data": "19ca23c02ff86dd1f7c78018e4052eea98de4ecca879f467c3a9d57f55b38d2c",
+    "baseline_macro_data": "bfc289cef5ed44182f9c07cb2ad4e2a6fb52e0bea730f0e52e588e18e6da15a6",
+    "baseline_request": "c8721c3cf874633c7a57e7697661f43349bc16347be931d34f7bf5ef49e2abdd",
+    "baseline_research_plan": "335b26d83685ffcd1637a3e4173b46564f07cb4ae131e836a21ddb7ee93a26e6",
+    "baseline_shock_artifact": "677487c2e7d846c9f5e03a34b484bcc1b88ceec931d6f9933ad078637e86789d",
+    "robustness_handoff": "afed702d2b860165bffcbcfa6a35ad9571ba5e0c8088b59863d6a49df3f12746"
+  },
+  "output_checksums": {
+    "audit-plan.json": "7a2c70ff9ef67426a6bbb42ad1e5b975647098bc7f0ca7a061015bbe1920314e",
+    "audit-request.json": "4ca38fda948e383326d55a783c4c1e0a0a30e1daf1937b0cacfc503f80a49662",
+    "audit-result.json": "3029cf4571ff54090d4b96ab652211b1c61cbea35664295408117926cba30cfe",
+    "check-results.json": "ff930691e298666fe8fdaff420a09c5b72a3eb78d1b9eb7cf92d5b0c89e608e6",
+    "comparison-paths.csv": "e453bdda7be92266e9c3544b79d2b60bc7452082b009469eaed0ba94da37ca7c",
+    "comparison-paths.png": "79ad92c227f7fec45fa393fc304def0c9832128f5dd5a956d2eae56ce8f4e27a",
+    "plain-language-summary.md": "88d3698887d777394442bfc571040c5af7bad1c41141cdef23fc2c7f042a20f4",
+    "technical-summary.md": "f419f2a0cba1d8cc73656476b79d3e59ae4334d9280ff0e34bc4c4f6fdf40b4a"
+  },
+  "run_id": "ra-run-7f56707a01380d7ba7e7b7b7b9be043a",
+  "runtime": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "python": "3.12.13"
+  },
+  "schema_version": "0.1.0",
+  "secrets_recorded": false
+}

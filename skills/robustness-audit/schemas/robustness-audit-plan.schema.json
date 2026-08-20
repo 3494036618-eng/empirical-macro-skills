@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:robustness-audit:plan:0.1.0",
+  "title": "robustness-audit plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "audit_plan_id",
+    "audit_request_id",
+    "adapter_id",
+    "adapter_contract_version",
+    "baseline_request_ref",
+    "baseline_bundle_ref",
+    "baseline_estimand_fingerprint",
+    "analysis_track",
+    "claim_eligibility",
+    "plan_timing",
+    "pre_result_binding",
+    "checks",
+    "alternatives",
+    "decision_rules",
+    "execution_budget",
+    "randomness",
+    "created_at",
+    "provenance",
+    "checksum"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "audit_plan_id": {
+      "type": "string",
+      "pattern": "^ra-plan-[a-f0-9]{32,64}$"
+    },
+    "audit_request_id": {
+      "type": "string",
+      "pattern": "^ra-request-[a-f0-9]{32,64}$"
+    },
+    "adapter_id": {"const": "time-series-dynamics"},
+    "adapter_contract_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "baseline_request_ref": {
+      "type": "string",
+      "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "baseline_bundle_ref": {
+      "type": "string",
+      "pattern": "^tsd-run-[a-f0-9]{32,64}$"
+    },
+    "baseline_estimand_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "analysis_track": {
+      "enum": [
+        "identified_shock_irf",
+        "conditional_dynamic_association"
+      ]
+    },
+    "claim_eligibility": {
+      "enum": ["causal_candidate", "associational_only"]
+    },
+    "plan_timing": {
+      "enum": ["pre_result_bound", "post_result_exploratory", "unknown"]
+    },
+    "pre_result_binding": {
+      "type": ["object", "null"],
+      "required": ["audit_plan_ref", "checksum"],
+      "properties": {
+        "audit_plan_ref": {
+          "type": "string",
+          "pattern": "^ra-plan-[a-f0-9]{32,64}$"
+        },
+        "checksum": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/check"}
+    },
+    "alternatives": {
+      "type": "array",
+      "maxItems": 31,
+      "items": {"$ref": "#/$defs/alternative"}
+    },
+    "decision_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/decision_rule"}
+    },
+    "execution_budget": {
+      "type": "object",
+      "required": [
+        "max_variants",
+        "max_runtime_seconds",
+        "max_parallel_jobs"
+      ],
+      "properties": {
+        "max_variants": {"type": "integer", "minimum": 1, "maximum": 32},
+        "max_runtime_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "max_parallel_jobs": {"const": 1}
+      },
+      "additionalProperties": false
+    },
+    "randomness": {
+      "type": "object",
+      "required": ["required", "seed"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "seed": {"type": ["integer", "null"], "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "provenance": {
+      "type": "object",
+      "required": ["complete", "source"],
+      "properties": {
+        "complete": {"const": true},
+        "source": {"type": "string", "minLength": 1, "maxLength": 200}
+      },
+      "additionalProperties": false
+    },
+    "checksum": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {"plan_timing": {"const": "pre_result_bound"}},
+        "required": ["plan_timing"]
+      },
+      "then": {
+        "properties": {"pre_result_binding": {"type": "object"}}
+      },
+      "else": {
+        "properties": {"pre_result_binding": {"type": "null"}}
+      }
+    }
+  ],
+  "$defs": {
+    "check": {
+      "type": "object",
+      "required": [
+        "check_id",
+        "check_family",
+        "required",
+        "same_estimand_required",
+        "anchor_horizons",
+        "metrics",
+        "decision_rule_ids",
+        "failure_policy",
+        "uses_randomness"
+      ],
+      "properties": {
+        "check_id": {
+          "type": "string",
+          "pattern": "^ra-check-[a-f0-9]{32,64}$"
+        },
+        "check_family": {
+          "enum": [
+            "exact_rerun",
+            "lag_sensitivity",
+            "covariance_sensitivity",
+            "sample_policy_sensitivity",
+            "sample_window_sensitivity"
+          ]
+        },
+        "required": {"type": "boolean"},
+        "same_estimand_required": {"const": true},
+        "anchor_horizons": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 0, "maximum": 120}
+        },
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"}
+        },
+        "decision_rule_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"}
+        },
+        "failure_policy": {"enum": ["stop_ship", "review_required"]},
+        "uses_randomness": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "alternative": {
+      "type": "object",
+      "required": ["alternative_id", "check_id", "patch"],
+      "properties": {
+        "alternative_id": {
+          "type": "string",
+          "pattern": "^ra-alt-[a-f0-9]{32,64}$"
+        },
+        "check_id": {
+          "type": "string",
+          "pattern": "^ra-check-[a-f0-9]{32,64}$"
+        },
+        "patch": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "decision_rule": {
+      "type": "object",
+      "required": ["rule_id", "metric", "operator", "threshold"],
+      "properties": {
+        "rule_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"},
+        "metric": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"},
+        "operator": {"enum": ["equal", "less_than_or_equal", "report_only"]},
+        "threshold": {"type": ["number", "boolean", "string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

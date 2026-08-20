@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-0000000e",
+      "intended_claim_candidate": "associational",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "dynamic_shock_response",
+      "research_question": "原油价格上涨与进口国产出动态变化有何关系？",
+      "risk_level": "low",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "原油价格上涨与进口国产出动态变化有何关系？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-000000000000000e",
+  "output_language": "zh-CN",
+  "raw_user_input": "原油价格上涨与进口国产出动态变化有何关系？",
+  "recommended_candidate_id": "rd-candidate-0000000e",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

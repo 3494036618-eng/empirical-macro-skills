@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:time-series-dynamics:input-evidence-manifest:0.1.0",
+  "title": "time-series-dynamics input evidence manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "macro_result_id",
+    "frequency",
+    "sample_window",
+    "file_checksums",
+    "secrets_recorded"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "0.1.0",
+        "0.2.0"
+      ]
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^tsd-input-evidence-[a-f0-9]{32}$"
+    },
+    "macro_result_id": {
+      "type": "string",
+      "pattern": "^macro-result-[a-f0-9]{16,64}$"
+    },
+    "shock_id": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^shock-artifact-[a-f0-9]{16,64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "license": {
+      "const": "CC0-1.0"
+    },
+    "frequency": {
+      "const": "Q"
+    },
+    "sample_window": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "pattern": "^[0-9]{4}Q[1-4]$"
+        },
+        "end": {
+          "type": "string",
+          "pattern": "^[0-9]{4}Q[1-4]$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "file_checksums": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "evidence_kind": {
+      "const": "macro_data_association"
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "license_or_authorization": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "data_profile": {
+      "const": "canonical_long_table"
+    },
+    "product_authorization_ref": {
+      "type": "string",
+      "pattern": "^product-auth-[a-f0-9]{32}$"
+    },
+    "series_bindings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "variable_id",
+          "series_key",
+          "entity_code",
+          "transform"
+        ],
+        "properties": {
+          "variable_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,63}$"
+          },
+          "series_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "entity_code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "transform": {
+            "enum": [
+              "identity",
+              "log",
+              "difference",
+              "log_difference"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "secrets_recorded": {
+      "const": false
+    }
+  },
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "required": [
+        "shock_id",
+        "source_commit",
+        "license"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "shock_id": {
+          "type": "string"
+        },
+        "file_checksums": {
+          "required": [
+            "macro-data-handoff.json",
+            "shock-identification-artifact.json",
+            "source-manifest.json",
+            "aggregatedata_final.dta"
+          ],
+          "properties": {
+            "macro-data-handoff.json": {
+              "$ref": "#/$defs/sha256"
+            },
+            "shock-identification-artifact.json": {
+              "$ref": "#/$defs/sha256"
+            },
+            "source-manifest.json": {
+              "$ref": "#/$defs/sha256"
+            },
+            "aggregatedata_final.dta": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "required": [
+        "evidence_kind",
+        "shock_id",
+        "source_version",
+        "license_or_authorization",
+        "data_profile",
+        "product_authorization_ref",
+        "series_bindings"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "0.2.0"
+        },
+        "shock_id": {
+          "type": "null"
+        },
+        "file_checksums": {
+          "required": [
+            "macro-data-handoff.json",
+            "source-manifest.json",
+            "data.csv"
+          ],
+          "properties": {
+            "macro-data-handoff.json": {
+              "$ref": "#/$defs/sha256"
+            },
+            "source-manifest.json": {
+              "$ref": "#/$defs/sha256"
+            },
+            "data.csv": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

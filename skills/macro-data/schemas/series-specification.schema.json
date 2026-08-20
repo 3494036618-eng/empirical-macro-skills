@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:macro-data:series-specification:0.2.0-beta",
+  "title": "macro-data series specification",
+  "description": "由研究需求生成、等待确定性解析或人工确认的序列规格。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "spec_id",
+    "concept",
+    "indicator_query",
+    "definition_constraints",
+    "entity_constraints",
+    "frequency_constraint",
+    "unit_constraint",
+    "seasonal_adjustment_constraint",
+    "price_basis_constraint",
+    "currency_constraint",
+    "time_range",
+    "vintage_constraint",
+    "candidate_status",
+    "selected_candidate",
+    "review_required"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0-beta"
+    },
+    "spec_id": {
+      "$ref": "#/$defs/sha256"
+    },
+    "concept": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "indicator_query": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 1000
+    },
+    "definition_constraints": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "entity_constraints": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "name_or_code",
+          "entity_type",
+          "code_scheme"
+        ],
+        "properties": {
+          "name_or_code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "entity_type": {
+            "enum": [
+              "country",
+              "territory",
+              "region",
+              "industry",
+              "custom_aggregate"
+            ]
+          },
+          "code_scheme": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "frequency_constraint": {
+      "enum": [
+        "D",
+        "W",
+        "M",
+        "Q",
+        "A",
+        "source_native"
+      ]
+    },
+    "unit_constraint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "seasonal_adjustment_constraint": {
+      "enum": [
+        "NSA",
+        "CA",
+        "SA",
+        "SCA",
+        "source_native"
+      ]
+    },
+    "price_basis_constraint": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "type",
+        "base_period",
+        "chain_linked"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "nominal",
+            "real",
+            "volume",
+            "index",
+            "source_native"
+          ]
+        },
+        "base_period": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}(?:=100)?$"
+        },
+        "chain_linked": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "currency_constraint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z]{3}$"
+    },
+    "time_range": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/period"
+        },
+        "end": {
+          "$ref": "#/$defs/period"
+        }
+      },
+      "additionalProperties": false
+    },
+    "vintage_constraint": {
+      "type": "object",
+      "required": [
+        "mode",
+        "value"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "latest",
+            "as_of",
+            "specific_vintage"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "mode": {
+              "const": "latest"
+            },
+            "value": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "properties": {
+            "mode": {
+              "enum": [
+                "as_of",
+                "specific_vintage"
+              ]
+            },
+            "value": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      ]
+    },
+    "candidate_status": {
+      "enum": [
+        "unresolved",
+        "unique",
+        "ambiguous",
+        "unsupported"
+      ]
+    },
+    "selected_candidate": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/selected_candidate"
+        }
+      ]
+    },
+    "review_required": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "candidate_status": {
+          "const": "unique"
+        },
+        "selected_candidate": {
+          "$ref": "#/$defs/selected_candidate"
+        },
+        "review_required": {
+          "const": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "candidate_status": {
+          "enum": [
+            "unresolved",
+            "ambiguous",
+            "unsupported"
+          ]
+        },
+        "selected_candidate": {
+          "type": "null"
+        },
+        "review_required": {
+          "const": true
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "period": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{4}|[0-9]{4}-Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2])|[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))$"
+    },
+    "selected_candidate": {
+      "type": "object",
+      "required": [
+        "provider",
+        "dataset_id",
+        "native_series_id",
+        "dimension_key",
+        "selection_basis"
+      ],
+      "properties": {
+        "provider": {
+          "enum": [
+            "datapro",
+            "imf",
+            "world_bank",
+            "oecd",
+            "bis",
+            "fred",
+            "eurostat",
+            "national"
+          ]
+        },
+        "dataset_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "native_series_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "dimension_key": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean"
+            ]
+          }
+        },
+        "selection_basis": {
+          "enum": [
+            "exact_native_id",
+            "unique_full_identity_match",
+            "explicit_user_confirmation"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

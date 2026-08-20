@@ -1,0 +1,4 @@
+interface:
+  display_name: "宏观研究数据准备"
+  short_description: "将宏观数据需求编译为带语义检查、质量状态、校验和与来源追踪的科研数据包"
+  default_prompt: "使用 $macro-data 准备宏观实证研究数据。先将自然语言转为候选 0.3 request JSON，明确 research_use、指标、实体、频率、时间、来源与 fallback，再通过 Schema；验证后的 JSON 是唯一权威入口。先构建 ExpectedObservationMatrix 并查询 DataPro，锁定合格 observation，只将 ResidualGapManifest 中获批的年度 WDI 缺口交给 World Bank Connector。官方值不得替换 DataPro，不得跨来源拼接。验证 completion bundle 后再决定是否可进入估计；不执行回归、预测或因果解释。"

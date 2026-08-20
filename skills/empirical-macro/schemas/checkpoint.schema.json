@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:checkpoint:0.1.0-beta",
+  "title": "Empirical Macro Checkpoint",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "checkpoint_id",
+    "workflow_id",
+    "stage",
+    "artifact_refs",
+    "state_checksum"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-beta"
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "pattern": "^checkpoint-[0-9a-f]{32}$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{32}$"
+    },
+    "stage": {
+      "enum": [
+        "design_ready",
+        "data_ready",
+        "estimation_ready",
+        "audit_ready",
+        "synthesis_ready",
+        "completed"
+      ]
+    },
+    "artifact_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/artifact_ref"
+      }
+    },
+    "state_checksum": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "artifact_ref": {
+      "type": "object",
+      "required": [
+        "role",
+        "path",
+        "sha256",
+        "validator"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "validator": {
+          "enum": [
+            "research-design",
+            "macro-data",
+            "time-series-dynamics",
+            "robustness-audit",
+            "research-synthesis"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "宏观动态响应分析"
+  short_description: "输出可审计的动态估计、图表和双层解释，严格隔离因果候选与条件关联"
+  default_prompt: "使用 $time-series-dynamics 执行宏观动态分析。先读取 research-design 和 macro-data 的结构化 Artifact；不要要求用户自己选择 LP、controls 或 lag。若存在已批准 shock Artifact，使用 identified_shock_irf；否则创建并明确采用独立的 conditional_dynamic_association 候选，不得静默改写失败因果请求。必须输出逐 horizon 数值、pointwise 区间、nobs、诊断、CSV、PNG、技术说明、白话说明和 checksum manifest。关联轨道不得使用 IRF、冲击响应、因果效应或导致等措辞。"

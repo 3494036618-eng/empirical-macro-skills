@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1.0-beta",
+  "manifest_id": "install-0123456789abcdef0123456789abcdef",
+  "installed_at": "2026-08-19T00:00:00Z",
+  "host": "trae",
+  "target_root": "/absolute/example/.trae/skills",
+  "source_snapshot_checksum": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "files": []
+}

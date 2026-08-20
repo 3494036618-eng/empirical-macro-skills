@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:time-series-dynamics:run-manifest:0.1.0",
+  "title": "time-series-dynamics run manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "request_id",
+    "generated_at",
+    "runtime",
+    "input_checksums",
+    "output_checksums",
+    "secrets_recorded"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "run_id": {
+      "type": "string",
+      "pattern": "^tsd-run-[a-f0-9]{32,64}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "runtime": {
+      "type": "object",
+      "required": ["python", "numpy", "pandas", "statsmodels"],
+      "properties": {
+        "python": {"type": "string", "minLength": 1, "maxLength": 50},
+        "numpy": {"type": "string", "minLength": 1, "maxLength": 50},
+        "pandas": {"type": "string", "minLength": 1, "maxLength": 50},
+        "statsmodels": {"type": "string", "minLength": 1, "maxLength": 50}
+      },
+      "additionalProperties": false
+    },
+    "input_checksums": {"$ref": "#/$defs/checksum_map"},
+    "output_checksums": {"$ref": "#/$defs/checksum_map"},
+    "secrets_recorded": {"const": false}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "checksum_map": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "coverage_policy": {
+    "missingness_must_be_reported": true,
+    "scope_may_shrink": false,
+    "selection_rule_pre_registered": true
+  },
+  "data_structure": {
+    "balanced_panel_required": false,
+    "entity_key": null,
+    "frequency": "Q",
+    "minimum_entities": 1,
+    "minimum_periods": 92,
+    "shape": "time_series",
+    "time_key": "quarter"
+  },
+  "license_requirement": "public_redistribution",
+  "macro_data_requests": [],
+  "point_in_time_required": false,
+  "request_id": "rd-request-0123456789abcdef",
+  "requirement_id": "data-req-0123456789abcdef",
+  "research_family": "dynamic_shock_response",
+  "schema_version": "0.1.0-draft",
+  "status": "review_required",
+  "treatment_timing_required": false,
+  "unresolved_requirements": [
+    "固定 JEL 数据通过 checksummed input-evidence bundle 交接"
+  ],
+  "variables": [
+    {
+      "concept": "美国季度 CPI 对数水平",
+      "currency": null,
+      "definition_constraints": [
+        "季度"
+      ],
+      "entity_scope": [
+        "country"
+      ],
+      "frequency": "Q",
+      "price_basis": "index",
+      "release_or_vintage": "not_applicable",
+      "role": "outcome",
+      "seasonal_adjustment": "source_native",
+      "source_policy": "specific_source_required",
+      "unit": "log_points_x100",
+      "variable_id": "lcpi"
+    },
+    {
+      "concept": "已识别货币政策冲击",
+      "currency": null,
+      "definition_constraints": [
+        "JEL Example 5 固定识别序列"
+      ],
+      "entity_scope": [
+        "country"
+      ],
+      "frequency": "Q",
+      "price_basis": "source_native",
+      "release_or_vintage": "not_applicable",
+      "role": "shock",
+      "seasonal_adjustment": "not_applicable",
+      "source_policy": "specific_source_required",
+      "unit": "shock_units",
+      "variable_id": "rr_shock"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-00000008",
+      "intended_claim_candidate": "associational",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "panel_association",
+      "research_question": "控制国家和年份固定效应后贸易与增长关系如何？",
+      "risk_level": "low",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "控制国家和年份固定效应后贸易与增长关系如何？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-0000000000000008",
+  "output_language": "zh-CN",
+  "raw_user_input": "控制国家和年份固定效应后贸易与增长关系如何？",
+  "recommended_candidate_id": "rd-candidate-00000008",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

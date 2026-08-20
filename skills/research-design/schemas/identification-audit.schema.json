@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-design:identification-audit:0.1.0-draft",
+  "title": "research-design identification audit",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "audit_id",
+    "request_id",
+    "intended_claim",
+    "estimand_status",
+    "assumptions",
+    "threats",
+    "identification_status",
+    "claim_eligibility",
+    "review_required"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-draft"
+    },
+    "audit_id": {
+      "type": "string",
+      "pattern": "^id-audit-[a-f0-9]{16,64}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^rd-request-[a-f0-9]{16,64}$"
+    },
+    "intended_claim": {
+      "enum": [
+        "descriptive",
+        "associational",
+        "causal",
+        "predictive",
+        "structural"
+      ]
+    },
+    "estimand_status": {
+      "enum": [
+        "specified",
+        "partial",
+        "missing",
+        "not_applicable"
+      ]
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assumption"
+      }
+    },
+    "threats": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/threat"
+      }
+    },
+    "identification_status": {
+      "enum": [
+        "not_applicable",
+        "candidate_identified",
+        "assumption_sensitive",
+        "not_identified"
+      ]
+    },
+    "claim_eligibility": {
+      "enum": [
+        "descriptive_only",
+        "associational_only",
+        "predictive_only",
+        "causal_candidate",
+        "structural_candidate",
+        "not_eligible"
+      ]
+    },
+    "review_required": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "intended_claim": {
+            "enum": [
+              "causal",
+              "structural"
+            ]
+          }
+        },
+        "required": [
+          "intended_claim"
+        ]
+      },
+      "then": {
+        "properties": {
+          "estimand_status": {
+            "enum": [
+              "specified",
+              "partial"
+            ]
+          },
+          "assumptions": {
+            "minItems": 1
+          },
+          "threats": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "identification_status": {
+            "const": "candidate_identified"
+          }
+        },
+        "required": [
+          "identification_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "claim_eligibility": {
+            "const": "causal_candidate"
+          },
+          "estimand_status": {
+            "const": "specified"
+          },
+          "review_required": {
+            "const": true
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "assumption": {
+      "type": "object",
+      "required": [
+        "code",
+        "statement",
+        "status",
+        "testability",
+        "required_diagnostics",
+        "evidence_references"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{2,63}$"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 1500
+        },
+        "status": {
+          "enum": [
+            "asserted",
+            "supported",
+            "violated",
+            "unresolved",
+            "not_applicable"
+          ]
+        },
+        "testability": {
+          "enum": [
+            "direct",
+            "indirect",
+            "untestable",
+            "not_applicable"
+          ]
+        },
+        "required_diagnostics": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "evidence_references": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "threat": {
+      "type": "object",
+      "required": [
+        "code",
+        "severity",
+        "status",
+        "mitigation"
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "reverse_causality",
+            "omitted_variables",
+            "simultaneity",
+            "anticipation",
+            "spillovers",
+            "parallel_trends",
+            "instrument_invalidity",
+            "sample_selection",
+            "measurement_error",
+            "nonstationarity",
+            "structural_break",
+            "future_information_leakage",
+            "external_validity",
+            "multiple_testing",
+            "other"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "stop_ship"
+          ]
+        },
+        "status": {
+          "enum": [
+            "open",
+            "mitigated",
+            "accepted",
+            "not_applicable"
+          ]
+        },
+        "mitigation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1500
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

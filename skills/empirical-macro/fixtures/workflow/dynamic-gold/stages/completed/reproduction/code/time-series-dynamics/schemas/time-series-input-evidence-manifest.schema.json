@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:time-series-dynamics:input-evidence-manifest:0.1.0",
+  "title": "time-series-dynamics input evidence manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "macro_result_id",
+    "shock_id",
+    "source_commit",
+    "license",
+    "frequency",
+    "sample_window",
+    "file_checksums",
+    "secrets_recorded"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^tsd-input-evidence-[a-f0-9]{32}$"
+    },
+    "macro_result_id": {
+      "type": "string",
+      "pattern": "^macro-result-[a-f0-9]{16,64}$"
+    },
+    "shock_id": {
+      "type": "string",
+      "pattern": "^shock-artifact-[a-f0-9]{16,64}$"
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "license": {
+      "const": "CC0-1.0"
+    },
+    "frequency": {
+      "const": "Q"
+    },
+    "sample_window": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "pattern": "^[0-9]{4}Q[1-4]$"
+        },
+        "end": {
+          "type": "string",
+          "pattern": "^[0-9]{4}Q[1-4]$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "file_checksums": {
+      "type": "object",
+      "required": [
+        "macro-data-handoff.json",
+        "shock-identification-artifact.json",
+        "source-manifest.json",
+        "aggregatedata_final.dta"
+      ],
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "secrets_recorded": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

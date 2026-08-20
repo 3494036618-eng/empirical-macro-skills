@@ -1,0 +1,13 @@
+{
+  "expected_claim_eligibility": "descriptive_only",
+  "expected_family": "descriptive_measurement",
+  "expected_readiness": "blocked",
+  "forbidden_claim_eligibility": [
+    "structural_candidate",
+    "causal_candidate"
+  ],
+  "gold_id": "RD03",
+  "required_issue_codes": [
+    "price_basis_alignment_required"
+  ]
+}

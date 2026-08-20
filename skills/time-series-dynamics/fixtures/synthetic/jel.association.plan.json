@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0-draft",
+  "plan_id": "research-plan-fedcba9876543210",
+  "request_id": "rd-request-fedcba9876543210",
+  "research_family": "dynamic_shock_response",
+  "intended_claim": "associational",
+  "analysis_track": "conditional_dynamic_association",
+  "primary_design": "conditional_projection",
+  "claim_eligibility": "associational_only",
+  "design_readiness": "ready_for_data",
+  "review_required": false
+}

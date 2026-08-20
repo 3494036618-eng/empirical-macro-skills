@@ -1,0 +1,10 @@
+{
+  "expected_claim_eligibility": "causal_candidate",
+  "expected_family": "dynamic_shock_response",
+  "expected_readiness": "review_required",
+  "forbidden_claim_eligibility": [
+    "structural_candidate"
+  ],
+  "gold_id": "RD13",
+  "required_issue_codes": []
+}

@@ -1,0 +1,14 @@
+{
+  "expected_claim_eligibility": "not_eligible",
+  "expected_family": "forecasting_nowcasting",
+  "expected_readiness": "blocked",
+  "forbidden_claim_eligibility": [
+    "structural_candidate",
+    "causal_candidate"
+  ],
+  "gold_id": "RD26",
+  "required_issue_codes": [
+    "future_information_leakage",
+    "historical_vintage_required"
+  ]
+}

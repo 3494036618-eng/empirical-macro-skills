@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "empirical-macro-skill"
+version = "0.1.0.dev0"
+description = "Deterministic routing and workflow state for supported empirical macro research."
+requires-python = ">=3.12,<3.14"
+dependencies = ["jsonschema>=4.26,<5"]
+
+[dependency-groups]
+dev = [
+  "mypy>=1.18,<2",
+  "pytest>=8.4,<9",
+  "pytest-cov>=7,<8",
+  "ruff>=0.12,<1",
+  "types-jsonschema>=4.23,<5",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/empirical_macro"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"schemas" = "empirical_macro/schemas"
+"configs" = "empirical_macro/configs"
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --cov=empirical_macro --cov-branch --cov-fail-under=90"
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["empirical_macro"]
+branch = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "C90", "S"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "S108", "S603"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["empirical_macro"]

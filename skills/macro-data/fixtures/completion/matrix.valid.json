@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.3.0-beta",
+  "matrix_id": "macro-matrix-11111111111111111111111111111111",
+  "request_id": "macro-request-22222222222222222222222222222222",
+  "request_checksum": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "cells": [
+    {
+      "cell_id": "macro-cell-44444444444444444444444444444444",
+      "key": {
+        "indicator_code": "FP.CPI.TOTL",
+        "entity_code": "CHN",
+        "period": "2019",
+        "frequency": "A"
+      },
+      "status": "datapro_locked"
+    },
+    {
+      "cell_id": "macro-cell-55555555555555555555555555555555",
+      "key": {
+        "indicator_code": "FP.CPI.TOTL",
+        "entity_code": "CHN",
+        "period": "2020",
+        "frequency": "A"
+      },
+      "status": "expected"
+    },
+    {
+      "cell_id": "macro-cell-66666666666666666666666666666666",
+      "key": {
+        "indicator_code": "FP.CPI.TOTL",
+        "entity_code": "CHN",
+        "period": "2021",
+        "frequency": "A"
+      },
+      "status": "datapro_locked"
+    }
+  ]
+}

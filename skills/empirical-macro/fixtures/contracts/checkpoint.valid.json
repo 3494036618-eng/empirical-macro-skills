@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1.0-beta",
+  "checkpoint_id": "checkpoint-0123456789abcdef0123456789abcdef",
+  "workflow_id": "workflow-0123456789abcdef0123456789abcdef",
+  "stage": "data_ready",
+  "artifact_refs": [
+    {
+      "role": "macro_data",
+      "path": "artifacts/macro-data/result.json",
+      "sha256": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "validator": "macro-data"
+    }
+  ],
+  "state_checksum": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789"
+}

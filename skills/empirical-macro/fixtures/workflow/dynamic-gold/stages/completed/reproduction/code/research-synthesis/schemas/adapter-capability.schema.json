@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-synthesis:adapter-capability:0.1.0",
+  "title": "research-synthesis 上游 validator capability",
+  "type": "object",
+  "required": [
+    "artifact_role",
+    "skill_name",
+    "skill_version",
+    "working_directory",
+    "validator_argv",
+    "timeout_seconds"
+  ],
+  "properties": {
+    "artifact_role": {
+      "enum": [
+        "research_design",
+        "macro_data",
+        "estimator",
+        "robustness_audit"
+      ]
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "skill_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "working_directory": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)[^*?]+$"
+    },
+    "validator_argv": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "contains": {
+        "const": "{bundle}"
+      }
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 600
+    }
+  },
+  "additionalProperties": false
+}

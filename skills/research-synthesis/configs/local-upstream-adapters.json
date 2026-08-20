@@ -1,0 +1,50 @@
+{
+  "macro_data": {
+    "artifact_role": "macro_data",
+    "skill_name": "time-series-dynamics",
+    "skill_version": "0.1.0",
+    "timeout_seconds": 60,
+    "validator_argv": [
+      ".venv/bin/python",
+      "scripts/validate_input_evidence.py",
+      "{bundle}"
+    ],
+    "working_directory": "30_宏观经济实证Skill/02_模块开发/time-series-dynamics"
+  },
+  "research_design": {
+    "artifact_role": "research_design",
+    "skill_name": "research-design",
+    "skill_version": "0.1.0",
+    "timeout_seconds": 60,
+    "validator_argv": [
+      ".venv/bin/python",
+      "scripts/validate_bundle.py",
+      "{bundle}"
+    ],
+    "working_directory": "30_宏观经济实证Skill/02_模块开发/research-design"
+  },
+  "robustness_audit": {
+    "artifact_role": "robustness_audit",
+    "skill_name": "robustness-audit",
+    "skill_version": "0.1.0",
+    "timeout_seconds": 300,
+    "validator_argv": [
+      ".venv/bin/python",
+      "scripts/validate_bundle.py",
+      "{bundle}"
+    ],
+    "working_directory": "30_宏观经济实证Skill/02_模块开发/robustness-audit"
+  },
+  "estimator": {
+    "artifact_role": "estimator",
+    "skill_name": "time-series-dynamics",
+    "skill_version": "0.1.0",
+    "timeout_seconds": 60,
+    "validator_argv": [
+      ".venv/bin/python",
+      "scripts/validate_bundle.py",
+      "{bundle}"
+    ],
+    "working_directory": "30_宏观经济实证Skill/02_模块开发/time-series-dynamics"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "limitations": [
+    {
+      "affected_claim_refs": [
+        "rs-claim-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "category": "identification",
+      "limitation_id": "rs-limitation-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mitigation": "保留人工审核并报告替代识别审查要求。",
+      "release_impact": "review_required",
+      "severity": "material",
+      "source_refs": [
+        "rs-evidence-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ],
+      "statement": "shock exogeneity 仍是未解决假设。",
+      "status": "open"
+    }
+  ],
+  "limitations_id": "rs-limitations-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "0.1.0"
+}

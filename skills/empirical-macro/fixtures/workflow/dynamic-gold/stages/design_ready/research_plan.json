@@ -1,0 +1,72 @@
+{
+  "analysis_track": "identified_shock_irf",
+  "claim_eligibility": "causal_candidate",
+  "data_requirements_ref": "data-req-0123456789abcdef",
+  "design_candidates": [
+    {
+      "decision": "adopt",
+      "design": "local_projection",
+      "prerequisites": [
+        "horizon_diagnostics"
+      ],
+      "rejection_reasons": []
+    }
+  ],
+  "design_readiness": "review_required",
+  "diagnostics": [
+    "horizon_diagnostics",
+    "independent_rerun_required"
+  ],
+  "estimand": {
+    "comparison": "A one-unit identified monetary tightening shock",
+    "horizons": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "outcome_variable_id": "lcpi",
+    "status": "specified",
+    "target_population": "United States quarterly macroeconomic observations",
+    "treatment_or_shock_variable_id": "rr_shock",
+    "type": "dynamic_response"
+  },
+  "execution_status": "success",
+  "identification_audit_ref": "id-audit-0123456789abcdef",
+  "intended_claim": "causal",
+  "plan_id": "research-plan-0123456789abcdef",
+  "primary_design": "local_projection",
+  "reproducibility_requirements": {
+    "artifact_checksums": true,
+    "code_and_environment": true,
+    "fixed_random_seed": false,
+    "independent_rerun_required": true,
+    "raw_data_lineage": true
+  },
+  "request_id": "rd-request-0123456789abcdef",
+  "research_family": "dynamic_shock_response",
+  "review_required": true,
+  "robustness_checks": [
+    "exact_rerun",
+    "lag_sensitivity",
+    "covariance_sensitivity",
+    "sample_policy_sensitivity",
+    "sample_window_sensitivity"
+  ],
+  "schema_version": "0.1.0-draft",
+  "warnings": []
+}

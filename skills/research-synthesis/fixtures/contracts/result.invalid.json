@@ -1,0 +1,13 @@
+{
+  "delivery_eligibility": "research_package",
+  "effective_claim_eligibility": "causal_confirmed",
+  "execution_status": "failed",
+  "primary_output": "summary.md",
+  "release_recommendation": "published",
+  "reproduction_status": "unknown",
+  "request_ref": "invalid",
+  "result_id": "invalid",
+  "schema_version": "9.9.9",
+  "synthesis_readiness": "ready",
+  "warnings": []
+}

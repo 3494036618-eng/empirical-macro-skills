@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-00000019",
+      "intended_claim_candidate": "predictive",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "forecasting_nowcasting",
+      "research_question": "截至二零二零年底预测二零二一年国内生产总值？",
+      "risk_level": "high",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "截至二零二零年底预测二零二一年国内生产总值？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-0000000000000019",
+  "output_language": "zh-CN",
+  "raw_user_input": "截至二零二零年底预测二零二一年国内生产总值？",
+  "recommended_candidate_id": "rd-candidate-00000019",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

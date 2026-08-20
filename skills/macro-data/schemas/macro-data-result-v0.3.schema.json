@@ -1,0 +1,481 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:macro-data:result:0.3.0-beta",
+  "title": "macro-data DataPro-first result",
+  "description": "DataPro-first 缺口补全结果摘要与三轴科研状态合同。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "research_use",
+    "request_manifest",
+    "series",
+    "raw_artifacts",
+    "normalized_artifacts",
+    "transformations",
+    "missingness",
+    "provenance",
+    "evidence_references",
+    "execution_status",
+    "research_readiness",
+    "delivery_eligibility",
+    "eligible_for_estimation",
+    "source_coverage",
+    "expected_observation_count",
+    "final_estimator_observation_count",
+    "provider_contribution",
+    "completion_status",
+    "residual_gap_count",
+    "conflict_count",
+    "completion_manifest_ref",
+    "warnings",
+    "review_required"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.3.0-beta"
+    },
+    "research_use": {
+      "enum": [
+        "descriptive_latest",
+        "panel_analysis",
+        "dynamic_response",
+        "forecasting",
+        "real_time"
+      ]
+    },
+    "result_id": {
+      "type": "string",
+      "pattern": "^macro-result-[a-f0-9]{16,64}$"
+    },
+    "request_manifest": {
+      "$ref": "#/$defs/artifact"
+    },
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "raw_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "normalized_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "transformations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "missingness": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "complete",
+        "unresolved_links"
+      ],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "unresolved_links": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidence_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "execution_status": {
+      "enum": [
+        "success",
+        "partial",
+        "failed"
+      ]
+    },
+    "research_readiness": {
+      "enum": [
+        "ready",
+        "review_required",
+        "blocked"
+      ]
+    },
+    "delivery_eligibility": {
+      "enum": [
+        "analysis_ready",
+        "comparison_only",
+        "not_deliverable"
+      ]
+    },
+    "eligible_for_estimation": {
+      "type": "boolean"
+    },
+    "source_coverage": {
+      "type": "object",
+      "required": [
+        "complete",
+        "scope_reduced",
+        "requested_count",
+        "delivered_count",
+        "failures"
+      ],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "scope_reduced": {
+          "const": false
+        },
+        "requested_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "delivered_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "expected_observation_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "final_estimator_observation_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "provider_contribution": {
+      "$ref": "#/$defs/provider_contribution"
+    },
+    "completion_status": {
+      "enum": [
+        "complete",
+        "partial",
+        "blocked"
+      ]
+    },
+    "residual_gap_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "conflict_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "completion_manifest_ref": {
+      "$ref": "#/$defs/path"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "review_required": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "properties": {
+            "research_readiness": {
+              "const": "ready"
+            },
+            "review_required": {
+              "const": false
+            }
+          },
+          "required": [
+            "research_readiness",
+            "review_required"
+          ]
+        },
+        {
+          "properties": {
+            "research_readiness": {
+              "enum": [
+                "review_required",
+                "blocked"
+              ]
+            },
+            "review_required": {
+              "const": true
+            }
+          },
+          "required": [
+            "research_readiness",
+            "review_required"
+          ]
+        }
+      ]
+    },
+    {
+      "if": {
+        "properties": {
+          "delivery_eligibility": {
+            "const": "analysis_ready"
+          }
+        },
+        "required": [
+          "delivery_eligibility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "execution_status": {
+            "const": "success"
+          },
+          "research_readiness": {
+            "const": "ready"
+          },
+          "eligible_for_estimation": {
+            "const": true
+          },
+          "source_coverage": {
+            "properties": {
+              "complete": {
+                "const": true
+              },
+              "scope_reduced": {
+                "const": false
+              },
+              "failures": {
+                "maxItems": 0
+              }
+            }
+          },
+          "completion_status": {
+            "const": "complete"
+          },
+          "residual_gap_count": {
+            "const": 0
+          },
+          "conflict_count": {
+            "const": 0
+          },
+          "provenance": {
+            "properties": {
+              "complete": {
+                "const": true
+              },
+              "unresolved_links": {
+                "const": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "delivery_eligibility": {
+            "const": "comparison_only"
+          }
+        },
+        "required": [
+          "delivery_eligibility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "research_readiness": {
+            "const": "review_required"
+          },
+          "eligible_for_estimation": {
+            "const": false
+          },
+          "review_required": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "delivery_eligibility": {
+            "const": "not_deliverable"
+          }
+        },
+        "required": [
+          "delivery_eligibility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "eligible_for_estimation": {
+            "const": false
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "provider_contribution": {
+      "type": "object",
+      "required": [
+        "classification",
+        "datapro_count",
+        "official_fallback_count",
+        "unresolved_count",
+        "datapro_ratio",
+        "official_fallback_ratio"
+      ],
+      "properties": {
+        "classification": {
+          "enum": [
+            "datapro_only",
+            "datapro_primary",
+            "datapro_assisted",
+            "datapro_attempted"
+          ]
+        },
+        "datapro_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "official_fallback_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolved_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "datapro_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "official_fallback_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "classification": {
+              "const": "datapro_only"
+            },
+            "datapro_ratio": {
+              "const": 1
+            },
+            "official_fallback_ratio": {
+              "const": 0
+            }
+          },
+          "required": [
+            "classification",
+            "datapro_ratio",
+            "official_fallback_ratio"
+          ]
+        },
+        {
+          "properties": {
+            "classification": {
+              "const": "datapro_primary"
+            },
+            "datapro_ratio": {
+              "minimum": 0.8,
+              "exclusiveMaximum": 1
+            }
+          },
+          "required": [
+            "classification",
+            "datapro_ratio"
+          ]
+        },
+        {
+          "properties": {
+            "classification": {
+              "const": "datapro_assisted"
+            },
+            "datapro_ratio": {
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 0.8
+            }
+          },
+          "required": [
+            "classification",
+            "datapro_ratio"
+          ]
+        },
+        {
+          "properties": {
+            "classification": {
+              "const": "datapro_attempted"
+            },
+            "datapro_ratio": {
+              "const": 0
+            }
+          },
+          "required": [
+            "classification",
+            "datapro_ratio"
+          ]
+        }
+      ]
+    }
+  }
+}

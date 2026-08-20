@@ -1,0 +1,45 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-01234567",
+      "intended_claim_candidate": "causal",
+      "locked_user_fields": [
+        "research_question",
+        "sample",
+        "estimand"
+      ],
+      "plain_language_explanation": "使用已批准的 JEL Example 5 设计和已识别冲击估计季度通胀动态路径。",
+      "research_family_candidate": "dynamic_shock_response",
+      "research_question": "一次已识别的意外货币政策收紧如何影响美国季度通胀路径？",
+      "risk_level": "high",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "research_question",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "intended_claim",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "execution_ready",
+  "intake_id": "rd-intake-0123456789abcdef",
+  "output_language": "zh-CN",
+  "raw_user_input": "执行已批准的 JEL Example 5 货币政策冲击与季度通胀动态响应设计。",
+  "recommended_candidate_id": "rd-candidate-01234567",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

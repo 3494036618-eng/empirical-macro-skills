@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1.0-draft",
+  "source_intake_id": "rd-intake-bbbbbbbbbbbbbbbb",
+  "selected_candidate_id": "rd-candidate-cccccccc",
+  "request_id": "rd-request-bbbbbbbbbbbbbbbb",
+  "research_question": "这项政策是否导致了经济增长？",
+  "input_maturity": "question_ready",
+  "intended_claim": "causal",
+  "target_population": {
+    "description": "政策影响地区",
+    "entity_types": [
+      "region"
+    ],
+    "inclusion_rules": [],
+    "exclusion_rules": []
+  },
+  "unit_of_analysis": "region_time",
+  "time_scope": {
+    "start": "2010",
+    "end": "2025",
+    "frequency": "A"
+  },
+  "variables": [
+    {
+      "variable_id": "growth",
+      "role": "outcome",
+      "concept": "经济增长",
+      "definition_constraints": []
+    }
+  ],
+  "intervention_or_shock": null,
+  "forecast": null,
+  "field_provenance": [
+    {
+      "field_path": "research_question",
+      "source": "user_provided",
+      "evidence_text": "这项政策是否导致了经济增长",
+      "confidence": "high"
+    },
+    {
+      "field_path": "intervention_or_shock",
+      "source": "unresolved",
+      "evidence_text": null,
+      "confidence": "not_applicable"
+    }
+  ],
+  "unresolved_decisions": [
+    "具体政策、处理时点和比较组均未明确"
+  ],
+  "safe_downgrade_applied": false,
+  "output_language": "zh-CN"
+}

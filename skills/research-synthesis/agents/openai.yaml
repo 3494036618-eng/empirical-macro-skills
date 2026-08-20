@@ -1,0 +1,4 @@
+interface:
+  display_name: "宏观实证研究综合"
+  short_description: "把已验证的设计、数据、估计与稳健性证据编译为一份中文科研报告和复现包"
+  default_prompt: "使用 $research-synthesis 汇总已经完成的宏观实证研究。只接受显式的 research-design、data evidence、estimator 和 robustness-audit bundle refs，并先运行各自公共 validator；缺少 required bundle 或 checksum mismatch 时 Stop-Ship。科研人员只接收 research-report.md、tables/、figures/ 和 reproduction/，内部 JSON 放入 .audit/。数值只能来自结构化 JSON 或已校验 CSV，禁止从 Markdown 或 OCR 提取。保持上游 claim 单调不升级；causal_candidate、post_result_exploratory 和 pointwise interval 必须保留审核边界。"

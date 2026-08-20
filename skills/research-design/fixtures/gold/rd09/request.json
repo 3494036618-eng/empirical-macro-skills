@@ -1,0 +1,91 @@
+{
+  "design_audit_inputs": {
+    "functional_form_preregistered": false
+  },
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "research_question",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "intended_claim",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "target_population",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "unit_of_analysis",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "time_scope",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "variables[0].role",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "Gold fixture",
+      "field_path": "variables[1].role",
+      "source": "user_provided"
+    }
+  ],
+  "forecast": null,
+  "input_maturity": "design_ready",
+  "intended_claim": "associational",
+  "intervention_or_shock": null,
+  "output_language": "zh-CN",
+  "request_id": "rd-request-0000000000000009",
+  "research_question": "债务与增长是否存在预先设定的非线性关系？",
+  "safe_downgrade_applied": false,
+  "schema_version": "0.1.0-draft",
+  "selected_candidate_id": "rd-candidate-00000009",
+  "source_intake_id": "rd-intake-0000000000000009",
+  "target_population": {
+    "description": "Gold场景目标总体",
+    "entity_types": [
+      "country"
+    ],
+    "exclusion_rules": [],
+    "inclusion_rules": [
+      "按预注册范围纳入"
+    ]
+  },
+  "time_scope": {
+    "end": "2025",
+    "frequency": "A",
+    "start": "2000"
+  },
+  "unit_of_analysis": "country_time",
+  "unresolved_decisions": [],
+  "variables": [
+    {
+      "concept": "RD09 outcome",
+      "definition_constraints": [],
+      "role": "outcome",
+      "variable_id": "variable_1"
+    },
+    {
+      "concept": "RD09 exposure",
+      "definition_constraints": [],
+      "role": "exposure",
+      "variable_id": "variable_2"
+    }
+  ]
+}

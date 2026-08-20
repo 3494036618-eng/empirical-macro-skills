@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0-beta",
+  "registry_version": "dynamic-beta-v1",
+  "capabilities": {
+    "dynamic_shock_response": {
+      "executable": true,
+      "executor_skill": "time-series-dynamics"
+    },
+    "conditional_dynamic_association": {
+      "executable": true,
+      "executor_skill": "time-series-dynamics"
+    },
+    "panel_association": {
+      "executable": false,
+      "executor_skill": null
+    },
+    "causal_policy_evaluation": {
+      "executable": false,
+      "executor_skill": null
+    },
+    "forecasting_nowcasting": {
+      "executable": false,
+      "executor_skill": null
+    },
+    "structural_modeling": {
+      "executable": false,
+      "executor_skill": null
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:macro-data:run-manifest:0.2.0-beta",
+  "title": "macro-data run manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "macro_data_version",
+    "request",
+    "connector",
+    "input_mode",
+    "fixture_provenance",
+    "artifacts",
+    "execution_status",
+    "research_readiness",
+    "delivery_eligibility",
+    "eligible_for_estimation",
+    "secrets_recorded"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0-beta"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^run-[a-f0-9]{32}$"
+    },
+    "macro_data_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "request": {
+      "type": "object"
+    },
+    "connector": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "input_mode": {
+      "enum": [
+        "live",
+        "sanitized-live-replay",
+        "public-artifact-import",
+        "synthetic",
+        "mock"
+      ]
+    },
+    "fixture_provenance": {
+      "type": "object"
+    },
+    "artifacts": {
+      "type": "object",
+      "required": [
+        "data.csv",
+        "data.parquet",
+        "provenance.json",
+        "quality_report.json",
+        "raw_response.json",
+        "request_manifest.json",
+        "result.json",
+        "series_catalog.json"
+      ],
+      "properties": {
+        "data.csv": {
+          "$ref": "#/$defs/sha256"
+        },
+        "data.parquet": {
+          "$ref": "#/$defs/sha256"
+        },
+        "provenance.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "quality_report.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "raw_response.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "request_manifest.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "result.json": {
+          "$ref": "#/$defs/sha256"
+        },
+        "series_catalog.json": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "additionalProperties": false
+    },
+    "execution_status": {
+      "enum": [
+        "success",
+        "partial",
+        "failed"
+      ]
+    },
+    "research_readiness": {
+      "enum": [
+        "ready",
+        "review_required",
+        "blocked"
+      ]
+    },
+    "delivery_eligibility": {
+      "enum": [
+        "analysis_ready",
+        "comparison_only",
+        "not_deliverable"
+      ]
+    },
+    "eligible_for_estimation": {
+      "type": "boolean"
+    },
+    "secrets_recorded": {
+      "const": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

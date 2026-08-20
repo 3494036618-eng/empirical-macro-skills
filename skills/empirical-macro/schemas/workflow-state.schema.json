@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:workflow-state:0.1.0-beta",
+  "title": "Empirical Macro Workflow State",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "workflow_id",
+    "created_at",
+    "updated_at",
+    "current_stage",
+    "supported_method",
+    "registry_version",
+    "route_action",
+    "request_id",
+    "artifact_refs",
+    "issue_codes",
+    "checkpoint_id",
+    "resume_eligible",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-beta"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^workflow-[0-9a-f]{32}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "current_stage": {
+      "enum": [
+        "idea_received",
+        "design_ready",
+        "data_ready",
+        "estimation_ready",
+        "audit_ready",
+        "synthesis_ready",
+        "completed",
+        "blocked",
+        "failed"
+      ]
+    },
+    "supported_method": {
+      "enum": [
+        "dynamic_shock_response",
+        "conditional_dynamic_association"
+      ]
+    },
+    "registry_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "route_action": {
+      "enum": [
+        "route_research_design",
+        "route_macro_data",
+        "route_time_series_dynamics",
+        "route_robustness_audit",
+        "route_research_synthesis",
+        "method_not_implemented",
+        "out_of_scope",
+        "stopped",
+        "completed"
+      ]
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^request-[0-9a-z-]{8,64}$"
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact_ref"
+      }
+    },
+    "issue_codes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true
+    },
+    "checkpoint_id": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^checkpoint-[0-9a-f]{32}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resume_eligible": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "blocked",
+        "failed",
+        "completed"
+      ]
+    }
+  },
+  "$defs": {
+    "artifact_ref": {
+      "type": "object",
+      "required": [
+        "role",
+        "path",
+        "sha256",
+        "validator"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "validator": {
+          "enum": [
+            "research-design",
+            "macro-data",
+            "time-series-dynamics",
+            "robustness-audit",
+            "research-synthesis"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "current_stage": {
+            "const": "completed"
+          }
+        },
+        "required": [
+          "current_stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "completed"
+          },
+          "resume_eligible": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "current_stage": {
+            "const": "blocked"
+          }
+        },
+        "required": [
+          "current_stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "blocked"
+          },
+          "resume_eligible": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "current_stage": {
+            "const": "failed"
+          }
+        },
+        "required": [
+          "current_stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "resume_eligible": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "current_stage": {
+            "enum": [
+              "idea_received",
+              "design_ready",
+              "data_ready",
+              "estimation_ready",
+              "audit_ready",
+              "synthesis_ready"
+            ]
+          }
+        },
+        "required": [
+          "current_stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "active"
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

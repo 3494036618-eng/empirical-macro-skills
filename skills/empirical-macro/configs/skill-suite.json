@@ -1,0 +1,10 @@
+{
+  "schema_version": "0.1.0-beta",
+  "validators": {
+    "macro-data": "scripts/validate_bundle.py",
+    "research-design": "scripts/validate_bundle.py",
+    "time-series-dynamics": "scripts/validate_bundle.py",
+    "robustness-audit": "scripts/validate_bundle.py",
+    "research-synthesis": "scripts/validate_bundle.py"
+  }
+}

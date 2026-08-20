@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "shock_id": "shock-artifact-0123456789abcdef",
+  "shock_object_type": "observed_shock",
+  "identification_strategy": "narrative",
+  "source_title": "Updated Romer-Romer monetary policy shocks",
+  "source_version": "JEL-Example5",
+  "frequency": "Q",
+  "units": "percentage_points",
+  "direction": "positive_is_tightening",
+  "coverage": {
+    "start": "1985Q1",
+    "end": "2007Q4"
+  },
+  "license": {
+    "identifier": "CC0-1.0",
+    "current_use_allowed": true
+  },
+  "checksum": "19ca23c02ff86dd1f7c78018e4052eea98de4ecca879f467c3a9d57f55b38d2c",
+  "provenance_complete": true,
+  "review_status": "approved_for_controlled_estimation",
+  "review_required": true
+}

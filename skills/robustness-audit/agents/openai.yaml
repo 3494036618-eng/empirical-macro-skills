@@ -1,0 +1,4 @@
+interface:
+  display_name: "宏观稳健性审计"
+  short_description: "执行已声明敏感性检查，保留不利结果并冻结结论边界"
+  default_prompt: "使用 $robustness-audit 审计已验证的宏观估计结果。先在不读取结果数值的条件下冻结 audit plan；若已看过基线结果，必须标记 post_result_exploratory。执行全部声明 alternatives，保留失败、超时和不利结果。缺少 required check 时 stop_ship；通过检查不得升级因果声明，也不得从 pointwise 区间推断整条路径显著。"

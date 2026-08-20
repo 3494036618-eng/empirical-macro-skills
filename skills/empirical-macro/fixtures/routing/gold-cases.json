@@ -1,0 +1,1302 @@
+[
+  {
+    "case_id": "vague-01",
+    "category": "vague_research_idea",
+    "prompt": "我想研究货币政策与通胀，但还没想好国家和指标。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-02",
+    "category": "vague_research_idea",
+    "prompt": "利率上升后经济通常怎么变化？我想把它做成实证研究。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-03",
+    "category": "vague_research_idea",
+    "prompt": "帮我把能源价格和产出波动这个方向变成可检验问题。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-04",
+    "category": "vague_research_idea",
+    "prompt": "我想研究金融条件对实体经济的动态影响，从哪里开始？",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-05",
+    "category": "vague_research_idea",
+    "prompt": "能不能设计一个关于通胀持续性的宏观研究？",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-06",
+    "category": "vague_research_idea",
+    "prompt": "我有个想法：政策收紧可能影响就业，请先帮我定研究问题。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-07",
+    "category": "vague_research_idea",
+    "prompt": "想比较一次宏观冲击发生后消费和产出的变化。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-08",
+    "category": "vague_research_idea",
+    "prompt": "我还没有变量表，只知道想研究需求冲击。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-09",
+    "category": "vague_research_idea",
+    "prompt": "请把汇率变化与国内价格这个主题整理成研究方案。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "vague-10",
+    "category": "vague_research_idea",
+    "prompt": "重新审视我的宏观研究想法，即使目录里有旧结果也先从设计开始。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "research_idea",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-01",
+    "category": "data_preparation",
+    "prompt": "整理中国季度 CPI 数据并给出口径和来源。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-02",
+    "category": "data_preparation",
+    "prompt": "准备美国季度实际 GDP 的科研数据包。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-03",
+    "category": "data_preparation",
+    "prompt": "我要欧元区政策利率和通胀的季度数据，只做数据准备。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-04",
+    "category": "data_preparation",
+    "prompt": "构建日本年度通胀与产出数据，不要开始估计。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-05",
+    "category": "data_preparation",
+    "prompt": "核对英国失业率序列的频率、单位和时间覆盖。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-06",
+    "category": "data_preparation",
+    "prompt": "准备多个国家的宏观指标并记录缺失期。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-07",
+    "category": "data_preparation",
+    "prompt": "查询一组季度宏观数据并保留原始来源与校验和。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-08",
+    "category": "data_preparation",
+    "prompt": "先帮我检查数据口径，不需要研究结论。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-09",
+    "category": "data_preparation",
+    "prompt": "把现有宏观数据需求转成可审计的数据包。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "data-10",
+    "category": "data_preparation",
+    "prompt": "只完成指标、实体、频率和时期的精确数据匹配。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "data_preparation",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-01",
+    "category": "supported_dynamic",
+    "prompt": "研究已识别货币政策冲击后的季度通胀响应。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-02",
+    "category": "supported_dynamic",
+    "prompt": "估计政策利率变化与未来产出的条件动态关联。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-03",
+    "category": "supported_dynamic",
+    "prompt": "基于现有研究计划和数据运行季度动态响应。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-04",
+    "category": "supported_dynamic",
+    "prompt": "我已经准备好外生冲击和季度数据，开始动态分析。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-05",
+    "category": "supported_dynamic",
+    "prompt": "研究一次供给冲击的动态路径，但还没有正式研究计划。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-06",
+    "category": "supported_dynamic",
+    "prompt": "分析利率和通胀的季度关系，我只有一个初步问题。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-07",
+    "category": "supported_dynamic",
+    "prompt": "我明确要做动态响应，但变量角色还没冻结。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-08",
+    "category": "supported_dynamic",
+    "prompt": "研究冲击后的产出路径，计划已有但数据还没准备好。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-09",
+    "category": "supported_dynamic",
+    "prompt": "继续动态关联分析，先补齐研究所需季度数据。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "dynamic-10",
+    "category": "supported_dynamic",
+    "prompt": "计划已确认，请在数据合格后估计动态路径。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "dynamic_analysis",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "robustness-01",
+    "category": "robustness",
+    "prompt": "基线动态结果已有，请执行预先声明的稳健性检查。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "robustness",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_robustness_audit",
+    "expected_target_skill": "robustness-audit",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "robustness-02",
+    "category": "robustness",
+    "prompt": "检查不同滞后阶数和 HAC 设定是否改变结论。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "robustness",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_robustness_audit",
+    "expected_target_skill": "robustness-audit",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "robustness-03",
+    "category": "robustness",
+    "prompt": "对现有动态估计做样本窗口敏感性审计。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "robustness",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_robustness_audit",
+    "expected_target_skill": "robustness-audit",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "robustness-04",
+    "category": "robustness",
+    "prompt": "我要做稳健性检查，但当前数据包还没有完成。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "robustness",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "robustness-05",
+    "category": "robustness",
+    "prompt": "研究设计和数据都已有，先完成基线估计再审计。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "robustness",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "synthesis-01",
+    "category": "final_report",
+    "prompt": "所有上游结果都齐了，请生成最终中文研究报告和复现材料。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_synthesis",
+    "expected_target_skill": "research-synthesis",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "synthesis-02",
+    "category": "final_report",
+    "prompt": "把已验证的设计、数据、估计和稳健性证据编译成研究包。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_synthesis",
+    "expected_target_skill": "research-synthesis",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "synthesis-03",
+    "category": "final_report",
+    "prompt": "我想要最终报告，但研究设计还没有完成。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_research_design",
+    "expected_target_skill": "research-design",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "synthesis-04",
+    "category": "final_report",
+    "prompt": "数据和计划已有，先完成动态估计再生成报告。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "synthesis-05",
+    "category": "final_report",
+    "prompt": "估计结果已有，但稳健性审计还没做完。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "conditional_dynamic_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "route_robustness_audit",
+    "expected_target_skill": "robustness-audit",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "unsupported-01",
+    "category": "unsupported_method",
+    "prompt": "请执行跨国面板固定效应回归。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "panel_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-02",
+    "category": "unsupported_method",
+    "prompt": "用动态面板模型分析债务和增长。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "panel_association",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-03",
+    "category": "unsupported_method",
+    "prompt": "做一个双重差分评估政策效果。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "causal_policy_evaluation",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-04",
+    "category": "unsupported_method",
+    "prompt": "请执行事件研究并估计政策因果效应。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "causal_policy_evaluation",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-05",
+    "category": "unsupported_method",
+    "prompt": "使用工具变量法解决内生性。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "causal_policy_evaluation",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-06",
+    "category": "unsupported_method",
+    "prompt": "用 RDD 识别政策影响。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "causal_policy_evaluation",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-07",
+    "category": "unsupported_method",
+    "prompt": "建立模型预测明年通胀。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "forecasting_nowcasting",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-08",
+    "category": "unsupported_method",
+    "prompt": "做实时 Nowcasting。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "forecasting_nowcasting",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-09",
+    "category": "unsupported_method",
+    "prompt": "估计 DSGE 结构模型。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "structural_modeling",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "unsupported-10",
+    "category": "unsupported_method",
+    "prompt": "求解一般均衡并模拟政策反事实。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "final_report",
+      "method_family": "structural_modeling",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "method_not_implemented",
+    "expected_target_skill": null,
+    "expected_user_message": "当前版本不能执行该方法"
+  },
+  {
+    "case_id": "out-of-scope-01",
+    "category": "out_of_scope",
+    "prompt": "帮我规划一条有机合成路线。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "chemistry",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-02",
+    "category": "out_of_scope",
+    "prompt": "审查这个 React 组件。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "software_engineering",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-03",
+    "category": "out_of_scope",
+    "prompt": "给销售团队生成客户跟进建议。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "sales",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-04",
+    "category": "out_of_scope",
+    "prompt": "比较两款家用汽车。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "car_decision",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-05",
+    "category": "out_of_scope",
+    "prompt": "分析我的个人股票组合。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "personal_finance",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-06",
+    "category": "out_of_scope",
+    "prompt": "翻译这段英文。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "translation",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-07",
+    "category": "out_of_scope",
+    "prompt": "生成一张产品海报。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "design",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-08",
+    "category": "out_of_scope",
+    "prompt": "检查数据库慢查询。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "database",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-09",
+    "category": "out_of_scope",
+    "prompt": "整理一次用户访谈。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "ux_research",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "out-of-scope-10",
+    "category": "out_of_scope",
+    "prompt": "写一份旅行行程。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "travel",
+      "request_kind": "research_idea",
+      "method_family": null,
+      "has_research_plan": false,
+      "has_macro_data_bundle": false,
+      "has_estimator_bundle": false,
+      "has_robustness_bundle": false,
+      "has_workflow_state": false
+    },
+    "state_stage": null,
+    "expected_action": "out_of_scope",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  },
+  {
+    "case_id": "resume-01",
+    "category": "resume",
+    "prompt": "设计已确认，从保存状态继续准备数据。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "resume",
+      "method_family": "dynamic_shock_response",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": true
+    },
+    "state_stage": "design_ready",
+    "expected_action": "route_macro_data",
+    "expected_target_skill": "macro-data",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "resume-02",
+    "category": "resume",
+    "prompt": "数据已经验证，从检查点继续动态估计。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "resume",
+      "method_family": "dynamic_shock_response",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": true
+    },
+    "state_stage": "data_ready",
+    "expected_action": "route_time_series_dynamics",
+    "expected_target_skill": "time-series-dynamics",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "resume-03",
+    "category": "resume",
+    "prompt": "基线估计完成，继续稳健性审计。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "resume",
+      "method_family": "dynamic_shock_response",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": true
+    },
+    "state_stage": "estimation_ready",
+    "expected_action": "route_robustness_audit",
+    "expected_target_skill": "robustness-audit",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "resume-04",
+    "category": "resume",
+    "prompt": "稳健性结果完成，继续生成最终交付。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "resume",
+      "method_family": "dynamic_shock_response",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": true
+    },
+    "state_stage": "audit_ready",
+    "expected_action": "route_research_synthesis",
+    "expected_target_skill": "research-synthesis",
+    "expected_user_message": null
+  },
+  {
+    "case_id": "resume-05",
+    "category": "resume",
+    "prompt": "检查这个已经完成的工作流。",
+    "intent": {
+      "schema_version": "0.1.0-beta",
+      "domain": "empirical_macro",
+      "request_kind": "resume",
+      "method_family": "dynamic_shock_response",
+      "has_research_plan": true,
+      "has_macro_data_bundle": true,
+      "has_estimator_bundle": true,
+      "has_robustness_bundle": true,
+      "has_workflow_state": true
+    },
+    "state_stage": "completed",
+    "expected_action": "completed",
+    "expected_target_skill": null,
+    "expected_user_message": null
+  }
+]

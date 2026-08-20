@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-synthesis:result:0.1.0",
+  "title": "research-synthesis result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "result_id",
+    "request_ref",
+    "execution_status",
+    "synthesis_readiness",
+    "delivery_eligibility",
+    "reproduction_status",
+    "release_recommendation",
+    "effective_claim_eligibility",
+    "primary_output",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "result_id": {
+      "type": "string",
+      "pattern": "^rs-result-[a-f0-9]{32}$"
+    },
+    "request_ref": {
+      "type": "string",
+      "pattern": "^rs-request-[a-f0-9]{32}$"
+    },
+    "execution_status": {
+      "enum": [
+        "success",
+        "partial",
+        "failed"
+      ]
+    },
+    "synthesis_readiness": {
+      "enum": [
+        "ready",
+        "review_required",
+        "blocked"
+      ]
+    },
+    "delivery_eligibility": {
+      "enum": [
+        "research_package",
+        "evidence_only",
+        "not_deliverable"
+      ]
+    },
+    "reproduction_status": {
+      "enum": [
+        "verified",
+        "not_run",
+        "failed",
+        "not_applicable"
+      ]
+    },
+    "release_recommendation": {
+      "enum": [
+        "local_review",
+        "public_release_review",
+        "stop_ship"
+      ]
+    },
+    "effective_claim_eligibility": {
+      "enum": [
+        "descriptive_only",
+        "associational_only",
+        "predictive_only",
+        "causal_candidate",
+        "structural_candidate",
+        "not_eligible"
+      ]
+    },
+    "primary_output": {
+      "const": "research-report.md"
+    },
+    "warnings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "execution_status": {
+            "const": "failed"
+          }
+        },
+        "required": [
+          "execution_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "synthesis_readiness": {
+            "const": "blocked"
+          },
+          "delivery_eligibility": {
+            "const": "not_deliverable"
+          },
+          "release_recommendation": {
+            "const": "stop_ship"
+          }
+        }
+      }
+    }
+  ]
+}

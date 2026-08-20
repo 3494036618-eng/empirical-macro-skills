@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:macro-data:residual-gap-manifest:0.3.0-beta",
+  "title": "ResidualGapManifest",
+  "description": "DataPro 合格 cell 锁定后仍允许进入官方缺口补全的精确范围。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "gap_manifest_id",
+    "matrix_id",
+    "datapro_locked_cell_ids",
+    "gap_cells",
+    "official_requests",
+    "issue_codes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.3.0-beta"
+    },
+    "gap_manifest_id": {
+      "type": "string",
+      "pattern": "^macro-gaps-[a-f0-9]{32}$"
+    },
+    "matrix_id": {
+      "type": "string",
+      "pattern": "^macro-matrix-[a-f0-9]{32}$"
+    },
+    "datapro_locked_cell_ids": {
+      "$ref": "#/$defs/cell_ids"
+    },
+    "gap_cells": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/gap_cell"
+      }
+    },
+    "official_requests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/official_request"
+      }
+    },
+    "issue_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "period": {
+      "type": "string",
+      "pattern": "^(?:[0-9]{4}|[0-9]{4}-?Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2])|[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))$"
+    },
+    "cell_id": {
+      "type": "string",
+      "pattern": "^macro-cell-[a-f0-9]{32}$"
+    },
+    "cell_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/cell_id"
+      }
+    },
+    "key": {
+      "type": "object",
+      "required": [
+        "indicator_code",
+        "entity_code",
+        "period",
+        "frequency"
+      ],
+      "properties": {
+        "indicator_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "entity_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "period": {
+          "$ref": "#/$defs/period"
+        },
+        "frequency": {
+          "enum": [
+            "D",
+            "W",
+            "M",
+            "Q",
+            "A"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "gap_cell": {
+      "type": "object",
+      "required": [
+        "cell_id",
+        "key",
+        "reason"
+      ],
+      "properties": {
+        "cell_id": {
+          "$ref": "#/$defs/cell_id"
+        },
+        "key": {
+          "$ref": "#/$defs/key"
+        },
+        "reason": {
+          "enum": [
+            "empty_result",
+            "unsupported_query",
+            "period_missing",
+            "exact_candidate_missing",
+            "metadata_insufficient",
+            "provider_error",
+            "license_or_use_not_authorized",
+            "identity_ambiguity"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "official_request": {
+      "type": "object",
+      "required": [
+        "gap_request_id",
+        "provider",
+        "entity_code",
+        "indicator_code",
+        "periods",
+        "research_request"
+      ],
+      "properties": {
+        "gap_request_id": {
+          "type": "string",
+          "pattern": "^macro-gap-request-[a-f0-9]{32}$"
+        },
+        "provider": {
+          "enum": [
+            "imf",
+            "world_bank",
+            "oecd",
+            "bis",
+            "fred",
+            "eurostat",
+            "national"
+          ]
+        },
+        "entity_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "indicator_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "periods": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/period"
+          }
+        },
+        "research_request": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

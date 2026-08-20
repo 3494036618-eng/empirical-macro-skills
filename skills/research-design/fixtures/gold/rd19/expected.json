@@ -1,0 +1,16 @@
+{
+  "expected_claim_eligibility": "not_eligible",
+  "expected_family": "causal_policy_evaluation",
+  "expected_readiness": "blocked",
+  "forbidden_claim_eligibility": [
+    "structural_candidate",
+    "causal_candidate"
+  ],
+  "gold_id": "RD19",
+  "required_issue_codes": [
+    "treatment_definition_required",
+    "comparison_group_required",
+    "anticipation_assessment_required",
+    "spillover_assessment_required"
+  ]
+}

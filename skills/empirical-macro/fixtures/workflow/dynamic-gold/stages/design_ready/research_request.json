@@ -1,0 +1,121 @@
+{
+  "comparison": "一个单位的已识别意外货币政策收紧冲击",
+  "design_audit_inputs": {
+    "shock_identification": "explicit"
+  },
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "research_question",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "intended_claim",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "target_population",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "unit_of_analysis",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "time_scope",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "variables[0].role",
+      "source": "user_provided"
+    },
+    {
+      "confidence": "high",
+      "evidence_text": "JEL Example 5 execution-ready benchmark",
+      "field_path": "variables[1].role",
+      "source": "user_provided"
+    }
+  ],
+  "forecast": null,
+  "input_maturity": "execution_ready",
+  "intended_claim": "causal",
+  "intervention_or_shock": {
+    "assignment_mechanism": "narrative",
+    "name": "已识别货币政策冲击",
+    "timing_known": true
+  },
+  "output_language": "zh-CN",
+  "preferred_design": "local_projection",
+  "request_id": "rd-request-0123456789abcdef",
+  "research_question": "一次已识别的意外货币政策收紧如何影响美国季度通胀路径？",
+  "response_horizons": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "safe_downgrade_applied": false,
+  "schema_version": "0.1.0-draft",
+  "selected_candidate_id": "rd-candidate-01234567",
+  "source_intake_id": "rd-intake-0123456789abcdef",
+  "target_population": {
+    "description": "1985Q1 至 2007Q4 的美国季度宏观观测",
+    "entity_types": [
+      "country"
+    ],
+    "exclusion_rules": [],
+    "inclusion_rules": [
+      "JEL Example 5 固定样本"
+    ]
+  },
+  "time_scope": {
+    "end": "2007Q4",
+    "frequency": "Q",
+    "start": "1985Q1"
+  },
+  "unit_of_analysis": "country_time",
+  "unresolved_decisions": [],
+  "variables": [
+    {
+      "concept": "美国季度 CPI 对数水平",
+      "definition_constraints": [
+        "季度"
+      ],
+      "role": "outcome",
+      "variable_id": "lcpi"
+    },
+    {
+      "concept": "已识别货币政策冲击",
+      "definition_constraints": [
+        "不得使用政策利率原始变化直接冒充冲击"
+      ],
+      "role": "shock",
+      "variable_id": "rr_shock"
+    }
+  ]
+}

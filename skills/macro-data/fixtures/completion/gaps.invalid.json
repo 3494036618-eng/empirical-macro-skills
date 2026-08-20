@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.3.0-beta",
+  "gap_manifest_id": "macro-gaps-11111111111111111111111111111111",
+  "matrix_id": "macro-matrix-22222222222222222222222222222222",
+  "datapro_locked_cell_ids": [],
+  "gap_cells": [
+    {
+      "cell_id": "macro-cell-55555555555555555555555555555555",
+      "key": {
+        "indicator_code": "FP.CPI.TOTL",
+        "entity_code": "CHN",
+        "period": "2020",
+        "frequency": "A"
+      },
+      "reason": "use_a_similar_indicator"
+    }
+  ],
+  "official_requests": [],
+  "issue_codes": []
+}

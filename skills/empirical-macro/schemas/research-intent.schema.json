@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-intent:0.1.0-beta",
+  "title": "Empirical Macro Research Intent",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "domain",
+    "request_kind",
+    "method_family",
+    "has_research_plan",
+    "has_macro_data_bundle",
+    "has_estimator_bundle",
+    "has_robustness_bundle",
+    "has_workflow_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-beta"
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_kind": {
+      "enum": [
+        "research_idea",
+        "data_preparation",
+        "dynamic_analysis",
+        "robustness",
+        "final_report",
+        "resume",
+        "other"
+      ]
+    },
+    "method_family": {
+      "oneOf": [
+        {
+          "enum": [
+            "dynamic_shock_response",
+            "conditional_dynamic_association",
+            "panel_association",
+            "causal_policy_evaluation",
+            "forecasting_nowcasting",
+            "structural_modeling"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "has_research_plan": {
+      "type": "boolean"
+    },
+    "has_macro_data_bundle": {
+      "type": "boolean"
+    },
+    "has_estimator_bundle": {
+      "type": "boolean"
+    },
+    "has_robustness_bundle": {
+      "type": "boolean"
+    },
+    "has_workflow_state": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "request_kind": {
+            "const": "resume"
+          }
+        },
+        "required": [
+          "request_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_workflow_state": {
+            "const": true
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

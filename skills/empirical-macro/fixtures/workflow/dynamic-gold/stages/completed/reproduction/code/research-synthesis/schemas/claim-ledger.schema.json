@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:research-synthesis:claim-ledger:0.1.0",
+  "title": "research-synthesis claim ledger",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "claim_ledger_id",
+    "effective_claim_eligibility",
+    "claims"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "claim_ledger_id": {
+      "type": "string",
+      "pattern": "^rs-claim-ledger-[a-f0-9]{32}$"
+    },
+    "effective_claim_eligibility": {
+      "enum": [
+        "descriptive_only",
+        "associational_only",
+        "predictive_only",
+        "causal_candidate",
+        "structural_candidate",
+        "not_eligible"
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "claim_id",
+          "claim_type",
+          "status",
+          "report_text",
+          "claim_eligibility",
+          "evidence_refs",
+          "limitation_refs",
+          "review_required",
+          "prohibited_expansions"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "pattern": "^rs-claim-[a-f0-9]{32}$"
+          },
+          "claim_type": {
+            "enum": [
+              "design",
+              "data",
+              "descriptive",
+              "associational",
+              "causal_candidate",
+              "uncertainty",
+              "robustness",
+              "limitation",
+              "reproduction"
+            ]
+          },
+          "status": {
+            "enum": [
+              "supported",
+              "qualified",
+              "blocked"
+            ]
+          },
+          "report_text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 5000
+          },
+          "claim_eligibility": {
+            "enum": [
+              "descriptive_only",
+              "associational_only",
+              "predictive_only",
+              "causal_candidate",
+              "structural_candidate",
+              "not_eligible"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^rs-evidence-[a-f0-9]{32}$"
+            }
+          },
+          "limitation_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^rs-limitation-[a-f0-9]{32}$"
+            }
+          },
+          "review_required": {
+            "type": "boolean"
+          },
+          "prohibited_expansions": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

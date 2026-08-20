@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-08-16T23:30:43.769929Z",
+  "input_checksums": {
+    "data": "19ca23c02ff86dd1f7c78018e4052eea98de4ecca879f467c3a9d57f55b38d2c",
+    "macro_data": "b28454c960a25c8290040713956b72ec3cb13d8c1799d3c4e0e6e24065c6734a",
+    "request": "c9104b2dc6d94c9ee429f4a42b23bf577b50fb59c389b2819af8761e480bd80a",
+    "research_plan": "e123c42023862cf45dc1d3d844e0468f5aa34cba260f2451c09884cb472d0e02",
+    "shock_artifact": "c09790750092a31621fbef0db46dad53636c2a38eefa32536c050d62bb30a325"
+  },
+  "output_checksums": {
+    "diagnostics.json": "498ccbc99b3df327f94649d69d5e20af3630bb67efd99d9bddc5e05ea044bfb9",
+    "dynamic-path.csv": "ade2f6369edd8ae9e2275e121730d009a4039c9894b55018d23e18459aaf089b",
+    "dynamic-path.png": "28d566fc0422c9f35b8034c41bb85040856ba55b14a34762718e5dfdaaf1cd95",
+    "plain-language-summary.md": "6f7da458bb8e6303e096b69015a2d93cf5f0e0e62feb305bbd880a65bb61f822",
+    "request.json": "c9104b2dc6d94c9ee429f4a42b23bf577b50fb59c389b2819af8761e480bd80a",
+    "result.json": "a70eeb70c4a591902fa83df0943d7d921f31c8d08798094a992f3d003db4610c",
+    "technical-summary.md": "bfafa14cbd2a68c038d96a8beba075ea6f2aa0ff24dd43745560eb3008dea6c5"
+  },
+  "request_id": "tsd-request-ed5c2aa2a14eddfa516c629020579ddc",
+  "run_id": "tsd-run-6a1d48bcc4ba02f37830edf214995cb7",
+  "runtime": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "python": "3.12.13",
+    "statsmodels": "0.14.6"
+  },
+  "schema_version": "0.1.0",
+  "secrets_recorded": false
+}

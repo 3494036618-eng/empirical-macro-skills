@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "robustness-audit-skill"
+version = "0.1.0.dev0"
+description = "Auditable declared robustness checks for empirical macro research."
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "jsonschema==4.26.0",
+  "matplotlib==3.10.9",
+  "numpy==2.3.5",
+  "pandas==2.3.3",
+]
+
+[dependency-groups]
+dev = [
+  "mypy>=1.18,<2",
+  "pandas-stubs==2.3.3.260113",
+  "pytest>=8.4,<9",
+  "pytest-cov>=7,<8",
+  "ruff>=0.12,<1",
+  "types-jsonschema>=4.23,<5",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/robustness_audit"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --cov=robustness_audit --cov-branch --cov-fail-under=90"
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+markers = [
+  "external: requires pinned external estimator artifacts",
+]
+
+[tool.coverage.run]
+source = ["robustness_audit"]
+branch = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "C90", "S"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["robustness_audit"]

@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.3.0-beta",
+  "research_question": "获取中国年度居民消费价格指数。",
+  "research_use": "panel_analysis",
+  "concepts": [],
+  "indicators": [
+    {
+      "name_or_code": "FP.CPI.TOTL",
+      "required_definition": null
+    }
+  ],
+  "entities": [
+    {
+      "name_or_code": "CHN",
+      "entity_type": "country",
+      "code_scheme": "ISO-3166-1-alpha-3"
+    }
+  ],
+  "time_range": {"start": "2019", "end": "2021"},
+  "frequency": "A",
+  "unit": null,
+  "seasonal_adjustment": "source_native",
+  "price_basis": {
+    "type": "source_native",
+    "base_period": null,
+    "chain_linked": null
+  },
+  "currency": null,
+  "release_or_vintage": {"mode": "latest", "value": null},
+  "preferred_sources": ["world_bank", "datapro"],
+  "fallback_policy": {
+    "mode": "allow_official_missing_only",
+    "allowed_sources": ["world_bank"],
+    "completion_scope": "full_series",
+    "preserve_datapro_observations": false,
+    "replace_primary_observations": true,
+    "allow_semantic_substitute": true,
+    "allow_cross_source_stitching": true,
+    "identity_match_policy": "name_similarity",
+    "overlap_policy": "replace_primary"
+  },
+  "transformation_policy": {
+    "allow_unit_scaling": false,
+    "allow_currency_conversion": false,
+    "allow_downsampling": false,
+    "allow_upsampling": false,
+    "allow_imputation": false,
+    "allow_self_seasonal_adjustment": false,
+    "allow_rebasing": false,
+    "requested_transformations": []
+  },
+  "output_format": ["json"]
+}

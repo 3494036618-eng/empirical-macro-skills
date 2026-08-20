@@ -1,0 +1,51 @@
+{
+  "assumptions": [
+    {
+      "code": "shock_exogeneity",
+      "evidence_references": [
+        "https://www.aeaweb.org/articles?id=10.1257/jep.32.3.59"
+      ],
+      "required_diagnostics": [
+        "shock_predictability",
+        "alternative_identification_review"
+      ],
+      "statement": "The identified monetary shock is orthogonal to unobserved innovations relevant to the outcome path.",
+      "status": "unresolved",
+      "testability": "indirect"
+    }
+  ],
+  "audit_id": "id-audit-0123456789abcdef",
+  "claim_eligibility": "causal_candidate",
+  "estimand_status": "specified",
+  "identification_status": "candidate_identified",
+  "intended_claim": "causal",
+  "request_id": "rd-request-0123456789abcdef",
+  "review_required": true,
+  "schema_version": "0.1.0-draft",
+  "threats": [
+    {
+      "code": "simultaneity",
+      "mitigation": "Use an approved observed-shock artifact rather than raw policy-rate changes.",
+      "severity": "high",
+      "status": "open"
+    },
+    {
+      "code": "sample_selection",
+      "mitigation": "Compare declared sample policies and endpoint trims.",
+      "severity": "medium",
+      "status": "open"
+    },
+    {
+      "code": "structural_break",
+      "mitigation": "Report endpoint sensitivity without data-driven breakpoint selection.",
+      "severity": "medium",
+      "status": "open"
+    },
+    {
+      "code": "multiple_testing",
+      "mitigation": "Keep pointwise claims separate from whole-path inference.",
+      "severity": "medium",
+      "status": "open"
+    }
+  ]
+}

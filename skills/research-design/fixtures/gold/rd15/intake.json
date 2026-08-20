@@ -1,0 +1,37 @@
+{
+  "candidate_questions": [
+    {
+      "candidate_id": "rd-candidate-0000000f",
+      "intended_claim_candidate": "causal",
+      "locked_user_fields": [
+        "research_question"
+      ],
+      "plain_language_explanation": "Gold场景的结构化候选研究问题。",
+      "research_family_candidate": "dynamic_shock_response",
+      "research_question": "财政乘数是否在衰退期更高并如何累计？",
+      "risk_level": "high",
+      "unresolved_decisions": []
+    }
+  ],
+  "clarifications": [],
+  "field_provenance": [
+    {
+      "confidence": "high",
+      "evidence_text": "财政乘数是否在衰退期更高并如何累计？",
+      "field_path": "research_question",
+      "source": "user_provided"
+    }
+  ],
+  "input_maturity": "design_ready",
+  "intake_id": "rd-intake-000000000000000f",
+  "output_language": "zh-CN",
+  "raw_user_input": "财政乘数是否在衰退期更高并如何累计？",
+  "recommended_candidate_id": "rd-candidate-0000000f",
+  "safe_default": {
+    "applied": false,
+    "downgraded_to": "none",
+    "reason": null
+  },
+  "schema_version": "0.1.0-draft",
+  "status": "ready_to_compile"
+}

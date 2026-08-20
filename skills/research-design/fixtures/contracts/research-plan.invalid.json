@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1.0-draft",
+  "plan_id": "research-plan-bbbbbbbbbbbbbbbb",
+  "request_id": "rd-request-bbbbbbbbbbbbbbbb",
+  "research_family": "causal_policy_evaluation",
+  "intended_claim": "causal",
+  "estimand": {
+    "type": "att",
+    "outcome_variable_id": "growth",
+    "treatment_or_shock_variable_id": "policy",
+    "target_population": "政策实施地区",
+    "comparison": "未实施政策地区",
+    "horizons": [],
+    "status": "specified"
+  },
+  "primary_design": "event_study_did",
+  "design_candidates": [
+    {
+      "design": "事件研究DID",
+      "decision": "adopt",
+      "prerequisites": [],
+      "rejection_reasons": []
+    }
+  ],
+  "identification_audit_ref": null,
+  "data_requirements_ref": "data-req-bbbbbbbbbbbbbbbb",
+  "diagnostics": [],
+  "robustness_checks": [],
+  "reproducibility_requirements": {
+    "raw_data_lineage": true,
+    "code_and_environment": true,
+    "fixed_random_seed": false,
+    "artifact_checksums": true,
+    "independent_rerun_required": true
+  },
+  "execution_status": "success",
+  "design_readiness": "ready_for_data",
+  "claim_eligibility": "causal_candidate",
+  "review_required": false,
+  "warnings": []
+}

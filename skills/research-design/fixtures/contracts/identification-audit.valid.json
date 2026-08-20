@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1.0-draft",
+  "audit_id": "id-audit-aaaaaaaaaaaaaaaa",
+  "request_id": "rd-request-aaaaaaaaaaaaaaaa",
+  "intended_claim": "causal",
+  "estimand_status": "specified",
+  "assumptions": [
+    {
+      "code": "shock_exogeneity",
+      "statement": "识别出的货币政策冲击与当期及未来未观测产出创新正交。",
+      "status": "unresolved",
+      "testability": "indirect",
+      "required_diagnostics": [
+        "冲击可预测性检验",
+        "替代识别方案比较"
+      ],
+      "evidence_references": [
+        "https://www.aeaweb.org/articles?id=10.1257/jep.32.3.59"
+      ]
+    }
+  ],
+  "threats": [
+    {
+      "code": "simultaneity",
+      "severity": "high",
+      "status": "open",
+      "mitigation": "不得把政策利率原始变动直接视为外生冲击。"
+    }
+  ],
+  "identification_status": "candidate_identified",
+  "claim_eligibility": "causal_candidate",
+  "review_required": true
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0-draft",
+  "audit_id": "id-audit-bbbbbbbbbbbbbbbb",
+  "request_id": "rd-request-bbbbbbbbbbbbbbbb",
+  "intended_claim": "causal",
+  "estimand_status": "specified",
+  "assumptions": [],
+  "threats": [],
+  "identification_status": "candidate_identified",
+  "claim_eligibility": "causal_candidate",
+  "review_required": false
+}

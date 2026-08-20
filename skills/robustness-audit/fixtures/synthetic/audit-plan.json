@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1.0",
+  "audit_plan_id": "ra-plan-0123456789abcdef0123456789abcdef",
+  "audit_request_id": "ra-request-0123456789abcdef0123456789abcdef",
+  "adapter_id": "time-series-dynamics",
+  "adapter_contract_version": "0.1.0",
+  "baseline_request_ref": "tsd-request-0123456789abcdef",
+  "baseline_bundle_ref": "tsd-run-0123456789abcdef0123456789abcdef",
+  "baseline_estimand_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "analysis_track": "identified_shock_irf",
+  "claim_eligibility": "causal_candidate",
+  "plan_timing": "post_result_exploratory",
+  "pre_result_binding": null,
+  "checks": [
+    {
+      "check_id": "ra-check-0123456789abcdef0123456789abcdef",
+      "check_family": "exact_rerun",
+      "required": true,
+      "same_estimand_required": true,
+      "anchor_horizons": [0, 4, 8, 12, 17],
+      "metrics": ["canonical_result_equality"],
+      "decision_rule_ids": ["exact_match_required"],
+      "failure_policy": "stop_ship",
+      "uses_randomness": false
+    }
+  ],
+  "alternatives": [
+    {
+      "alternative_id": "ra-alt-0123456789abcdef0123456789abcdef",
+      "check_id": "ra-check-0123456789abcdef0123456789abcdef",
+      "patch": {"lags": 3}
+    }
+  ],
+  "decision_rules": [
+    {
+      "rule_id": "exact_match_required",
+      "metric": "canonical_result_equality",
+      "operator": "equal",
+      "threshold": true
+    }
+  ],
+  "execution_budget": {
+    "max_variants": 7,
+    "max_runtime_seconds": 600,
+    "max_parallel_jobs": 1
+  },
+  "randomness": {
+    "required": false,
+    "seed": null
+  },
+  "created_at": "2026-08-16T00:00:00Z",
+  "provenance": {
+    "complete": true,
+    "source": "research-design-handoff"
+  },
+  "checksum": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}

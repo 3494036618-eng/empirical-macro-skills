@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:robustness-audit:check-result:0.1.0",
+  "title": "robustness check result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "check_result_id",
+    "check_id",
+    "check_family",
+    "status",
+    "required",
+    "baseline_request_ref",
+    "alternative_request_ref",
+    "alternative_result_ref",
+    "changed_fields",
+    "same_estimand",
+    "execution_error",
+    "metrics",
+    "rule_results",
+    "threat_refs",
+    "threat_updates",
+    "warnings",
+    "evidence_refs",
+    "input_checksums",
+    "output_checksums"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "check_result_id": {
+      "type": "string",
+      "pattern": "^ra-check-result-[a-f0-9]{32,64}$"
+    },
+    "check_id": {"type": "string", "pattern": "^ra-check-[a-f0-9]{32,64}$"},
+    "check_family": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"},
+    "status": {
+      "enum": [
+        "passed",
+        "failed",
+        "sensitive",
+        "inconclusive",
+        "not_applicable",
+        "blocked",
+        "error"
+      ]
+    },
+    "required": {"type": "boolean"},
+    "baseline_request_ref": {
+      "type": "string",
+      "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "alternative_request_ref": {
+      "type": ["string", "null"],
+      "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "alternative_result_ref": {
+      "type": ["string", "null"],
+      "pattern": "^tsd-result-[a-f0-9]{16,64}$"
+    },
+    "changed_fields": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9_.]{1,63}$"}
+    },
+    "same_estimand": {"type": "boolean"},
+    "execution_error": {"type": ["string", "null"], "maxLength": 4000},
+    "metrics": {"type": "object", "additionalProperties": true},
+    "rule_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "passed", "observed"],
+        "properties": {
+          "rule_id": {"type": "string", "minLength": 1, "maxLength": 100},
+          "passed": {"type": ["boolean", "null"]},
+          "observed": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "threat_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$"}
+    },
+    "threat_updates": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 200}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 500}
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 500}
+    },
+    "input_checksums": {"$ref": "#/$defs/checksum_map"},
+    "output_checksums": {"$ref": "#/$defs/checksum_map"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "checksum_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    }
+  }
+}

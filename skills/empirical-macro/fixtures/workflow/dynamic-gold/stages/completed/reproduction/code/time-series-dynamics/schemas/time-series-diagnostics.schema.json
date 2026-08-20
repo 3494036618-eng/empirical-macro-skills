@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:empirical-macro:time-series-dynamics:diagnostics:0.1.0",
+  "title": "time-series-dynamics diagnostics",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request_id",
+    "sample_alignment",
+    "design_matrix",
+    "covariance",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "request_id": {
+      "type": "string",
+      "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "sample_alignment": {
+      "type": "object",
+      "required": [
+        "start",
+        "end",
+        "original_nobs",
+        "common_nobs",
+        "dropped_for_lags",
+        "dropped_for_leads",
+        "dropped_for_missing"
+      ],
+      "properties": {
+        "start": {"type": "string", "minLength": 4, "maxLength": 10},
+        "end": {"type": "string", "minLength": 4, "maxLength": 10},
+        "original_nobs": {"type": "integer", "minimum": 1},
+        "common_nobs": {"type": "integer", "minimum": 1},
+        "dropped_for_lags": {"type": "integer", "minimum": 0},
+        "dropped_for_leads": {"type": "integer", "minimum": 0},
+        "dropped_for_missing": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "design_matrix": {
+      "type": "object",
+      "required": ["columns", "rank"],
+      "properties": {
+        "columns": {"type": "integer", "minimum": 1},
+        "rank": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "covariance": {
+      "type": "object",
+      "required": ["type", "kernel", "maxlags"],
+      "properties": {
+        "type": {"const": "HAC"},
+        "kernel": {"const": "bartlett"},
+        "maxlags": {"type": "integer", "minimum": 0, "maximum": 120}
+      },
+      "additionalProperties": false
+    },
+    "warnings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 500}
+    }
+  },
+  "additionalProperties": false
+}

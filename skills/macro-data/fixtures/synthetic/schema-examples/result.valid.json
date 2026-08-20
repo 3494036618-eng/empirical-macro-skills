@@ -1,0 +1,176 @@
+{
+  "schema_version": "0.2.0-beta",
+  "research_use": "panel_analysis",
+  "request_manifest": {
+    "path": "request/request_manifest.json"
+  },
+  "series": [
+    {
+      "series_identity": {
+        "identity_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "native_series_id": "example-series",
+        "connector_series_fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "identity_status": "verified",
+        "critical_identity_complete": true
+      },
+      "indicator_definition": {
+        "name": "实际国内生产总值",
+        "code": "REAL_GDP",
+        "definition": "按不变价格计量的国内生产总值",
+        "concept_scheme": "example-concept-scheme"
+      },
+      "entity": {
+        "name": "中国",
+        "native_code": "CHN",
+        "native_scheme": "ISO-3166-1-alpha-3",
+        "canonical_code": "CHN",
+        "canonical_scheme": "ISO-3166-1-alpha-3",
+        "mapping_version": "2026-08-13"
+      },
+      "source": {
+        "provider": "datapro",
+        "native_source": "example-source",
+        "source_changed_from_preference": false
+      },
+      "dataset": {
+        "id": "example-dataset",
+        "name": "Example macro dataset",
+        "version": "1",
+        "dataflow": "EXAMPLE"
+      },
+      "series_id": "example-series",
+      "frequency": "A",
+      "unit": "constant_local_currency",
+      "seasonal_adjustment": "source_native",
+      "price_basis": {
+        "type": "real",
+        "base_period": "2020"
+      },
+      "currency": "CNY",
+      "observation_period": {
+        "start": "2000",
+        "end": "2025"
+      },
+      "retrieved_at": "2026-08-13T00:00:30Z",
+      "release_date": null,
+      "vintage": null,
+      "license": {
+        "id": "example-internal-use",
+        "url": "https://example.org/license",
+        "attribution": "Example source",
+        "use_status": "allowed",
+        "allows_requested_use": true
+      },
+      "raw_artifact": "raw/provider_response.json",
+      "normalized_artifact": "normalized/observations.parquet",
+      "transformations": [],
+      "missingness": {
+        "missing_count": 0
+      },
+      "checksum": {
+        "raw_sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "normalized_sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "provenance_ref": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "unresolved_conflicts": 0,
+      "evidence_references": [
+        "https://example.org/metadata"
+      ],
+      "warnings": []
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "path": "raw/provider_response.json",
+      "sha256": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "normalized_artifacts": [
+    {
+      "path": "normalized/observations.parquet",
+      "sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "transformations": [],
+  "missingness": {
+    "missing_count": 0
+  },
+  "provenance": {
+    "schema_version": "0.2.0-beta",
+    "run_id": "run-0123456789abcdef",
+    "generated_at": "2026-08-13T00:02:00Z",
+    "input_mode": "synthetic",
+    "request_artifact": "request/request_manifest.json",
+    "raw_artifacts": [
+      "raw/provider_response.json"
+    ],
+    "normalized_artifacts": [
+      "normalized/observations.parquet"
+    ],
+    "activities": [
+      {
+        "activity_id": "activity-0123456789abcdef",
+        "type": "retrieve",
+        "agent": "macro-data-connector",
+        "started_at": "2026-08-13T00:00:00Z",
+        "ended_at": "2026-08-13T00:00:30Z",
+        "used": [
+          "request/request_manifest.json"
+        ],
+        "generated": [
+          "raw/provider_response.json"
+        ],
+        "software": {
+          "name": "macro-data",
+          "version": "0.2.0-beta"
+        },
+        "parameters": {
+          "provider": "fixture"
+        }
+      },
+      {
+        "activity_id": "activity-fedcba9876543210",
+        "type": "normalize",
+        "agent": "macro-data-normalizer",
+        "started_at": "2026-08-13T00:01:00Z",
+        "ended_at": "2026-08-13T00:02:00Z",
+        "used": [
+          "raw/provider_response.json"
+        ],
+        "generated": [
+          "normalized/observations.parquet"
+        ],
+        "software": {
+          "name": "macro-data",
+          "version": "0.2.0-beta"
+        },
+        "parameters": {
+          "sort": "series_period"
+        }
+      }
+    ],
+    "checksums": {
+      "request/request_manifest.json": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "raw/provider_response.json": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "normalized/observations.parquet": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "complete": true,
+    "unresolved_links": 0
+  },
+  "evidence_references": [
+    "https://example.org/metadata"
+  ],
+  "execution_status": "success",
+  "research_readiness": "ready",
+  "delivery_eligibility": "analysis_ready",
+  "eligible_for_estimation": true,
+  "source_coverage": {
+    "complete": true,
+    "scope_reduced": false,
+    "requested_count": 1,
+    "delivered_count": 1,
+    "failures": []
+  },
+  "warnings": [],
+  "review_required": false
+}
