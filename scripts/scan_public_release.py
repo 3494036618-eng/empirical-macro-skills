@@ -89,14 +89,36 @@ TEXT_SUFFIXES = {
 }
 
 
-def scan(root: Path) -> list[dict[str, str]]:
+def _text_finding_codes(text: str) -> list[str]:
+    checks = (
+        ("private_path_found", PRIVATE_PATH.search(text)),
+        ("secret_value_found", SECRET_VALUE.search(text)),
+        ("raw_trace_id_found", RAW_TRACE.search(text)),
+        ("email_address_found", EMAIL.search(text)),
+        (
+            "private_workspace_term_found",
+            any(term.lower() in text.lower() for term in PRIVATE_WORKSPACE_TERMS),
+        ),
+    )
+    return [code for code, matched in checks if matched]
+
+
+def scan(
+    root: Path,
+    *,
+    allow_git_metadata: bool = False,
+) -> list[dict[str, str]]:
     findings: list[dict[str, str]] = []
     observed_top = {path.name for path in root.iterdir()}
+    if allow_git_metadata:
+        observed_top.discard(".git")
     for name in sorted(observed_top - ALLOWED_TOP_LEVEL):
         findings.append({"path": name, "code": "unexpected_top_level_entry"})
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root)
         relative_text = relative.as_posix()
+        if allow_git_metadata and relative.parts[0] == ".git":
+            continue
         if path.is_symlink():
             findings.append({"path": relative_text, "code": "symlink_found"})
             continue
@@ -109,28 +131,23 @@ def scan(root: Path) -> list[dict[str, str]]:
         if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
-        checks = (
-            ("private_path_found", PRIVATE_PATH.search(text)),
-            ("secret_value_found", SECRET_VALUE.search(text)),
-            ("raw_trace_id_found", RAW_TRACE.search(text)),
-            ("email_address_found", EMAIL.search(text)),
-            (
-                "private_workspace_term_found",
-                any(term.lower() in text.lower() for term in PRIVATE_WORKSPACE_TERMS),
-            ),
+        findings.extend(
+            {"path": relative_text, "code": code}
+            for code in _text_finding_codes(text)
         )
-        for code, matched in checks:
-            if matched:
-                findings.append({"path": relative_text, "code": code})
     return findings
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("root", type=Path)
+    parser.add_argument("--allow-git-metadata", action="store_true")
     args = parser.parse_args()
     root = args.root.resolve()
-    findings = scan(root)
+    findings = scan(
+        root,
+        allow_git_metadata=args.allow_git_metadata,
+    )
     report = {
         "schema_version": "0.1.0",
         "root": ".",
