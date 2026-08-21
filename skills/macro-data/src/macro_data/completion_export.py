@@ -224,8 +224,11 @@ def _series_catalog(result: CompletionResult) -> dict[str, object]:
 
 def _quality_report(result: CompletionResult) -> dict[str, object]:
     complete = result.residual_gap_count == 0 and result.conflict_count == 0
+    execution_status = (
+        "success" if complete else ("partial" if result.observations else "failed")
+    )
     return {
-        "execution_status": "success" if complete else "partial",
+        "execution_status": execution_status,
         "research_readiness": "ready" if complete else "blocked",
         "delivery_eligibility": (
             "analysis_ready" if complete else "not_deliverable"

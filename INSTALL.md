@@ -1,21 +1,36 @@
 # Install the Empirical Macro Skill Suite
 
+## 快速安装
+
+npm 包发布后，可使用一条命令选择通用 Agent 或 OpenAI4S：
+
+```bash
+npx empirical-macro-skills
+```
+
+该命令只负责选择宿主并调用本仓库的 Python 安装器，不包含另一套 Skill 或科研
+实现。当前源码版本可继续使用下方的 `uv + Python` 命令。
+
 ## Prerequisites
 
+- Node.js 20 or newer for the `npx` entry point
 - Python 3.12
 - `uv`
 
-The installer creates a locked `.venv` inside each installed Skill and runs
-that Skill's quick validator before publishing any files to the target.
+For directory-based hosts, the installer creates a locked `.venv` inside each
+installed Skill and runs that Skill's quick validator before publishing files.
+OpenAI4S uses its managed environment instead.
 
-## Any Agent
+## Unified Installer
+
+Run from the extracted repository root. The same `skills/` directories are
+installed for every host; there is no separate OpenAI4S package.
 
 Use `generic` for any Agent that supports a local Agent Skills directory:
 
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py install \
-  --source-root skills \
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py install \
   --host generic \
   --target-root /path/to/your-agent/skills
 ```
@@ -30,9 +45,8 @@ and its `SKILL.md` entry point.
 Run from the extracted public snapshot root:
 
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py install \
-  --source-root skills \
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py install \
   --host trae \
   --target-root ~/.trae/skills
 ```
@@ -40,9 +54,8 @@ uv run --project skills/empirical-macro --locked --no-dev \
 ### Codex
 
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py install \
-  --source-root skills \
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py install \
   --host codex \
   --target-root ~/.agents/skills
 ```
@@ -50,9 +63,8 @@ uv run --project skills/empirical-macro --locked --no-dev \
 ### Claude Code
 
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py install \
-  --source-root skills \
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py install \
   --host claude-code \
   --target-root ~/.claude/skills
 ```
@@ -60,13 +72,61 @@ uv run --project skills/empirical-macro --locked --no-dev \
 Installation is atomic. If dependency setup or any quick validator fails, the
 existing target remains unchanged.
 
+### OpenAI4S
+
+Run the same installer from the OpenAI4S project environment. Replace both
+example paths with the corresponding local directories:
+
+```bash
+uv run --isolated --project /path/to/OpenAI4S --locked --no-dev \
+  python /path/to/empirical-macro-skills/scripts/install.py \
+  install --host openai4s --scope personal
+```
+
+For a project-scoped installation:
+
+```bash
+uv run --isolated --project /path/to/OpenAI4S --locked --no-dev \
+  python /path/to/empirical-macro-skills/scripts/install.py install \
+  --host openai4s \
+  --scope project \
+  --project-id <openai4s-project-id>
+```
+
+OpenAI4S installs the same six directories through its public
+`SkillVersionService`. If any package or sidecar fails validation, the suite
+installer rolls changed Skills back to their previous active versions and
+deactivates newly installed Skills.
+
+File installation and runtime readiness are separate checks. In an OpenAI4S
+cell, import the selected Skill's `kernel.py`, then inspect
+`kernel.requirements()`:
+
+```python
+requirements = kernel.requirements()
+host.env.list_dependencies(requirements["imports"])
+```
+
+Prefer an existing environment that satisfies the imports. If packages remain
+missing, obtain user approval before using OpenAI4S's managed mutation:
+
+```python
+host.env.create(
+    name="empirical-macro",
+    packages=requirements["pip"],
+)
+```
+
+Do not run `pip`, `uv`, or create `.venv` directories inside an installed
+Skill.
+
 ## Uninstall
 
 Use the same snapshot and host, changing the operation to `uninstall`:
 
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py uninstall \
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py uninstall \
   --manifest ~/.trae/skills/empirical-macro-install-manifest.json \
   --host trae \
   --target-root ~/.trae/skills
@@ -74,3 +134,6 @@ uv run --project skills/empirical-macro --locked --no-dev \
 
 Uninstall removes unchanged managed files and installer-managed runtime
 environments. User-created or modified files are retained.
+
+OpenAI4S uninstall and rollback use its Skills UI or `SkillVersionService`, so
+retained version history stays under platform control.

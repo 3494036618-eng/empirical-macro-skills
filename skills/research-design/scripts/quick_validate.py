@@ -22,6 +22,7 @@ BEHAVIOR_REPORT = (
 REQUIRED = [
     "SKILL.md",
     "THIRD_PARTY_NOTICES.md",
+    "kernel.py",
     "agents/openai.yaml",
     "scripts/quick_validate.py",
     "scripts/materialize_execution_ready_bundle.py",
@@ -36,12 +37,6 @@ REQUIRED = [
     "references/identification-assumptions.md",
     "references/forecasting-design.md",
     "references/expert-review-policy.md",
-    "fixtures/gold/rd01/intake.json",
-    "fixtures/gold/rd30/expected.json",
-    "fixtures/external/jel-example5.intake.json",
-    "fixtures/external/jel-example5.request.json",
-    "fixtures/external/jel-example5.data-requirements.json",
-    "tests/test_gold.py",
     "pyproject.toml",
 ]
 SECRET_PATTERN = re.compile(
@@ -120,10 +115,15 @@ def main() -> int:
     skill_text = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     frontmatter = _frontmatter(skill_text)
     errors: list[str] = []
-    if sorted(frontmatter) != ["description", "name"]:
-        errors.append("SKILL.md frontmatter must contain only name and description")
+    expected_fields = ["compatibility", "description", "license", "name"]
+    if sorted(frontmatter) != expected_fields:
+        errors.append("SKILL.md frontmatter fields are invalid")
     if frontmatter.get("name") != "research-design":
         errors.append("SKILL.md name must be research-design")
+    if frontmatter.get("license") != "Apache-2.0":
+        errors.append("SKILL.md license must be Apache-2.0")
+    if "Python 3.12" not in frontmatter.get("compatibility", ""):
+        errors.append("SKILL.md compatibility must name Python 3.12")
     description = frontmatter.get("description", "")
     if not description or len(description) > 200:
         errors.append("SKILL.md description must be present and at most 200 characters")

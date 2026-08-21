@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
     "SKILL.md",
     "THIRD_PARTY_NOTICES.md",
+    "kernel.py",
     "agents/openai.yaml",
     "scripts/import_public_research_artifact.py",
     "scripts/probe_datapro.py",
@@ -38,6 +39,8 @@ REQUIRED = [
     "src/macro_data/semantic_validator.py",
     "src/macro_data/series_mapping.py",
     "src/macro_data/normalizer.py",
+    "src/macro_data/live_completion.py",
+    "src/macro_data/openai4s_host_bridge.py",
     "src/macro_data/observation_matrix.py",
     "src/macro_data/primary_cell_ledger.py",
     "src/macro_data/provenance.py",
@@ -61,8 +64,6 @@ REQUIRED = [
     "references/research-readiness.md",
     "references/indicator-identity.md",
     "references/source-policy.md",
-    "fixtures/gold/beta-world-bank-panel.request.json",
-    "tests/test_beta_gold.py",
     "pyproject.toml",
 ]
 SECRET_PATTERN = re.compile(
@@ -103,10 +104,15 @@ def _structure_findings() -> tuple[list[str], str, dict[str, str], list[str]]:
     skill_text = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     frontmatter = _frontmatter(skill_text)
     errors: list[str] = []
-    if sorted(frontmatter) != ["description", "name"]:
-        errors.append("SKILL.md frontmatter must contain only name and description")
+    expected_fields = ["compatibility", "description", "license", "name"]
+    if sorted(frontmatter) != expected_fields:
+        errors.append("SKILL.md frontmatter fields are invalid")
     if frontmatter.get("name") != "macro-data":
         errors.append("SKILL.md name must be macro-data")
+    if frontmatter.get("license") != "Apache-2.0":
+        errors.append("SKILL.md license must be Apache-2.0")
+    if "Python 3.12" not in frontmatter.get("compatibility", ""):
+        errors.append("SKILL.md compatibility must name Python 3.12")
     if not frontmatter.get("description") or len(frontmatter["description"]) > 200:
         errors.append("SKILL.md description must be present and at most 200 characters")
     if len(skill_text.splitlines()) > 500:

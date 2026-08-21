@@ -341,33 +341,34 @@ def uninstall_suite(
     manifest_path: Path,
     dry_run: bool,
 ) -> dict[str, object]:
-    if manifest_path.resolve().parent != target.root.resolve():
+    target_root = target.root.resolve()
+    if manifest_path.resolve().parent != target_root:
         raise ValueError("manifest must be inside target root")
     manifest = _load_manifest(manifest_path)
     if manifest is None or manifest.get("host") != target.host:
         raise ValueError("install manifest missing or host mismatch")
     files = cast(list[dict[str, object]], manifest["files"])
-    removable, retained = _uninstall_candidates(target.root, files)
+    removable, retained = _uninstall_candidates(target_root, files)
     report: dict[str, object] = {
         "dry_run": dry_run,
-        "removed_files": [str(path.relative_to(target.root)) for path in removable],
+        "removed_files": [str(path.relative_to(target_root)) for path in removable],
         "retained_modified_files": retained,
         "removed_runtime_environments": runtime.remove_managed_runtimes(
-            target.root,
+            target_root,
             SUITE_SKILLS,
             dry_run=True,
         ),
     }
     if dry_run:
         return report
-    runtime.remove_managed_runtimes(target.root, SUITE_SKILLS, dry_run=False)
+    runtime.remove_managed_runtimes(target_root, SUITE_SKILLS, dry_run=False)
     checksums = {
         cast(str, item["path"]): cast(str, item["sha256"])
         for item in files
     }
     removed: list[str] = []
     for path in removable:
-        relative = path.relative_to(target.root).as_posix()
+        relative = path.relative_to(target_root).as_posix()
         if (
             path.is_symlink()
             or not path.is_file()
@@ -378,7 +379,7 @@ def uninstall_suite(
         path.unlink()
         removed.append(relative)
     for skill in SUITE_SKILLS:
-        skill_root = target.root / skill
+        skill_root = target_root / skill
         for directory in sorted(
             (path for path in skill_root.rglob("*") if path.is_dir()),
             key=lambda path: len(path.parts),

@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
     "SKILL.md",
     "THIRD_PARTY_NOTICES.md",
+    "kernel.py",
     "agents/openai.yaml",
     "scripts/fetch_jel_example5.py",
     "scripts/materialize_input_evidence.py",
@@ -35,10 +36,6 @@ REQUIRED = [
     "references/analysis-tracks.md",
     "references/claim-language-policy.md",
     "references/jorda-taylor-example5.md",
-    "tests/test_jel_replication.py",
-    "tests/test_canonical_loader.py",
-    "tests/test_input_evidence.py",
-    "tests/test_macro_input_evidence.py",
     "pyproject.toml",
     "uv.lock",
 ]
@@ -102,10 +99,15 @@ def main() -> int:
     errors.extend(f"missing required file: {name}" for name in missing)
     skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     frontmatter = _frontmatter(skill)
-    if sorted(frontmatter) != ["description", "name"]:
-        errors.append("SKILL frontmatter must contain only name and description")
+    expected_fields = ["compatibility", "description", "license", "name"]
+    if sorted(frontmatter) != expected_fields:
+        errors.append("SKILL frontmatter fields are invalid")
     if frontmatter.get("name") != "time-series-dynamics":
         errors.append("SKILL name must be time-series-dynamics")
+    if frontmatter.get("license") != "Apache-2.0":
+        errors.append("SKILL license must be Apache-2.0")
+    if "Python 3.12" not in frontmatter.get("compatibility", ""):
+        errors.append("SKILL compatibility must name Python 3.12")
     schemas = sorted((ROOT / "schemas").glob("*.schema.json"))
     for path in schemas:
         Draft202012Validator.check_schema(

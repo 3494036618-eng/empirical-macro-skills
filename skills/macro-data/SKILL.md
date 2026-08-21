@@ -1,6 +1,8 @@
 ---
 name: "macro-data"
-description: "Builds auditable macroeconomic research datasets from validated request JSON. Invoke for country, region, industry, time-series, or panel data preparation before econometric analysis."
+description: "Use when audited macro-data preparation is the complete single-stage task and request JSON is validated; for end-to-end or multi-stage research, invoke empirical-macro first."
+license: Apache-2.0
+compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the optional kernel.py sidecar."
 ---
 
 # Macro Data
@@ -9,6 +11,13 @@ Use this Skill to turn a macroeconomic research data request into a traceable
 data bundle. The Skill retrieves candidates from DataPro and, after explicit
 approval, can query World Bank WDI directly. It validates research semantics
 deterministically and exports data plus quality and provenance artifacts.
+
+## Entry Boundary
+
+Use this Skill directly only when data preparation is the complete task and a
+validated request JSON is available. For a new study that also requests design,
+estimation, robustness, or reporting, invoke `empirical-macro` first and enter
+here only after its `RouteDecision` selects `route_macro_data`.
 
 ## Scope
 
@@ -164,3 +173,12 @@ See:
 - `references/research-readiness.md`
 - `references/indicator-identity.md`
 - `references/source-policy.md`
+
+## OpenAI4S Runtime
+
+OpenAI4S may import `kernel.py` and call `plan()`, `run_with_datapro()`, or
+`validate()`. Check `kernel.requirements()["imports"]` with
+`host.env.list_dependencies()` first. If packages are missing, ask the user
+before calling `host.env.create(packages=kernel.requirements()["pip"])`.
+Professional-dataset retrieval must use the supplied `host` object; never read
+an API key or TRAE configuration from this Skill.

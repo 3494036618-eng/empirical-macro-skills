@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
     "SKILL.md",
     "THIRD_PARTY_NOTICES.md",
+    "kernel.py",
     "configs/local-upstream-adapters.json",
     "scripts/quick_validate.py",
     "scripts/run_research_synthesis.py",
@@ -73,10 +74,15 @@ def main() -> int:
     errors.extend(f"缺少必要文件: {name}" for name in missing)
     skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     frontmatter = _frontmatter(skill)
-    if sorted(frontmatter) != ["description", "name"]:
-        errors.append("SKILL.md frontmatter 只能包含 name 和 description")
+    expected_fields = ["compatibility", "description", "license", "name"]
+    if sorted(frontmatter) != expected_fields:
+        errors.append("SKILL.md frontmatter 字段无效")
     if frontmatter.get("name") != "research-synthesis":
         errors.append("SKILL.md name 必须为 research-synthesis")
+    if frontmatter.get("license") != "Apache-2.0":
+        errors.append("SKILL.md license 必须为 Apache-2.0")
+    if "Python 3.12" not in frontmatter.get("compatibility", ""):
+        errors.append("SKILL.md compatibility 必须声明 Python 3.12")
     for contract in SCHEMA_FILES:
         Draft202012Validator.check_schema(load_schema(contract))
     findings = _secret_findings()

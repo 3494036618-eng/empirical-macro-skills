@@ -20,6 +20,7 @@ BEHAVIOR_REPORT = (
 REQUIRED_FILES = {
     "SKILL.md",
     "THIRD_PARTY_NOTICES.md",
+    "kernel.py",
     "agents/openai.yaml",
     "pyproject.toml",
     "references/adapter-contract.md",
@@ -112,10 +113,15 @@ def main() -> int:
     errors.extend(f"missing required file: {name}" for name in missing)
     skill_text = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     frontmatter = _frontmatter(skill_text)
-    if sorted(frontmatter) != ["description", "name"]:
-        errors.append("SKILL frontmatter must contain only name and description")
+    expected_fields = ["compatibility", "description", "license", "name"]
+    if sorted(frontmatter) != expected_fields:
+        errors.append("SKILL frontmatter fields are invalid")
     if frontmatter.get("name") != "robustness-audit":
         errors.append("SKILL name must be robustness-audit")
+    if frontmatter.get("license") != "Apache-2.0":
+        errors.append("SKILL license must be Apache-2.0")
+    if "Python 3.12" not in frontmatter.get("compatibility", ""):
+        errors.append("SKILL compatibility must name Python 3.12")
     description = frontmatter.get("description", "")
     if not description.startswith("Use when ") or len(description) > 200:
         errors.append("SKILL description must be a concise Use when trigger")

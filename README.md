@@ -7,9 +7,9 @@
 
 ## 中文介绍
 
-这是一套开放的 Agent Skills 参考实现，不绑定某一个 Agent 产品。只要目标 Agent
-支持 `SKILL.md` 或 Agent Skills 目录约定，就可以加载这六个 Skill；仓库同时提供
-`generic` 安装模式，允许用户指定任意 Agent 的 Skills 目录。
+本项目是一套面向宏观经济实证研究的 Agent Skill 套件，覆盖研究设计、宏观数据
+构建、动态分析、稳健性审计和研究综合。它通过结构化合同、确定性计算和可追溯
+Artifact，把自然语言研究问题转化为可审计、可复现并受结论边界约束的研究流程。
 
 Agent Plan 提供推荐的完整能力组合：
 
@@ -36,7 +36,7 @@ Python 代码控制。
 ### 专业数据集如何参与
 
 `macro-data` 默认先使用 **专业数据集**中的宏观经济数据能力进行候选召回，再执行
-本地确定性筛选和科研质量门：
+确定性筛选和科研质量门：
 
 ```text
 研究问题
@@ -46,11 +46,6 @@ Python 代码控制。
 → 核验定义、单位、季调、价格口径、覆盖和来源
 → 形成可分析数据包，或明确停止并报告缺口
 ```
-
-在一次独立短窗口验证中，专业数据集返回 104 条候选记录，系统筛选出 24 条目标
-观测，覆盖欧元区总体调和消费者价格指数、实际国内生产总值和存款便利利率。
-该验证证明了“候选召回 + 本地筛选”链路可用；8 个季度不足以支持正式动态估计，
-因此系统没有生成研究结论。这个结果不代表所有指标、国家和历史窗口都稳定可用。
 
 ### 六个 Skill
 
@@ -65,6 +60,8 @@ Python 代码控制。
 
 ```text
 自然语言研究问题
+    ↓
+empirical-macro
     ↓
 research-design
     ↓
@@ -81,15 +78,22 @@ research-synthesis
 
 前置条件：
 
+- Node.js 20 或更高版本（使用 `npx` 时）
 - Python 3.12
 - [`uv`](https://docs.astral.sh/uv/)
 
-将 `/path/to/your-agent/skills` 替换为目标 Agent 的 Skills 目录：
+npm 包发布后，可以使用统一入口选择目标 Agent：
 
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py install \
-  --source-root skills \
+npx empirical-macro-skills
+```
+
+在当前源码目录中，或不使用 npm 时，可以直接运行 Python 安装器。将
+`/path/to/your-agent/skills` 替换为目标 Agent 的 Skills 目录：
+
+```bash
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py install \
   --host generic \
   --target-root /path/to/your-agent/skills
 ```
@@ -97,6 +101,18 @@ uv run --project skills/empirical-macro --locked --no-dev \
 安装器会为六个 Skill 分别创建锁定依赖环境，并在写入目标目录前运行快速验证。
 依赖安装或验证失败时，已有目录保持不变。已提供 Trae、Codex 和 Claude Code 的
 目标目录预设，但这些预设不是使用本项目的前提。
+
+OpenAI4S 使用相同的六个 Skill 目录，不需要下载另一套包：
+
+```bash
+uv run --isolated --project /path/to/OpenAI4S --locked --no-dev \
+  python /path/to/empirical-macro-skills/scripts/install.py \
+  install --host openai4s --scope personal
+```
+
+每个 Skill 根目录都包含可选 `kernel.py` sidecar。OpenAI4S 可以按需导入它，
+其他遵循 Agent Skills 规范的 Agent 可以忽略它并继续使用 `SKILL.md` 与
+`scripts/`。
 
 完整安装、升级和卸载命令见 [INSTALL.md](INSTALL.md)。
 
@@ -129,20 +145,18 @@ API 密钥不得写入提示词、文档、代码仓库或研究 Artifact。
 
 - 未通过识别审核时，只能报告条件关联，不能声称因果效应。
 - 数据返回成功不等于科研可用，必须通过口径、覆盖、许可和质量检查。
-- 专业数据集的短窗口验证不能外推为所有指标和历史区间均可用。
+- 数据源覆盖必须针对具体指标、地区、频率和时期逐项核验，不能从单次成功调用外推。
 - 使用者负责最终审核数据许可、识别假设、模型诊断和研究结论。
 
 ---
 
 ## English
 
-**Empirical Macro Skills** are an open-source Beta suite
-of six host-neutral Agent Skills for auditable empirical macroeconomic
-research.
-
-The Skills can be installed into any Agent that supports the `SKILL.md` or
-Agent Skills directory convention. A `generic` installer mode accepts any
-user-supplied Skills directory.
+**Empirical Macro Skills** is an open-source Beta suite for auditable and
+reproducible empirical macroeconomic research. Its six Skills cover research
+design, macro-data preparation, dynamic analysis, robustness auditing, and
+evidence-bound synthesis through structured contracts and deterministic
+execution.
 
 The recommended Agent Plan capability stack is:
 
@@ -160,6 +174,7 @@ workflow state, and artifact checksums.
 
 ```text
 research question
+→ empirical-macro
 → research-design
 → macro-data and Agent Plan 专业数据集
 → time-series-dynamics
@@ -173,22 +188,39 @@ data provenance and unfavorable robustness results.
 
 ### Generic installation
 
+After the npm package is published, use the unified installer:
+
 ```bash
-uv run --project skills/empirical-macro --locked --no-dev \
-  python skills/empirical-macro/scripts/install_skill_suite.py install \
-  --source-root skills \
+npx empirical-macro-skills
+```
+
+From a source checkout, or without npm, use the Python installer:
+
+```bash
+uv run --isolated --project skills/empirical-macro --locked --no-dev \
+  python scripts/install.py install \
   --host generic \
   --target-root /path/to/your-agent/skills
 ```
 
-See [INSTALL.md](INSTALL.md) for known host presets, upgrades, and uninstall.
+OpenAI4S installs the same Skill directories through its versioned Skill
+service:
+
+```bash
+uv run --isolated --project /path/to/OpenAI4S --locked --no-dev \
+  python /path/to/empirical-macro-skills/scripts/install.py \
+  install --host openai4s --scope personal
+```
+
+See [INSTALL.md](INSTALL.md) for known host presets, upgrades, rollback, and
+uninstall.
 
 ### Beta status
 
-The public package has passed privacy scanning, plugin-schema validation,
-clean installation, six post-install validators, upgrade, and managed
-uninstall. Full live routing certification across every Agent host is still
-pending and is not claimed by this Beta.
+This release is in Beta. Public interfaces may change before a stable release.
+Runtime behavior depends on the target Agent and its configured data and search
+capabilities. Users remain responsible for reviewing data licenses,
+identification assumptions, diagnostics, and research conclusions.
 
 ## Repository structure
 
@@ -200,8 +232,11 @@ pending and is not claimed by this Beta.
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── THIRD_PARTY_NOTICES.md
+├── package.json
 ├── plugin.json
+├── bin/
 ├── scripts/
+├── tests/
 └── skills/
     ├── empirical-macro/
     ├── research-design/
@@ -211,14 +246,15 @@ pending and is not claimed by this Beta.
     └── research-synthesis/
 ```
 
-Each Skill contains a `SKILL.md` entry point and may include scripts, source
-code, schemas, references, tests, and redistributable public fixtures.
+Each installable Skill contains a `SKILL.md` entry point, an optional
+OpenAI4S `kernel.py` sidecar, scripts, source code, schemas, references, and
+bounded public assets. Repository regression tests live at top-level `tests/`
+and are not copied into Agent installations.
 
 ## Security, contribution, and license
 
 - [Security policy](SECURITY.md)
 - [Contribution guide](CONTRIBUTING.md)
-- [Publication checklist](docs/PUBLICATION_CHECKLIST.md)
 
 Run the standalone release scan before publishing:
 

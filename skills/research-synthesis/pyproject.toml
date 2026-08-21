@@ -21,6 +21,9 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/research_synthesis"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"schemas" = "research_synthesis/schemas"
+
 [tool.pytest.ini_options]
 addopts = "--strict-markers --cov=research_synthesis --cov-branch --cov-fail-under=90"
 pythonpath = ["src", "."]

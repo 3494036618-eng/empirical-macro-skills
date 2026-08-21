@@ -27,8 +27,10 @@ EXCLUDED_PARTS = {
     ".venv",
     "__pycache__",
     "agent-runs",
+    "fixtures",
     "open_source",
     "sanitized-live",
+    "tests",
 }
 EXCLUDED_NAMES = {
     ".coverage",
@@ -89,6 +91,20 @@ SECRET_PATTERN = re.compile(
 TRACE_PATTERN = re.compile(
     r'"trace_' + r'id"\s*:\s*"[A-Za-z0-9._-]{8,}"',
     re.IGNORECASE,
+)
+FORBIDDEN_PUBLIC_NAMES = {
+    "HOST_ADAPTER_ARCHITECTURE.md",
+    "OPEN_SOURCE_RELEASE_IMPLEMENTATION_PLAN.md",
+    "PUBLICATION_CHECKLIST.md",
+    "openai4s_local_adapter.py",
+}
+FORBIDDEN_PUBLIC_PARTS = {
+    "evidence",
+    "platform-hotfix",
+}
+FORBIDDEN_PYTHON_SYMBOL_PATTERN = re.compile(
+    r"^\s*def\s+(?:run_demo_design|run_next)\s*\(",
+    re.MULTILINE,
 )
 
 
@@ -273,6 +289,8 @@ def _scan_file(path: Path) -> list[str]:
         issues.append("secret_value_found")
     if TRACE_PATTERN.search(text):
         issues.append("raw_trace_id_found")
+    if path.suffix.lower() == ".py" and FORBIDDEN_PYTHON_SYMBOL_PATTERN.search(text):
+        issues.append("forbidden_local_adapter_symbol")
     return issues
 
 
@@ -298,12 +316,16 @@ def _plugin_issues(path: Path) -> list[str]:
 def _required_issues(output_dir: Path) -> list[str]:
     issues: list[str] = []
     required = {
+        ".npmignore",
         "README.md",
         "INSTALL.md",
         "SECURITY.md",
         "CONTRIBUTING.md",
         "THIRD_PARTY_NOTICES.md",
+        "package.json",
         "plugin.json",
+        "bin/empirical-macro-skills.mjs",
+        "scripts/install.py",
         "scripts/scan_public_release.py",
     }
     for name in required:
@@ -317,6 +339,8 @@ def _required_issues(output_dir: Path) -> list[str]:
         root = skills_root / skill
         if not (root / "SKILL.md").is_file():
             issues.append(f"public_skill_missing:{skill}")
+        if not (root / "kernel.py").is_file():
+            issues.append(f"openai4s_sidecar_missing:{skill}")
         if not (root / "scripts" / "quick_validate.py").is_file():
             issues.append(f"quick_validator_missing:{skill}")
     return issues
@@ -329,6 +353,17 @@ def _scan_snapshot(
     findings: list[dict[str, str]] = []
     for path in output_dir.rglob("*"):
         relative = path.relative_to(output_dir)
+        if (
+            relative.name in FORBIDDEN_PUBLIC_NAMES
+            or FORBIDDEN_PUBLIC_PARTS.intersection(relative.parts)
+        ):
+            issues.append("forbidden_public_path")
+            findings.append(
+                {
+                    "path": relative.as_posix(),
+                    "issue": "forbidden_public_path",
+                }
+            )
         if path.is_symlink():
             issues.append("symlink_found")
             findings.append({"path": relative.as_posix(), "issue": "symlink_found"})

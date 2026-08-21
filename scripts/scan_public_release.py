@@ -6,18 +6,22 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 from pathlib import Path
 
 ALLOWED_TOP_LEVEL = {
     ".github",
     ".gitignore",
+    ".npmignore",
     "CONTRIBUTING.md",
     "INSTALL.md",
     "LICENSE",
     "README.md",
     "SECURITY.md",
     "THIRD_PARTY_NOTICES.md",
+    "bin",
     "docs",
+    "package.json",
     "plugin.json",
     "scripts",
     "skills",
@@ -35,6 +39,8 @@ FORBIDDEN_PARTS = {
     ".vscode",
     "__pycache__",
     "agent-runs",
+    "evidence",
+    "platform-hotfix",
     "sanitized-live",
 }
 FORBIDDEN_NAMES = {
@@ -42,6 +48,10 @@ FORBIDDEN_NAMES = {
     ".DS_Store",
     ".env",
     ".netrc",
+    "HOST_ADAPTER_ARCHITECTURE.md",
+    "OPEN_SOURCE_RELEASE_IMPLEMENTATION_PLAN.md",
+    "PUBLICATION_CHECKLIST.md",
+    "openai4s_local_adapter.py",
     "credentials.json",
     "service-account.json",
 }
@@ -81,6 +91,7 @@ TEXT_SUFFIXES = {
     ".json",
     ".jsonl",
     ".md",
+    ".mjs",
     ".py",
     ".toml",
     ".txt",
@@ -103,15 +114,46 @@ def _text_finding_codes(text: str) -> list[str]:
     return [code for code, matched in checks if matched]
 
 
+def _tracked_paths(root: Path) -> set[str]:
+    result = subprocess.run(
+        ["git", "ls-files", "-z"],
+        cwd=root,
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        return set()
+    return {
+        item.decode("utf-8")
+        for item in result.stdout.split(b"\0")
+        if item
+    }
+
+
+def _tracked_or_contains(relative: Path, tracked: set[str]) -> bool:
+    value = relative.as_posix().rstrip("/")
+    prefix = value + "/"
+    return value in tracked or any(path.startswith(prefix) for path in tracked)
+
+
 def scan(
     root: Path,
     *,
     allow_git_metadata: bool = False,
 ) -> list[dict[str, str]]:
     findings: list[dict[str, str]] = []
+    tracked = _tracked_paths(root) if allow_git_metadata else set()
     observed_top = {path.name for path in root.iterdir()}
     if allow_git_metadata:
         observed_top.discard(".git")
+        observed_top.difference_update(
+            name
+            for name in FORBIDDEN_PARTS
+            if not any(
+                path == name or path.startswith(name + "/")
+                for path in tracked
+            )
+        )
     for name in sorted(observed_top - ALLOWED_TOP_LEVEL):
         findings.append({"path": name, "code": "unexpected_top_level_entry"})
     for path in sorted(root.rglob("*")):
@@ -123,6 +165,8 @@ def scan(
             findings.append({"path": relative_text, "code": "symlink_found"})
             continue
         if FORBIDDEN_PARTS.intersection(relative.parts):
+            if allow_git_metadata and not _tracked_or_contains(relative, tracked):
+                continue
             findings.append({"path": relative_text, "code": "generated_path_found"})
             continue
         if path.name in FORBIDDEN_NAMES or path.name.startswith(".env."):

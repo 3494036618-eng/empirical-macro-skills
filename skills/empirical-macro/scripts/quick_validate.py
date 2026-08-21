@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
     "SKILL.md",
     "THIRD_PARTY_NOTICES.md",
+    "kernel.py",
     "agents/openai.yaml",
     "configs/capability-registry.json",
     "configs/skill-suite.json",
@@ -51,10 +52,14 @@ def _required_findings() -> list[str]:
         frontmatter = _frontmatter()
     except (OSError, ValueError) as error:
         return [*findings, str(error)]
-    if set(frontmatter) != {"name", "description"}:
+    if set(frontmatter) != {"name", "description", "license", "compatibility"}:
         findings.append("skill_frontmatter_fields_invalid")
     if frontmatter.get("name") != "empirical-macro":
         findings.append("skill_name_invalid")
+    if frontmatter.get("license") != "Apache-2.0":
+        findings.append("skill_license_invalid")
+    if "Python 3.12" not in frontmatter.get("compatibility", ""):
+        findings.append("skill_compatibility_invalid")
     description = frontmatter.get("description", "")
     if len(description) > 200 or "Invoke" not in description:
         findings.append("skill_description_invalid")

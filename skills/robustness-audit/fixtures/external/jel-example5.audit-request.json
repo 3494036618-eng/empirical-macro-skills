@@ -1,9 +1,0 @@
-{
-  "schema_version": "0.1.0",
-  "audit_request_id": "ra-request-0123456789abcdef0123456789abcdef",
-  "robustness_handoff_ref": "rd-robustness-3c713c5e2000a3249d3976d5a58d1b23",
-  "baseline_bundle_ref": "tsd-run-47c8f67cbc8772d6b7eb64b7f6db520d",
-  "baseline_request_ref": "tsd-request-0123456789abcdef",
-  "adapter_id": "time-series-dynamics",
-  "requested_output": "declared_robustness_audit"
-}

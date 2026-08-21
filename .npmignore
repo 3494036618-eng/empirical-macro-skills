@@ -1,0 +1,11 @@
+**/.DS_Store
+**/.mypy_cache/**
+**/.pytest_cache/**
+**/.ruff_cache/**
+**/.venv/**
+**/__pycache__/**
+**/*.pyc
+**/*.pyo
+**/agent-runs/**
+**/openai4s_local_adapter.py
+**/platform-hotfix/**

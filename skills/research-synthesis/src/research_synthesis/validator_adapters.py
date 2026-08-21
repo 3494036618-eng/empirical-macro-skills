@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import cast
 
 from research_synthesis.contracts import validate_document
 from research_synthesis.models import ResolvedBundle, ValidationEvidence
 from research_synthesis.subprocess_runner import run_command
+
+MANAGED_PYTHON_PATHS = {".venv/bin/python", ".venv/Scripts/python.exe"}
 
 
 def _project_root(bundle: ResolvedBundle) -> Path:
@@ -59,6 +62,8 @@ def validate_upstream_bundle(
     cwd = _project_root(bundle) / str(capability["working_directory"])
     if not cwd.is_dir():
         raise ValueError("adapter_working_directory_missing")
+    if argv[0] in MANAGED_PYTHON_PATHS and not (cwd / argv[0]).is_file():
+        argv[0] = sys.executable
     evidence = run_command(
         argv,
         cwd,

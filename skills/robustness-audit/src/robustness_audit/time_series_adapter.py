@@ -5,6 +5,8 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
+import sys
 from pathlib import Path
 from typing import cast
 
@@ -77,11 +79,26 @@ class TimeSeriesAdapter:
             format_checker=FormatChecker(),
         )
 
+    def _runtime(self) -> tuple[str, dict[str, str]]:
+        managed_python = (
+            self._root
+            / ".venv"
+            / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        )
+        python = managed_python if managed_python.is_file() else Path(sys.executable)
+        existing = os.environ.get("PYTHONPATH")
+        paths = [str(self._root / "src")]
+        if existing:
+            paths.append(existing)
+        return str(python), {"PYTHONPATH": os.pathsep.join(paths)}
+
     def validate_baseline(self, bundle: Path) -> None:
+        python, environment = self._runtime()
         result = run_command(
-            ["uv", "run", "python", "scripts/validate_bundle.py", str(bundle)],
+            [python, "scripts/validate_bundle.py", str(bundle)],
             cwd=self._root,
             timeout_seconds=60,
+            environment_overrides=environment,
         )
         if result.returncode != 0:
             raise ValueError(f"baseline bundle invalid: {result.stderr or result.stdout}")
@@ -120,10 +137,9 @@ class TimeSeriesAdapter:
         self._request_validator.validate(
             json.loads(request_path.read_text(encoding="utf-8"))
         )
+        python, environment = self._runtime()
         command = [
-            "uv",
-            "run",
-            "python",
+            python,
             "scripts/run_time_series_dynamics.py",
             "--request-json",
             str(request_path),
@@ -143,13 +159,16 @@ class TimeSeriesAdapter:
             command,
             cwd=self._root,
             timeout_seconds=timeout_seconds,
+            environment_overrides=environment,
         )
 
     def validate_result_bundle(self, output_dir: Path) -> None:
+        python, environment = self._runtime()
         result = run_command(
-            ["uv", "run", "python", "scripts/validate_bundle.py", str(output_dir)],
+            [python, "scripts/validate_bundle.py", str(output_dir)],
             cwd=self._root,
             timeout_seconds=60,
+            environment_overrides=environment,
         )
         if result.returncode != 0:
             raise ValueError(f"alternative bundle invalid: {result.stderr or result.stdout}")

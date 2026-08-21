@@ -26,6 +26,10 @@ def run_command(
         raise ValueError("validator_argv_invalid")
     environment = os.environ.copy()
     environment.pop("VIRTUAL_ENV", None)
+    python_paths = [str(cwd / "src")]
+    if existing_python_path := environment.get("PYTHONPATH"):
+        python_paths.append(existing_python_path)
+    environment["PYTHONPATH"] = os.pathsep.join(python_paths)
     started = time.monotonic()
     try:
         run = subprocess.run(  # noqa: S603

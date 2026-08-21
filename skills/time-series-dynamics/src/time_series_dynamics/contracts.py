@@ -19,7 +19,13 @@ SCHEMA_FILES = {
     "run_manifest": "time-series-run-manifest.schema.json",
     "input_evidence_manifest": "time-series-input-evidence-manifest.schema.json",
 }
-SCHEMA_ROOT = Path(__file__).resolve().parents[2] / "schemas"
+PACKAGE_SCHEMA_ROOT = Path(__file__).resolve().parent / "schemas"
+SOURCE_SCHEMA_ROOT = Path(__file__).resolve().parents[2] / "schemas"
+SCHEMA_ROOT = (
+    PACKAGE_SCHEMA_ROOT
+    if PACKAGE_SCHEMA_ROOT.is_dir()
+    else SOURCE_SCHEMA_ROOT
+)
 
 
 @lru_cache(maxsize=len(SCHEMA_FILES))

@@ -1,12 +1,21 @@
 ---
 name: research-synthesis
-description: "Use when 已验证的宏观实证设计、数据证据、estimator 和 robustness bundles 需要汇总为最终科研报告或研究包。"
+description: "Use when synthesis of validated design, data, estimator, and robustness bundles is the complete single-stage task; for end-to-end or multi-stage research, invoke empirical-macro first."
+license: Apache-2.0
+compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the optional kernel.py sidecar."
 ---
 
 # 研究综合
 
 本 Skill 把已验证的宏观实证 Artifact 编译为一份证据绑定的中文科研报告。它只做
 综合与交付，不重新估计、不重新画图，也不升级上游 claim。
+
+## 入口边界
+
+只有在“汇总现有研究结果”本身就是完整任务，且所有上游 bundle 已验证时，才能
+直接使用本 Skill。对于还需要设计、数据、估计或稳健性检验的新研究，必须先调用
+`empirical-macro`，并仅在其 `RouteDecision` 选择
+`route_research_synthesis` 后进入本阶段。
 
 ## 何时触发
 
@@ -94,3 +103,11 @@ uv run python scripts/validate_bundle.py output
 ```
 
 复现目录规则见 [复现包说明](references/reproduction-package.md)。
+
+## OpenAI4S Runtime
+
+OpenAI4S may import `kernel.py` and call `run()`. Check
+`kernel.requirements()["imports"]` with `host.env.list_dependencies()` first.
+If packages are missing, ask the user before calling
+`host.env.create(packages=kernel.requirements()["pip"])`. Runtime setup does
+not relax required-bundle, checksum, or claim-boundary gates.

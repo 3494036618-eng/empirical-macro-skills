@@ -10,6 +10,12 @@ from typing import cast
 from jsonschema import Draft202012Validator, FormatChecker
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PACKAGE_SCHEMA_ROOT = Path(__file__).resolve().parent / "schemas"
+SCHEMA_ROOT = (
+    PACKAGE_SCHEMA_ROOT
+    if PACKAGE_SCHEMA_ROOT.is_dir()
+    else PROJECT_ROOT / "schemas"
+)
 SCHEMA_FILES = {
     "intake": "research-intake.schema.json",
     "request": "research-design-request.schema.json",
@@ -30,7 +36,7 @@ def load_schema(contract: str) -> dict[str, object]:
         raise ValueError(f"unknown contract: {contract}") from exc
     schema = cast(
         dict[str, object],
-        json.loads((PROJECT_ROOT / "schemas" / filename).read_text(encoding="utf-8")),
+        json.loads((SCHEMA_ROOT / filename).read_text(encoding="utf-8")),
     )
     Draft202012Validator.check_schema(schema)
     return schema

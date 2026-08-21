@@ -37,6 +37,7 @@ branch = true
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+extend-exclude = ["fixtures/workflow/dynamic-gold/stages/completed/reproduction"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "C90", "S"]

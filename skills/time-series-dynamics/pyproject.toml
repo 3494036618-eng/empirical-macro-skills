@@ -28,6 +28,9 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/time_series_dynamics"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"schemas" = "time_series_dynamics/schemas"
+
 [tool.pytest.ini_options]
 addopts = "--strict-markers --cov=time_series_dynamics --cov-branch --cov-fail-under=90"
 pythonpath = ["src", "."]

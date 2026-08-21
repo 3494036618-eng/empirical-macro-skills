@@ -1,12 +1,22 @@
 ---
 name: "time-series-dynamics"
-description: "Estimate auditable dynamic paths for empirical-macro questions, separating identified-shock impulse responses from noncausal conditional associations."
+description: "Use when dynamic-path estimation is the complete single-stage task and upstream Artifacts are validated; for end-to-end or multi-stage research, invoke empirical-macro first."
+license: Apache-2.0
+compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the optional kernel.py sidecar."
 ---
 
 # Time-Series Dynamics
 
 Use this Skill after `research-design` and `macro-data` have produced validated
 Artifacts for a dynamic macroeconomic question.
+
+## Entry Boundary
+
+Use this Skill directly only when dynamic estimation is the complete task and
+all required upstream Artifacts are available. For a new study that also needs
+design, data, robustness, or reporting, invoke `empirical-macro` first and
+enter here only after its `RouteDecision` selects
+`route_time_series_dynamics`.
 
 ## User Outcome
 
@@ -125,3 +135,11 @@ estimand, or generate claims beyond the structured result.
 - [Analysis tracks](references/analysis-tracks.md)
 - [Claim language policy](references/claim-language-policy.md)
 - [Jordà–Taylor Example 5](references/jorda-taylor-example5.md)
+
+## OpenAI4S Runtime
+
+OpenAI4S may import `kernel.py` and call `run()`. Check
+`kernel.requirements()["imports"]` with `host.env.list_dependencies()` first.
+If packages are missing, ask the user before calling
+`host.env.create(packages=kernel.requirements()["pip"])`. Execute estimation
+only after the selected environment satisfies every declared import.

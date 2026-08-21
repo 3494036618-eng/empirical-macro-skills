@@ -1,6 +1,8 @@
 ---
 name: "robustness-audit"
-description: "Use when a validated empirical-macro estimator bundle needs declared robustness checks, sensitivity assessment, or a release decision."
+description: "Use when robustness auditing a validated estimator bundle is the complete single-stage task; for end-to-end or multi-stage research, invoke empirical-macro first."
+license: Apache-2.0
+compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the optional kernel.py sidecar."
 ---
 
 # Robustness Audit
@@ -8,6 +10,13 @@ description: "Use when a validated empirical-macro estimator bundle needs declar
 Audit a validated estimator bundle without changing its estimand or claim
 boundary. Freeze the audit plan before reading result values, then retain every
 planned success, failure, timeout, and unfavorable result.
+
+## Entry Boundary
+
+Use this Skill directly only when robustness auditing is the complete task and
+a validated estimator bundle is available. For a new study that also needs
+design, data, estimation, or reporting, invoke `empirical-macro` first and
+enter here only after its `RouteDecision` selects `route_robustness_audit`.
 
 ## Required Workflow
 
@@ -79,3 +88,11 @@ VAR/SVAR, LP-IV, panel, causal-policy, or forecast adapters.
 - [Audit semantics](references/audit-semantics.md)
 - [Adapter contract](references/adapter-contract.md)
 - [Claim language policy](references/claim-language-policy.md)
+
+## OpenAI4S Runtime
+
+OpenAI4S may import `kernel.py` and call `run()`. Check
+`kernel.requirements()["imports"]` with `host.env.list_dependencies()` first.
+If packages are missing, ask the user before calling
+`host.env.create(packages=kernel.requirements()["pip"])`. Runtime setup must
+not alter the frozen audit plan or its timing label.

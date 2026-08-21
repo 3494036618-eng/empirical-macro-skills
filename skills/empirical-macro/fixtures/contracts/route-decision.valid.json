@@ -1,7 +1,0 @@
-{
-  "schema_version": "0.1.0-beta",
-  "action": "route_research_design",
-  "target_skill": "research-design",
-  "issue_codes": [],
-  "user_message": null
-}

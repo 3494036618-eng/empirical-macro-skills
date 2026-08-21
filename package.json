@@ -1,0 +1,44 @@
+{
+  "name": "empirical-macro-skills",
+  "version": "0.1.0-beta",
+  "description": "Auditable empirical macroeconomic research skills for AI agents",
+  "license": "Apache-2.0",
+  "type": "module",
+  "private": false,
+  "bin": {
+    "empirical-macro-skills": "bin/empirical-macro-skills.mjs"
+  },
+  "files": [
+    "bin",
+    "scripts",
+    "skills",
+    "!skills/**/.mypy_cache/**",
+    "!skills/**/.pytest_cache/**",
+    "!skills/**/.ruff_cache/**",
+    "!skills/**/.venv/**",
+    "!skills/**/__pycache__/**",
+    "!skills/**/*.pyc",
+    "!skills/**/*.pyo",
+    "!scripts/**/__pycache__/**",
+    "!scripts/**/*.pyc",
+    "!scripts/**/*.pyo",
+    "INSTALL.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3494036618-eng/empirical-macro-skills.git"
+  },
+  "homepage": "https://github.com/3494036618-eng/empirical-macro-skills",
+  "keywords": [
+    "agent-skills",
+    "economics",
+    "empirical-macro",
+    "openai4s",
+    "research"
+  ]
+}

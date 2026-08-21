@@ -6,6 +6,7 @@ import os
 import signal
 import subprocess
 import time
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -23,10 +24,13 @@ def run_command(
     *,
     cwd: Path,
     timeout_seconds: float,
+    environment_overrides: Mapping[str, str] | None = None,
 ) -> CommandResult:
     started = time.monotonic()
     environment = os.environ.copy()
     environment.pop("VIRTUAL_ENV", None)
+    if environment_overrides:
+        environment.update(environment_overrides)
     # Commands are fixed argument arrays supplied by an adapter; no shell is used.
     process = subprocess.Popen(  # noqa: S603
         command,

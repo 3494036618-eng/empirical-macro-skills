@@ -97,7 +97,7 @@ def run_quick_validators(staging: Path, skills: Iterable[str]) -> None:
             raise ValueError(f"quick validator missing: {skill}")
         python = prepare_runtime(skill_root)
         environment = dict(os.environ)
-        environment["PYTHONPATH"] = str(skill_root / "src")
+        environment.pop("PYTHONPATH", None)
         completed = subprocess.run(  # noqa: S603
             [str(python), str(script)],
             cwd=skill_root,

@@ -1,6 +1,8 @@
 ---
 name: "empirical-macro"
-description: "Routes supported empirical-macro research through design, data, dynamic analysis, robustness, and synthesis. Invoke for end-to-end macro research or to continue an existing workflow."
+description: "Invoke as the mandatory first entry point when starting or resuming end-to-end empirical-macro research on monetary-policy shocks, inflation responses, data, robustness, or synthesis."
+license: Apache-2.0
+compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the optional kernel.py sidecar."
 ---
 
 # Empirical Macro
@@ -11,6 +13,16 @@ Use this Skill as the single entry point for empirical-macro research. The
 host Agent interprets natural language, but the deterministic Router and
 workflow state decide whether execution is allowed and which atomic Skill is
 next.
+
+## Entry Boundary
+
+For an initial request that spans two or more workflow stages, load this Skill
+before any atomic Skill and call `route()` before web search, data retrieval,
+estimation, robustness checks, or report generation. Loading several atomic
+Skills is not a substitute for a `RouteDecision`.
+
+Direct atomic-Skill use remains valid for a clearly scoped single-stage request
+whose required upstream Artifacts are already available.
 
 ## Invoke When
 
@@ -76,3 +88,57 @@ content.
 
 Read `references/routing-policy.md`, `references/supported-scope.md`, and
 `references/artifact-handoffs.md` for the machine-facing policy.
+
+## OpenAI4S Runtime
+
+OpenAI4S injects the loaded Skill through its import hook.
+Do not search the workspace for this Skill.
+Do not call `list_dir` or `glob_files` to locate it, and do not import `host`;
+the runtime injects `host` into Python cells.
+
+Use this exact import pattern:
+
+```python
+import importlib
+
+router = importlib.import_module("empirical-macro.kernel")
+requirements = router.requirements()
+```
+
+`requirements()` declares what the Skill needs; it does not mean those packages
+are missing. Check `requirements["imports"]` with the native `env_list` tool and
+prefer an existing compatible environment. If packages are still missing, ask
+the user before calling the native `env_create` tool with
+`requirements["pip"]`. If it succeeds, continue in a new Python cell. If it
+fails, stop and report the failure.
+
+Never install dependencies with `pip`, `uv`, or `host.bash`, and never create a
+virtual environment inside this Skill.
+
+For a new end-to-end supported shock-response study with no existing
+Artifacts, use this exact routing candidate:
+
+```python
+intent = {
+    "schema_version": "0.1.0-beta",
+    "domain": "empirical_macro",
+    "request_kind": "research_idea",
+    "method_family": "dynamic_shock_response",
+    "has_research_plan": False,
+    "has_macro_data_bundle": False,
+    "has_estimator_bundle": False,
+    "has_robustness_bundle": False,
+    "has_workflow_state": False,
+}
+decision = router.route(intent)
+print(decision)
+```
+
+`ResearchIntent` contains only routing metadata. Do not add research variables,
+sample dates, or identification details; those belong to `research-design`.
+Do not call private helpers or inspect private module source. The public
+`route()` function validates the contract.
+
+Call `route()` before preparing downstream dependencies, loading atomic Skills,
+invoking web or DataPro tools, writing files, or running an estimator. Obey the
+returned action and execute only its `target_skill`.

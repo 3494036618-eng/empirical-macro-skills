@@ -1,12 +1,21 @@
 ---
 name: "research-design"
-description: "Use when an empirical-macro research question, claim, identification strategy, forecast protocol, or macro-data handoff must be clarified before data preparation or estimation."
+description: "Use when empirical-macro research design is the complete single-stage task; for end-to-end or multi-stage research, invoke empirical-macro first."
+license: Apache-2.0
+compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the optional kernel.py sidecar."
 ---
 
 # Research Design
 
 Use this Skill to turn a macroeconomic research idea into validated intake,
 request, plan, identification-audit, and data-requirement artifacts.
+
+## Entry Boundary
+
+Use this Skill directly only when the user asks for research design as the
+complete task. For a new study that also requests data, estimation, robustness,
+or reporting, invoke `empirical-macro` first and enter here only after its
+`RouteDecision` selects `route_research_design`.
 
 ## Required Workflow
 
@@ -107,3 +116,11 @@ does not match.
 - [Identification assumptions](references/identification-assumptions.md)
 - [Forecasting design](references/forecasting-design.md)
 - [Expert review policy](references/expert-review-policy.md)
+
+## OpenAI4S Runtime
+
+OpenAI4S may import `kernel.py` and call `run()`. Check
+`kernel.requirements()["imports"]` with `host.env.list_dependencies()` first.
+If packages are missing, ask the user before calling
+`host.env.create(packages=kernel.requirements()["pip"])`. Do not install
+packages or create a virtual environment from inside this Skill.

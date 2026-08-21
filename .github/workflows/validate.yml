@@ -16,7 +16,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - run: python scripts/scan_public_release.py . --allow-git-metadata
+      - uses: astral-sh/setup-uv@v6
+      - run: >-
+          UV_PROJECT_ENVIRONMENT=${{ runner.temp }}/empirical-macro-public-scan
+          uv run
+          --project skills/macro-data
+          --locked
+          pytest -o addopts='--strict-markers' tests
 
   skill-validation:
     runs-on: ubuntu-latest
@@ -36,7 +46,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: uvx --from skills-ref agentskills validate skills/${{ matrix.skill }}
       - run: >-
+          UV_PROJECT_ENVIRONMENT=${{ runner.temp }}/${{ matrix.skill }}-validate
           uv run
           --project skills/${{ matrix.skill }}
           --locked
