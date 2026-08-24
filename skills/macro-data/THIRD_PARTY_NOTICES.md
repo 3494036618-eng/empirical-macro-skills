@@ -24,9 +24,9 @@ Upstream license texts and notices:
 - <https://github.com/python/typeshed/blob/main/LICENSE>
 - <https://github.com/pypa/hatch/blob/hatchling-v1.32.0/LICENSE.txt>
 
-This file does not determine the license of `macro-data` itself. Project
-publication and redistribution remain blocked until the project owner chooses a
-license and confirms DataPro data-use rights.
+The project source is distributed under Apache-2.0. Live DataPro responses are
+not bundled in the public package; users remain responsible for confirming the
+applicable data-use rights before redistributing retrieved data.
 
 World Bank WDI data retrieved by the optional `world_bank` Connector is licensed
 under CC BY 4.0 according to the dataset-specific catalog entry:

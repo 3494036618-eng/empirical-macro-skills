@@ -145,6 +145,7 @@ def _write_staging(
     comparison_rows: list[dict[str, object]],
     threat_ledger: list[dict[str, object]],
     input_checksums: dict[str, str],
+    frequency: str,
 ) -> None:
     write_json(staging / "audit-request.json", audit_request)
     write_json(staging / "audit-plan.json", audit_plan)
@@ -155,6 +156,7 @@ def _write_staging(
         staging / "comparison-paths.png",
         comparison_rows,
         str(audit_plan["plan_timing"]),
+        frequency,
     )
     (staging / "technical-summary.md").write_text(
         technical_summary(audit_plan, audit_result, check_results, threat_ledger),
@@ -277,6 +279,7 @@ def run_robustness_audit(
                 baseline_bundle,
                 input_paths,
             ),
+            str(_load(input_paths["request"])["frequency"]),
         )
         validation = validate_bundle(staging)
         if validation["valid"] is not True:

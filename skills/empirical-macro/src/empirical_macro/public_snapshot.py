@@ -303,7 +303,7 @@ def _plugin_issues(path: Path) -> list[str]:
         return ["plugin_manifest_invalid"]
     expected = {
         "name": "empirical-macro-skills",
-        "version": "0.1.0-beta",
+        "version": "0.2.0-beta",
         "license": "Apache-2.0",
     }
     if not isinstance(plugin, dict) or any(

@@ -75,6 +75,13 @@ def lock_datapro_cells(
     for key, candidates in eligible.items():
         if len(candidates) > 1:
             issue = _duplicate_issue(candidates)
+            if issue == "datapro_cell_duplicate":
+                locked.append(_locked(cell_ids[key], key, candidates[0]))
+                rejected.extend(
+                    _rejection(item, (issue,))
+                    for item in candidates[1:]
+                )
+                continue
             issues.add(issue)
             rejected.extend(_rejection(item, (issue,)) for item in candidates)
             continue
@@ -244,10 +251,18 @@ def _locked(
 
 def _duplicate_issue(candidates: list[dict[str, Any]]) -> str:
     values = {float(item["value"]) for item in candidates}
+    identities = {
+        (
+            str(item.get("source_system") or ""),
+            str(item.get("dataset_id") or ""),
+            str(item.get("series_key") or ""),
+        )
+        for item in candidates
+    }
     return (
-        "datapro_cell_value_conflict"
-        if len(values) > 1
-        else "datapro_cell_duplicate"
+        "datapro_cell_duplicate"
+        if len(values) == 1 and len(identities) == 1
+        else "datapro_cell_value_conflict"
     )
 
 

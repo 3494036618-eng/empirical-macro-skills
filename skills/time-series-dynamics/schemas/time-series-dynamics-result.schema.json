@@ -7,6 +7,7 @@
     "schema_version",
     "result_id",
     "request_id",
+    "frequency",
     "analysis_track",
     "estimand_type",
     "claim_eligibility",
@@ -25,6 +26,9 @@
     "request_id": {
       "type": "string",
       "pattern": "^tsd-request-[a-f0-9]{16,64}$"
+    },
+    "frequency": {
+      "enum": ["M", "Q"]
     },
     "analysis_track": {
       "enum": [

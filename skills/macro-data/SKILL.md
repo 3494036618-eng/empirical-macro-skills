@@ -45,24 +45,33 @@ This Skill prepares data. It does not:
 4. Build `ExpectedObservationMatrix`, then query DataPro first. Use the host
    MCP or `scripts/run_datapro_first.py --live`; never request, print, or
    persist a Key.
-5. Treat every returned record as a candidate. Do not assume `code=0` means the
+5. For long ranges, split the request deterministically before retrieval:
+   monthly windows contain at most 12 months, quarterly windows at most 8
+   quarters, and annual window size must be explicit. Each batch contains one
+   entity and one indicator.
+6. Treat every returned record as a candidate. Do not assume `code=0` means the
    research request was satisfied.
-6. Lock every eligible DataPro cell as immutable `datapro_primary`. Generate a
+7. Lock one physical series identity per entity and indicator. Later batches
+   must preserve source, dataset, `series_key`, frequency, unit, seasonal
+   adjustment, and price basis.
+8. Lock every eligible DataPro cell as immutable `datapro_primary`. Generate a
    `ResidualGapManifest` from the original matrix; never reduce the requested
    scope to make coverage appear complete.
-7. Only after the request policy permits it, send exact residual cells to the
+9. Re-query contiguous missing windows within the declared call budget. Stop
+   with `batch_period_incomplete` if the original matrix remains incomplete.
+10. Only after the request policy permits it, send exact residual cells to the
    World Bank WDI Connector. Official results may fill missing cells but may
    never replace a DataPro cell. IMF official completion is not implemented.
-8. Validate source, dataset, indicator, entity, frequency, time coverage, unit,
+11. Validate source, dataset, indicator, entity, frequency, time coverage, unit,
    seasonal adjustment, price basis, definition, release, and vintage.
-9. Keep non-target entities in `filtered_candidates`; never mix them into
+12. Keep non-target entities in `filtered_candidates`; never mix them into
    normalized output.
-10. Preserve unknown metadata as `unknown` or `unresolved`. Names may be retained
+13. Preserve unknown metadata as `unknown` or `unresolved`. Names may be retained
    as evidence but cannot become source-provided metadata.
-11. Export the full bundle, validate `completion_manifest.json`, and report
+14. Export the full bundle, validate `completion_manifest.json`, and report
     `datapro_only`, `datapro_primary`, `datapro_assisted`, or
     `datapro_attempted` from final estimator cells.
-12. Only downstream modules may consume data with
+15. Only downstream modules may consume data with
    `delivery_eligibility=analysis_ready`. `comparison_only` and
    `not_deliverable` must not enter estimation.
 

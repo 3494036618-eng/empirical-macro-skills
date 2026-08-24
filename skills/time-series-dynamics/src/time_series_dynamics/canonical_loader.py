@@ -35,37 +35,51 @@ def _binding_values(
     source: pd.DataFrame,
     binding: SeriesBinding,
     expected: pd.PeriodIndex,
+    frequency: str,
 ) -> pd.Series:
     rows = source.loc[
         (source["series_key"] == binding.series_key)
         & (source["entity_code"] == binding.entity_code)
-        & (source["frequency"] == "Q")
+        & (source["frequency"] == frequency)
     ].copy()
     if rows.empty:
         raise ValueError(f"series_binding_missing:{binding.variable_id}")
     try:
         periods = pd.PeriodIndex(
             rows["period"].astype(str),
-            freq="Q",
+            freq=frequency,
         )
     except (TypeError, ValueError) as exc:
-        raise ValueError(f"quarterly_period_invalid:{binding.variable_id}") from exc
+        issue = (
+            "quarterly_period_invalid"
+            if frequency == "Q"
+            else "period_invalid"
+        )
+        raise ValueError(f"{issue}:{binding.variable_id}") from exc
     rows.index = periods
     rows = rows.loc[(rows.index >= expected[0]) & (rows.index <= expected[-1])].sort_index()
     if rows.index.duplicated().any():
-        raise ValueError(f"duplicate_quarter:{binding.variable_id}")
+        issue = "duplicate_quarter" if frequency == "Q" else "duplicate_period"
+        raise ValueError(f"{issue}:{binding.variable_id}")
     if not rows.index.equals(expected):
-        raise ValueError(f"quarterly_axis_incomplete:{binding.variable_id}")
+        issue = (
+            "quarterly_axis_incomplete"
+            if frequency == "Q"
+            else "time_axis_incomplete"
+        )
+        raise ValueError(f"{issue}:{binding.variable_id}")
     values = pd.to_numeric(rows["value"], errors="raise").astype(float)
     if not np.isfinite(values.to_numpy()).all():
         raise ValueError(f"nonfinite_value:{binding.variable_id}")
     return _transform(values, binding)
 
 
-def load_canonical_quarterly(
+def load_canonical_time_series(
     path: Path,
     request: DynamicsRequest,
 ) -> pd.DataFrame:
+    if request.frequency not in {"M", "Q"}:
+        raise ValueError(f"unsupported_frequency:{request.frequency}")
     source = pd.read_csv(path)
     missing = sorted(REQUIRED_COLUMNS - set(source.columns))
     if missing:
@@ -73,18 +87,30 @@ def load_canonical_quarterly(
     expected = pd.period_range(
         request.sample_start,
         request.sample_end,
-        freq="Q",
+        freq=request.frequency,
     )
     output = {
         binding.variable_id: _binding_values(
             source,
             binding,
             expected,
+            request.frequency,
         )
         for binding in request.series_bindings
     }
     analysis = pd.DataFrame(output, index=expected)
     if analysis.iloc[1:].isna().any().any():
         raise ValueError("canonical_transform_missing_values")
-    analysis.insert(0, "qdate", expected.to_timestamp(how="start"))
+    analysis.insert(0, "period", expected.astype(str))
     return analysis.reset_index(drop=True)
+
+
+def load_canonical_quarterly(
+    path: Path,
+    request: DynamicsRequest,
+) -> pd.DataFrame:
+    """Compatibility wrapper for the original quarterly public interface."""
+    analysis = load_canonical_time_series(path, request)
+    periods = pd.PeriodIndex(analysis.pop("period"), freq="Q")
+    analysis.insert(0, "qdate", periods.to_timestamp(how="start"))
+    return analysis

@@ -1,6 +1,6 @@
 {
   "name": "empirical-macro-skills",
-  "version": "0.1.0-beta",
+  "version": "0.2.0-beta",
   "description": "Auditable empirical macroeconomic research skills for AI agents",
   "license": "Apache-2.0",
   "type": "module",

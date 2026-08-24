@@ -139,6 +139,7 @@ def build_macro_handoff(
     result: dict[str, object],
     data_checksum: str,
     bindings: tuple[SeriesBinding, ...],
+    frequency: str,
 ) -> dict[str, object]:
     ready = (
         result.get("execution_status") == "success"
@@ -149,8 +150,8 @@ def build_macro_handoff(
     )
     if not ready:
         raise ValueError("macro_bundle_not_analysis_ready")
-    if result.get("frequency") != "Q":
-        raise ValueError("macro_frequency_not_quarterly")
+    if result.get("frequency") != frequency:
+        raise ValueError("frequency_mismatch")
     if result.get("source_checksum") != data_checksum:
         raise ValueError("macro_data_checksum_mismatch")
     _validate_bindings(result, bindings)
@@ -164,7 +165,7 @@ def build_macro_handoff(
         "delivery_eligibility": result["delivery_eligibility"],
         "eligible_for_estimation": result["eligible_for_estimation"],
         "review_required": result["review_required"],
-        "frequency": "Q",
+        "frequency": frequency,
         "observation_period": result["observation_period"],
         "source_checksum": data_checksum,
         "source": _source_summary(result),
@@ -192,7 +193,7 @@ def _source_manifest(
         "license_or_authorization": handoff["product_authorization_ref"],
         "sample_start": window["start"],
         "sample_end": window["end"],
-        "frequency": "Q",
+        "frequency": handoff["frequency"],
         "data_sha256": data_checksum,
     }
 
@@ -224,7 +225,7 @@ def _manifest(
         "shock_id": None,
         "source_version": source["source_version"],
         "license_or_authorization": source["license_or_authorization"],
-        "frequency": "Q",
+        "frequency": handoff["frequency"],
         "sample_window": handoff["observation_period"],
         "file_checksums": checksums,
         "data_profile": "canonical_long_table",
@@ -252,6 +253,7 @@ def materialize_macro_input_evidence(
         result,
         data_checksum,
         request.series_bindings,
+        request.frequency,
     )
     validate_document("macro_data_handoff", handoff)
     source = _source_manifest(handoff, data_checksum)

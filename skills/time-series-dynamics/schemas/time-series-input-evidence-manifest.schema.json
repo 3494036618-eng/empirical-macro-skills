@@ -46,7 +46,7 @@
       "const": "CC0-1.0"
     },
     "frequency": {
-      "const": "Q"
+      "enum": ["M", "Q"]
     },
     "sample_window": {
       "type": "object",
@@ -57,11 +57,11 @@
       "properties": {
         "start": {
           "type": "string",
-          "pattern": "^[0-9]{4}Q[1-4]$"
+          "pattern": "^(?:[0-9]{4}Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2]))$"
         },
         "end": {
           "type": "string",
-          "pattern": "^[0-9]{4}Q[1-4]$"
+          "pattern": "^(?:[0-9]{4}Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2]))$"
         }
       },
       "additionalProperties": false
@@ -137,7 +137,45 @@
     }
   },
   "additionalProperties": false,
-  "oneOf": [
+  "allOf": [
+    {
+      "if": {
+        "properties": {"frequency": {"const": "M"}},
+        "required": ["frequency"]
+      },
+      "then": {
+        "properties": {
+          "sample_window": {
+            "properties": {
+              "start": {
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])$"
+              },
+              "end": {
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"frequency": {"const": "Q"}},
+        "required": ["frequency"]
+      },
+      "then": {
+        "properties": {
+          "sample_window": {
+            "properties": {
+              "start": {"pattern": "^[0-9]{4}Q[1-4]$"},
+              "end": {"pattern": "^[0-9]{4}Q[1-4]$"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "oneOf": [
     {
       "required": [
         "shock_id",
@@ -213,6 +251,8 @@
           "additionalProperties": false
         }
       }
+    }
+      ]
     }
   ],
   "$defs": {

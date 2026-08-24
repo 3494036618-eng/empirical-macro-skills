@@ -47,10 +47,22 @@ RULES: dict[str, dict[str, object]] = {
 }
 
 
-def _quarter_key(value: str) -> int:
-    if len(value) != 6 or value[4] != "Q" or value[5] not in "1234":
-        raise ValueError("invalid quarter")
-    return int(value[:4]) * 4 + int(value[5])
+def _period_key(value: str, frequency: str) -> int:
+    if frequency == "Q":
+        if len(value) != 6 or value[4] != "Q" or value[5] not in "1234":
+            raise ValueError("invalid quarter")
+        return int(value[:4]) * 4 + int(value[5])
+    if frequency == "M":
+        if (
+            len(value) != 7
+            or value[4] != "-"
+            or not value[:4].isdigit()
+            or not value[5:].isdigit()
+            or not 1 <= int(value[5:]) <= 12
+        ):
+            raise ValueError("invalid month")
+        return int(value[:4]) * 12 + int(value[5:])
+    raise ValueError("unsupported frequency")
 
 
 def _valid_patch_value(field: str, value: object) -> bool:
@@ -91,11 +103,12 @@ def _window_within_baseline(
     try:
         base = cast(dict[str, str], baseline["sample_window"])
         window = cast(dict[str, str], patch["sample_window"])
+        frequency = str(baseline["frequency"])
         return (
-            _quarter_key(base["start"])
-            <= _quarter_key(window["start"])
-            <= _quarter_key(window["end"])
-            <= _quarter_key(base["end"])
+            _period_key(base["start"], frequency)
+            <= _period_key(window["start"], frequency)
+            <= _period_key(window["end"], frequency)
+            <= _period_key(base["end"], frequency)
         )
     except (KeyError, TypeError, ValueError):
         return False

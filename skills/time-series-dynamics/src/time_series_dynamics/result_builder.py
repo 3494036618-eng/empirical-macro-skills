@@ -43,6 +43,7 @@ def build_result(
         "schema_version": "0.1.0",
         "result_id": _result_id(request, estimates),
         "request_id": request.request_id,
+        "frequency": request.frequency,
         "analysis_track": request.analysis_track,
         "estimand_type": policy.result_label,
         "claim_eligibility": policy.claim_eligibility,

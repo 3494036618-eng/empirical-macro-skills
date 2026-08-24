@@ -70,7 +70,7 @@
       "uniqueItems": true,
       "items": {"$ref": "#/$defs/variable_id"}
     },
-    "frequency": {"const": "Q"},
+    "frequency": {"enum": ["M", "Q"]},
     "sample_window": {"$ref": "#/$defs/sample_window"},
     "sample_policy": {
       "enum": ["common_sample", "horizon_specific"]
@@ -126,8 +126,14 @@
       "type": "object",
       "required": ["start", "end"],
       "properties": {
-        "start": {"type": "string", "pattern": "^[0-9]{4}Q[1-4]$"},
-        "end": {"type": "string", "pattern": "^[0-9]{4}Q[1-4]$"}
+        "start": {
+          "type": "string",
+          "pattern": "^(?:[0-9]{4}Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2]))$"
+        },
+        "end": {
+          "type": "string",
+          "pattern": "^(?:[0-9]{4}Q[1-4]|[0-9]{4}-(?:0[1-9]|1[0-2]))$"
+        }
       },
       "additionalProperties": false
     },
@@ -166,6 +172,42 @@
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {"frequency": {"const": "M"}},
+        "required": ["frequency"]
+      },
+      "then": {
+        "properties": {
+          "sample_window": {
+            "properties": {
+              "start": {
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])$"
+              },
+              "end": {
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"frequency": {"const": "Q"}},
+        "required": ["frequency"]
+      },
+      "then": {
+        "properties": {
+          "sample_window": {
+            "properties": {
+              "start": {"pattern": "^[0-9]{4}Q[1-4]$"},
+              "end": {"pattern": "^[0-9]{4}Q[1-4]$"}
+            }
+          }
+        }
+      }
+    },
     {
       "if": {
         "properties": {"analysis_track": {"const": "identified_shock_irf"}},

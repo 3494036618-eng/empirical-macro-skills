@@ -79,9 +79,10 @@ uv run python scripts/validate_bundle.py audit-bundle
 ## V0.1 Boundary
 
 V0.1 supports `time-series-dynamics` exact rerun plus declared lag, HAC,
-sample-policy, and sample-window alternatives. It does not implement shock
-predictability, bootstrap, simultaneous bands, leave-block-out, CUSUM,
-VAR/SVAR, LP-IV, panel, causal-policy, or forecast adapters.
+sample-policy, and frequency-consistent monthly or quarterly sample-window
+alternatives. It does not implement shock predictability, bootstrap,
+simultaneous bands, leave-block-out, CUSUM, VAR/SVAR, LP-IV, panel,
+causal-policy, or forecast adapters.
 
 ## References
 

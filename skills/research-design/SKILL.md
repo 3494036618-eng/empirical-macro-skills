@@ -95,11 +95,19 @@ This Skill does not:
 
 - estimate regressions, VARs, local projections, treatment effects, forecasts,
   or structural parameters;
+- mark VAR or SVAR as executable in the current suite; `var_svar` is a
+  deferred design candidate, while Local Projection is the only implemented
+  dynamic estimator;
 - claim causality, select methods from significance, or invent instruments,
   shocks, comparison groups, horizons, vintages, or missing data;
 - silently shrink entities, periods, variables, or the research question;
 - call DataPro, World Bank, CUA, or other live sources;
 - treat comparison-only data as eligible for estimation.
+
+An Agent must not replace a deferred design with handwritten `statsmodels`
+VAR/SVAR code. Return the deferred candidate for review or use an eligible
+Local Projection candidate when its prerequisites and the user's request
+permit it.
 
 ## Failure Rules
 
@@ -124,3 +132,31 @@ OpenAI4S may import `kernel.py` and call `run()`. Check
 If packages are missing, ask the user before calling
 `host.env.create(packages=kernel.requirements()["pip"])`. Do not install
 packages or create a virtual environment from inside this Skill.
+
+For a new monthly or quarterly dynamic question, call the high-level public
+entry instead of reading Schemas or manually constructing `intake` and
+`request` dictionaries:
+
+```python
+import importlib
+
+design = importlib.import_module("research-design.kernel")
+result = design.run_dynamic_question(
+    user_question,
+    outcome="美国消费者价格通胀",
+    policy_variable="美联储货币政策收紧",
+    entity="USA",
+    start="1969-01",
+    end="2023-12",
+    frequency="M",
+    horizon=16,
+    output_dir="output/research-design",
+    shock_identification="unresolved",
+)
+```
+
+Use `shock_identification="unresolved"` unless the user supplied a concrete
+narrative, external-instrument, statistical-innovation, or randomized shock
+source. The word "unexpected" does not by itself prove identification. Pass
+the result to `empirical-macro.kernel.decide_after_stage()` and obey
+`stopped`.

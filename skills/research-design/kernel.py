@@ -51,3 +51,48 @@ def run(
         schema,
         macro_request_document=macro_request,
     )
+
+
+def run_dynamic_question(
+    question: str,
+    *,
+    outcome: str,
+    policy_variable: str,
+    entity: str,
+    start: str,
+    end: str,
+    frequency: str,
+    horizon: int,
+    output_dir: str,
+    intended_claim: str = "causal",
+    shock_identification: str = "unresolved",
+) -> dict[str, object]:
+    """Compile a small dynamic input and run the full design validator."""
+    from typing import cast
+
+    from research_design.dynamic_entry import (
+        Claim,
+        ShockIdentification,
+        build_dynamic_documents,
+    )
+
+    intake, request = build_dynamic_documents(
+        question=question,
+        outcome=outcome,
+        policy_variable=policy_variable,
+        entity=entity,
+        start=start,
+        end=end,
+        frequency=frequency,
+        horizon=horizon,
+        intended_claim=cast(Claim, intended_claim),
+        shock_identification=cast(
+            ShockIdentification,
+            shock_identification,
+        ),
+    )
+    return run(
+        intake,
+        request,
+        output_dir=output_dir,
+    )

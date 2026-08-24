@@ -11,6 +11,10 @@ from typing import Any, cast
 from macro_data.completion_assembler import CompletionResult, assemble_completion
 from macro_data.connectors.base import Connector, ConnectorRequest
 from macro_data.contracts import validate_document
+from macro_data.datapro_batch_plan import (
+    BatchPolicy,
+    build_datapro_batch_plan,
+)
 from macro_data.observation_matrix import (
     ExpectedObservationMatrix,
     build_expected_matrix,
@@ -58,6 +62,48 @@ class _Retrieved:
     raw_checksum: str
 
 
+def _retrieve_primary(
+    *,
+    request: dict[str, Any],
+    matrix: ExpectedObservationMatrix,
+    connector: Connector,
+    output_dir: Path,
+    batch_policy: BatchPolicy | None,
+) -> tuple[PrimaryCellLedger, tuple[RetrievalRecord, ...], set[str]]:
+    if batch_policy is not None:
+        from macro_data.datapro_batch_runner import run_datapro_batches
+
+        batch_run = run_datapro_batches(
+            request=request,
+            matrix=matrix,
+            batches=build_datapro_batch_plan(request, batch_policy),
+            connector=connector,
+            output_dir=output_dir,
+            maximum_calls=batch_policy.maximum_calls,
+        )
+        return batch_run.primary, batch_run.retrievals, set(batch_run.issue_codes)
+    retrieved = _retrieve(
+        connector=connector,
+        connector_request=ConnectorRequest(
+            request_id=matrix.request_id,
+            query=cast(str, request["research_question"]),
+            research_request=request,
+        ),
+        research_request=request,
+        output_dir=output_dir,
+    )
+    evaluation = evaluate_candidates(request, retrieved.record.parsed)
+    primary = _primary_with_evaluation_issues(
+        lock_datapro_cells(
+            request=request,
+            matrix=matrix,
+            evaluation=evaluation,
+        ),
+        evaluation,
+    )
+    return primary, (retrieved.record,), set()
+
+
 def run_datapro_first_completion(
     *,
     request: dict[str, Any],
@@ -65,6 +111,7 @@ def run_datapro_first_completion(
     official_connectors: OfficialConnectorRegistry,
     output_dir: Path,
     input_mode: str = "live",
+    batch_policy: BatchPolicy | None = None,
 ) -> dict[str, Any]:
     """Run DataPro first, then exact missing-only official completion."""
     validate_document("request", request)
@@ -74,24 +121,12 @@ def run_datapro_first_completion(
         raise ValueError("primary connector must be datapro")
 
     matrix = build_expected_matrix(request)
-    primary_retrieval = _retrieve(
+    primary, primary_retrievals, batch_issues = _retrieve_primary(
+        request=request,
+        matrix=matrix,
         connector=datapro_connector,
-        connector_request=ConnectorRequest(
-            request_id=matrix.request_id,
-            query=cast(str, request["research_question"]),
-            research_request=request,
-        ),
-        research_request=request,
         output_dir=output_dir,
-    )
-    evaluation = evaluate_candidates(request, primary_retrieval.record.parsed)
-    primary = _primary_with_evaluation_issues(
-        lock_datapro_cells(
-            request=request,
-            matrix=matrix,
-            evaluation=evaluation,
-        ),
-        evaluation,
+        batch_policy=batch_policy,
     )
     route_plan = _available_route_plan(request, official_connectors)
     gaps = build_residual_gaps(
@@ -113,7 +148,7 @@ def run_datapro_first_completion(
         fallback=official.observations,
         overlaps=official.overlaps,
     )
-    issues = set(gaps.issue_codes) | set(official.issue_codes)
+    issues = batch_issues | set(gaps.issue_codes) | set(official.issue_codes)
     issues.update(completion.issue_codes)
     completion = replace(
         completion,
@@ -124,7 +159,7 @@ def run_datapro_first_completion(
         primary=primary,
         gaps=gaps,
         completion=completion,
-        retrievals=(primary_retrieval.record, *official.retrievals),
+        retrievals=(*primary_retrievals, *official.retrievals),
         issue_codes=issues,
         input_mode=input_mode,
     )

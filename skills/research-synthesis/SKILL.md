@@ -45,9 +45,11 @@ compatibility: "Requires Python 3.12; scripts use uv; OpenAI4S can load the opti
 1. 用各上游 Skill 的公共 CLI validator 验证四个 required bundles。
 2. 核对 expected IDs、manifest SHA-256 和 cross-bundle binding。
 3. 数值只读取结构化 JSON 或已校验 CSV；禁止从 Markdown、自由文本或 OCR 提取。
-4. 编译 evidence、claim 和 limitation ledgers，保持 claim 单调不升级。
-5. 运行 `scripts/run_research_synthesis.py` 生成研究包。
-6. 运行 `scripts/validate_bundle.py`；失败时不发布部分包。
+4. 保留上游频率和 horizon 单位；月度路径不得在报告中写成季度，季度路径不得写成
+   月度。
+5. 编译 evidence、claim 和 limitation ledgers，保持 claim 单调不升级。
+6. 运行 `scripts/run_research_synthesis.py` 生成研究包。
+7. 运行 `scripts/validate_bundle.py`；失败时不发布部分包。
 
 ## 唯一主输出
 

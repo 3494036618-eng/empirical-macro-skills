@@ -58,7 +58,7 @@
       "type": "boolean"
     },
     "frequency": {
-      "const": "Q"
+      "enum": ["M", "Q"]
     },
     "observation_period": {
       "type": "object",
@@ -200,6 +200,42 @@
   },
   "additionalProperties": false,
   "allOf": [
+    {
+      "if": {
+        "properties": {"frequency": {"const": "M"}},
+        "required": ["frequency"]
+      },
+      "then": {
+        "properties": {
+          "observation_period": {
+            "properties": {
+              "start": {
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])$"
+              },
+              "end": {
+                "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"frequency": {"const": "Q"}},
+        "required": ["frequency"]
+      },
+      "then": {
+        "properties": {
+          "observation_period": {
+            "properties": {
+              "start": {"pattern": "^[0-9]{4}Q[1-4]$"},
+              "end": {"pattern": "^[0-9]{4}Q[1-4]$"}
+            }
+          }
+        }
+      }
+    },
     {
       "if": {
         "properties": {

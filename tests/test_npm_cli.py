@@ -26,6 +26,7 @@ def test_package_exposes_one_cli() -> None:
     plugin = json.loads((ROOT / "plugin.json").read_text("utf-8"))
 
     assert package["name"] == "empirical-macro-skills"
+    assert package["version"] == "0.2.0-beta"
     assert package["version"] == plugin["version"]
     assert package["private"] is False
     assert package["bin"] == {

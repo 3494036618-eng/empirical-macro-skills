@@ -90,6 +90,7 @@ TEXT_SUFFIXES = {
     ".csv",
     ".json",
     ".jsonl",
+    ".js",
     ".md",
     ".mjs",
     ".py",

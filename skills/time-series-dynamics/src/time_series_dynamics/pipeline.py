@@ -7,7 +7,7 @@ import tempfile
 from pathlib import Path
 
 from time_series_dynamics.artifact_validation import validate_handoff
-from time_series_dynamics.canonical_loader import load_canonical_quarterly
+from time_series_dynamics.canonical_loader import load_canonical_time_series
 from time_series_dynamics.claim_policy import claim_policy
 from time_series_dynamics.contracts import validate_document
 from time_series_dynamics.exporter import (
@@ -140,7 +140,7 @@ def run_time_series_dynamics(
             end=parsed.sample_end,
         )
     elif parsed.data_profile == "canonical_long_table":
-        frame = load_canonical_quarterly(data_path, parsed)
+        frame = load_canonical_time_series(data_path, parsed)
     else:
         raise ValueError(f"unsupported_data_profile:{parsed.data_profile}")
     estimates = estimate_path(frame, parsed)

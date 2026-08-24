@@ -10,6 +10,7 @@ IDENTIFIED_SHOCK_MECHANISMS = {
     "external_instrument",
     "statistical_innovation",
 }
+DEFERRED_DESIGNS = {"var_svar"}
 
 
 def _roles(request: dict[str, object]) -> set[str]:
@@ -66,7 +67,10 @@ def _evaluate_card(
         if not _requirement_satisfied(requirement, request, roles)
     ]
     decision = "adopt" if not missing else "reject"
-    if card.allowed_claim == "structural_candidate" and not missing:
+    if (
+        card.code in DEFERRED_DESIGNS
+        or card.allowed_claim == "structural_candidate"
+    ) and not missing:
         decision = "defer"
     return {
         "code": card.code,

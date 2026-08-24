@@ -1,12 +1,21 @@
-"""Translate the OpenAI4S MCP host contract into a macro-data connector."""
+"""OpenAI4S Host bridge for the managed professional-dataset connector."""
 
 from __future__ import annotations
 
 import hashlib
+import os
+import shutil
+import tempfile
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any, cast
 
+from macro_data.completion_export import export_completion_bundle
+from macro_data.completion_validation import validate_completion_bundle
 from macro_data.connectors.base import ConnectorRequest, ConnectorResponse
+from macro_data.contracts import validate_document
+from macro_data.datapro_batch_plan import BatchPolicy
+from macro_data.multi_source_pipeline import run_datapro_first_completion
 from macro_data.result_parser import parse_datapro_response
 
 SERVER = "volcengine-datapro"
@@ -69,12 +78,6 @@ class OpenAI4SDataProConnector:
 
     def __init__(self, host: object) -> None:
         self._mcp = _mcp(host)
-        discovery = getattr(self._mcp, "tools")(SERVER)
-        tools = discovery.get("tools") if isinstance(discovery, dict) else None
-        if not isinstance(tools, list) or not any(
-            isinstance(tool, dict) and tool.get("name") == TOOL for tool in tools
-        ):
-            raise RuntimeError("dataPro_search is not available on volcengine-datapro")
 
     def retrieve(self, request: ConnectorRequest) -> ConnectorResponse:
         result = getattr(self._mcp, "call")(
@@ -103,3 +106,72 @@ class OpenAI4SDataProConnector:
     @staticmethod
     def parse_response(raw: dict[str, Any]) -> dict[str, Any]:
         return parse_datapro_response(raw)
+
+
+def _publish(staging: Path, output: Path) -> None:
+    backup: Path | None = None
+    if output.exists():
+        backup = output.with_name(f".{output.name}.backup")
+        if backup.exists():
+            shutil.rmtree(backup)
+        os.replace(output, backup)
+    try:
+        os.replace(staging, output)
+    except BaseException:
+        if backup is not None and backup.exists() and not output.exists():
+            os.replace(backup, output)
+        raise
+    finally:
+        if backup is not None:
+            shutil.rmtree(backup, ignore_errors=True)
+
+
+def run_with_openai4s_datapro(
+    host: object,
+    request: dict[str, object],
+    output_dir: Path,
+) -> dict[str, object]:
+    validate_document("request", cast(dict[str, Any], request))
+    output_dir.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(
+        tempfile.mkdtemp(
+            prefix=f".{output_dir.name}.staging-",
+            dir=output_dir.parent,
+        )
+    )
+    try:
+        run = run_datapro_first_completion(
+            request=cast(dict[str, Any], request),
+            datapro_connector=OpenAI4SDataProConnector(host),
+            official_connectors={},
+            output_dir=staging,
+            input_mode="live",
+            batch_policy=BatchPolicy(
+                maximum_periods={"M": 12, "Q": 8, "A": 10},
+                maximum_calls=200,
+            ),
+        )
+        export_completion_bundle(
+            request=cast(dict[str, Any], request),
+            result=run["completion"],
+            retrievals=run["retrievals"],
+            gap_manifest=run["gap_manifest"],
+            output_dir=staging,
+            input_mode="live",
+        )
+        validation = validate_completion_bundle(staging)
+        if validation["valid"] is not True:
+            raise RuntimeError("completion bundle validation failed")
+        _publish(staging, output_dir)
+    finally:
+        if staging.exists():
+            shutil.rmtree(staging, ignore_errors=True)
+    return {
+        "status": run["execution_status"],
+        "research_readiness": run["research_readiness"],
+        "delivery_eligibility": run["delivery_eligibility"],
+        "eligible_for_estimation": run["eligible_for_estimation"],
+        "provider_contribution": run["provider_contribution"],
+        "issue_codes": run["issue_codes"],
+        "bundle_valid": True,
+    }

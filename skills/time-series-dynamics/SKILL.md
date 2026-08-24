@@ -124,8 +124,13 @@ V0.1 does not implement LP-IV, VAR, SVAR, state dependence, cumulative
 multipliers, mixed-frequency estimation, imputation, seasonal adjustment,
 automatic lag selection, or significance-driven specification search.
 
-V0.1 accepts one quarterly macro-data handoff and contiguous horizons `0..H`.
-Monthly and multi-bundle requests are blocked at the request contract.
+V0.1 accepts one monthly or quarterly macro-data handoff and contiguous
+horizons `0..H`. Request, macro-data handoff, and any shock Artifact must use
+the same frequency. Annual and multi-bundle requests are blocked at the
+request contract.
+
+Local Projection is the only implemented estimator. An Agent must not replace
+an unsupported or failed request with handwritten VAR/SVAR code.
 
 The estimator does not fetch data, construct shocks, rewrite the research
 estimand, or generate claims beyond the structured result.

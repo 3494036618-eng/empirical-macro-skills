@@ -1,15 +1,15 @@
 # Install the Empirical Macro Skill Suite
 
-## 快速安装
+## Quick Install
 
-npm 包发布后，可使用一条命令选择通用 Agent 或 OpenAI4S：
+Use the npm entry point to select a supported Agent:
 
 ```bash
 npx empirical-macro-skills
 ```
 
-该命令只负责选择宿主并调用本仓库的 Python 安装器，不包含另一套 Skill 或科研
-实现。当前源码版本可继续使用下方的 `uv + Python` 命令。
+The npm command delegates to the Python installer in this repository. It does
+not contain a separate Skill implementation.
 
 ## Prerequisites
 

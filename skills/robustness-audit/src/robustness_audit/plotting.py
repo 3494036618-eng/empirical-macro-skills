@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 
 import matplotlib as mpl
 from matplotlib.backends.backend_agg import FigureCanvasAgg
@@ -56,10 +56,30 @@ def _write_empty_plot(path: Path, disclosure: str) -> None:
     _write_png(path, canvas, disclosure)
 
 
+def _style_axis(axis: Any, frequency: str) -> None:
+    unit = {"M": "months", "Q": "quarters"}.get(frequency)
+    if unit is None:
+        raise ValueError(f"unsupported frequency: {frequency}")
+    axis.axhline(0.0, color="#6b7280", linewidth=1.0, linestyle=(0, (4, 4)))
+    axis.set_xlabel(f"Horizon ({unit})", color="#374151", labelpad=12)
+    axis.set_ylabel("Estimate", color="#374151", labelpad=12)
+    axis.grid(axis="y", color="#e5e7eb", linewidth=0.8)
+    axis.tick_params(colors="#4b5563")
+    axis.spines[["top", "right"]].set_visible(False)
+    axis.spines[["left", "bottom"]].set_color("#d1d5db")
+    axis.legend(
+        loc="upper left",
+        frameon=False,
+        ncols=4,
+        fontsize=8,
+    )
+
+
 def write_comparison_plot(
     path: Path,
     rows: list[dict[str, object]],
     plan_timing: str,
+    frequency: str = "Q",
 ) -> None:
     disclosure = _plan_timing_disclosure(plan_timing)
     if not rows:
@@ -99,19 +119,7 @@ def write_comparison_plot(
             alpha=0.72,
             label=alternative_id[-6:],
         )
-    axis.axhline(0.0, color="#6b7280", linewidth=1.0, linestyle=(0, (4, 4)))
-    axis.set_xlabel("Horizon (quarters)", color="#374151", labelpad=12)
-    axis.set_ylabel("Estimate", color="#374151", labelpad=12)
-    axis.grid(axis="y", color="#e5e7eb", linewidth=0.8)
-    axis.tick_params(colors="#4b5563")
-    axis.spines[["top", "right"]].set_visible(False)
-    axis.spines[["left", "bottom"]].set_color("#d1d5db")
-    axis.legend(
-        loc="upper left",
-        frameon=False,
-        ncols=4,
-        fontsize=8,
-    )
+    _style_axis(axis, frequency)
     figure.text(
         0.10,
         0.92,

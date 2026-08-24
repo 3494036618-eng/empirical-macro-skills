@@ -64,6 +64,7 @@ def export_completion_bundle(
             "quality_report.json",
         ),
     )
+    checksums.update(_batch_evidence_checksums(output_dir))
     provenance = _provenance(result, retrievals, raw_artifacts, input_mode)
     _write_json(output_dir / "provenance.json", provenance)
     checksums["provenance.json"] = sha256_file(output_dir / "provenance.json")
@@ -364,6 +365,19 @@ def _checksums(
     return {
         name: sha256_file(output_dir / name)
         for name in artifacts
+    }
+
+
+def _batch_evidence_checksums(output_dir: Path) -> dict[str, str]:
+    paths = [
+        output_dir / "batch-plan.json",
+        *sorted((output_dir / "candidate-ledgers").glob("*.json")),
+        *sorted((output_dir / "coverage-ledgers").glob("*.json")),
+    ]
+    return {
+        path.relative_to(output_dir).as_posix(): sha256_file(path)
+        for path in paths
+        if path.is_file()
     }
 
 

@@ -36,7 +36,7 @@ Python 代码控制。
 ### 专业数据集如何参与
 
 `macro-data` 默认先使用 **专业数据集**中的宏观经济数据能力进行候选召回，再执行
-确定性筛选和科研质量门：
+本地确定性筛选和科研质量门：
 
 ```text
 研究问题
@@ -82,14 +82,15 @@ research-synthesis
 - Python 3.12
 - [`uv`](https://docs.astral.sh/uv/)
 
-npm 包发布后，可以使用统一入口选择目标 Agent：
+推荐使用 npm 包提供的统一安装入口：
 
 ```bash
 npx empirical-macro-skills
 ```
 
-在当前源码目录中，或不使用 npm 时，可以直接运行 Python 安装器。将
-`/path/to/your-agent/skills` 替换为目标 Agent 的 Skills 目录：
+这个入口只负责选择目标 Agent 并调用仓库中的 Python 安装器，不包含另一套 Skill
+实现。直接从源码安装时，将 `/path/to/your-agent/skills` 替换为目标 Agent 的
+Skills 目录：
 
 ```bash
 uv run --isolated --project skills/empirical-macro --locked --no-dev \
@@ -188,13 +189,14 @@ data provenance and unfavorable robustness results.
 
 ### Generic installation
 
-After the npm package is published, use the unified installer:
+The npm package provides one entry point for selecting the target Agent:
 
 ```bash
 npx empirical-macro-skills
 ```
 
-From a source checkout, or without npm, use the Python installer:
+This command delegates to the repository's Python installer; it does not
+contain a second Skill implementation. From a source checkout, use:
 
 ```bash
 uv run --isolated --project skills/empirical-macro --locked --no-dev \

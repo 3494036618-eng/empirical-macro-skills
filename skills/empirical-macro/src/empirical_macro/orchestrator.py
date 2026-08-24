@@ -64,7 +64,7 @@ def _timestamp() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def _initial_state(intent: ResearchIntent) -> WorkflowState:
+def create_initial_state(intent: ResearchIntent) -> WorkflowState:
     if intent.method_family not in {
         "dynamic_shock_response",
         "conditional_dynamic_association",
@@ -355,7 +355,7 @@ def run_intent(
         return WorkflowRunResult(state, decision, (), (), None, output_root, "route_only")
     if state is None and decision.action != "route_research_design":
         return WorkflowRunResult(state, decision, (), (), None, output_root, "route_only")
-    current = state or _initial_state(intent)
+    current = state or create_initial_state(intent)
     stages: list[WorkflowStage] = []
     artifacts: list[str] = []
     while current.current_stage not in {"completed", "blocked", "failed"}:

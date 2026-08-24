@@ -7,14 +7,14 @@ from typing import Any
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-MACRO_DATA_SRC = ROOT / "skills" / "macro-data" / "src"
-
 from empirical_macro.openai4s_installer import (
     INSTALL_ORDER,
     OpenAI4SSuiteInstallError,
     install_openai4s_suite,
 )
+from macro_data.connectors.base import ConnectorRequest
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class _Sidecar:
@@ -62,6 +62,10 @@ class _VersionService:
         self.deleted.append(name)
 
 
+def _adapter() -> Any:
+    return importlib.import_module("macro_data.openai4s_datapro")
+
+
 def test_openai4s_suite_install_reports_all_versions() -> None:
     service = _VersionService()
 
@@ -96,27 +100,18 @@ def test_openai4s_suite_install_removes_new_versions_after_failure() -> None:
     assert service.deleted == list(reversed(expected_changed))
 
 
-def _host_bridge() -> Any:
-    bridge_path = MACRO_DATA_SRC / "macro_data" / "openai4s_host_bridge.py"
-    assert bridge_path.is_file(), "OpenAI4S DataPro bridge must have a host-specific name"
-    return importlib.import_module("macro_data.openai4s_host_bridge")
+def test_datapro_adapter_requires_host_mcp() -> None:
+    adapter = _adapter()
+
+    with pytest.raises(RuntimeError, match="host.mcp is unavailable"):
+        adapter.OpenAI4SDataProConnector(SimpleNamespace())
 
 
-def test_datapro_host_bridge_rejects_missing_tool() -> None:
-    bridge = _host_bridge()
-    host = SimpleNamespace(
-        mcp=SimpleNamespace(tools=lambda _server: {"tools": []})
-    )
-
-    with pytest.raises(RuntimeError, match="dataPro_search"):
-        bridge.OpenAI4SDataProConnector(host)
-
-
-def test_datapro_host_bridge_removes_secrets_and_hashes_trace_id() -> None:
-    bridge = _host_bridge()
+def test_datapro_adapter_removes_secrets_and_hashes_trace_id() -> None:
+    adapter = _adapter()
     trace_key = "trace_" + "id"
 
-    sanitized = bridge._sanitize(
+    sanitized = adapter._sanitize(
         {
             "token": "secret",
             trace_key: "raw-trace",
@@ -130,17 +125,12 @@ def test_datapro_host_bridge_removes_secrets_and_hashes_trace_id() -> None:
     assert sanitized["payload"] == {"value": 1}
 
 
-def test_datapro_host_bridge_calls_the_built_in_mcp_tool() -> None:
-    bridge = _host_bridge()
+def test_datapro_adapter_calls_the_built_in_mcp_tool() -> None:
+    adapter = _adapter()
     calls: list[tuple[str, str, dict[str, str]]] = []
     trace_key = "trace_" + "id"
 
     class _MCP:
-        @staticmethod
-        def tools(server: str) -> dict[str, object]:
-            assert server == "volcengine-datapro"
-            return {"tools": [{"name": "dataPro_search"}]}
-
         @staticmethod
         def call(
             server: str,
@@ -166,10 +156,10 @@ def test_datapro_host_bridge_calls_the_built_in_mcp_tool() -> None:
                 },
             }
 
-    connector = bridge.OpenAI4SDataProConnector(SimpleNamespace(mcp=_MCP()))
-    request = SimpleNamespace(request_id="request-1", query="中国季度 GDP")
-
-    response = connector.retrieve(request)
+    connector = adapter.OpenAI4SDataProConnector(SimpleNamespace(mcp=_MCP()))
+    response = connector.retrieve(
+        ConnectorRequest(request_id="request-1", query="中国季度 GDP")
+    )
 
     assert calls == [
         (
@@ -185,40 +175,38 @@ def test_datapro_host_bridge_calls_the_built_in_mcp_tool() -> None:
     assert response.raw["trace_id_sha256"].startswith("sha256:")
 
 
-def test_datapro_host_bridge_does_not_own_bundle_pipeline() -> None:
-    bridge_path = MACRO_DATA_SRC / "macro_data" / "openai4s_host_bridge.py"
-    assert bridge_path.is_file(), "OpenAI4S DataPro bridge must exist"
-    source = bridge_path.read_text("utf-8")
+def test_datapro_adapter_rejects_an_incomplete_response_index() -> None:
+    adapter = _adapter()
 
-    assert "export_completion_bundle" not in source
-    assert "validate_completion_bundle" not in source
-    assert "tempfile" not in source
-    assert "os.replace" not in source
+    class _MCP:
+        @staticmethod
+        def call(
+            _server: str,
+            _tool: str,
+            _arguments: dict[str, str],
+        ) -> dict[str, object]:
+            return {
+                "raw": {"structuredContent": {"code": 0, "items": []}},
+                "index": {"complete": False},
+            }
+
+    connector = adapter.OpenAI4SDataProConnector(SimpleNamespace(mcp=_MCP()))
+
+    with pytest.raises(RuntimeError, match="index is incomplete"):
+        connector.retrieve(ConnectorRequest(request_id="request-1", query="GDP"))
 
 
-def test_live_completion_runner_is_host_neutral() -> None:
-    runner_path = MACRO_DATA_SRC / "macro_data" / "live_completion.py"
-    assert runner_path.is_file(), "bundle orchestration must be host neutral"
-    source = runner_path.read_text("utf-8")
-
-    assert "openai4s" not in source.lower()
-    assert "host.mcp" not in source
-    assert "export_completion_bundle" in source
-    assert "validate_completion_bundle" in source
-
-
-def test_live_completion_publishes_only_after_validation(
+def test_openai4s_completion_publishes_only_after_validation(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    runner = importlib.import_module("macro_data.live_completion")
-    connector = SimpleNamespace(code="datapro")
+    adapter = _adapter()
     output = tmp_path / "bundle"
     request: dict[str, object] = {"schema_version": "0.3.0-beta"}
 
-    monkeypatch.setattr(runner, "validate_document", lambda *_args: None)
+    monkeypatch.setattr(adapter, "validate_document", lambda *_args: None)
     monkeypatch.setattr(
-        runner,
+        adapter,
         "run_datapro_first_completion",
         lambda **_kwargs: {
             "completion": object(),
@@ -238,35 +226,35 @@ def test_live_completion_publishes_only_after_validation(
         assert isinstance(staging, Path)
         (staging / "validated.txt").write_text("ready", encoding="utf-8")
 
-    monkeypatch.setattr(runner, "export_completion_bundle", export_completion_bundle)
+    monkeypatch.setattr(adapter, "export_completion_bundle", export_completion_bundle)
     monkeypatch.setattr(
-        runner,
+        adapter,
         "validate_completion_bundle",
         lambda path: {"valid": (path / "validated.txt").is_file()},
     )
 
-    result = runner.run_live_completion(
-        request=request,
-        datapro_connector=connector,
-        output_dir=output,
+    result = adapter.run_with_openai4s_datapro(
+        SimpleNamespace(mcp=SimpleNamespace()),
+        request,
+        output,
     )
 
     assert result["bundle_valid"] is True
     assert (output / "validated.txt").read_text("utf-8") == "ready"
 
 
-def test_live_completion_preserves_existing_output_when_validation_fails(
+def test_openai4s_completion_preserves_output_when_validation_fails(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    runner = importlib.import_module("macro_data.live_completion")
+    adapter = _adapter()
     output = tmp_path / "bundle"
     output.mkdir()
     (output / "existing.txt").write_text("keep", encoding="utf-8")
 
-    monkeypatch.setattr(runner, "validate_document", lambda *_args: None)
+    monkeypatch.setattr(adapter, "validate_document", lambda *_args: None)
     monkeypatch.setattr(
-        runner,
+        adapter,
         "run_datapro_first_completion",
         lambda **_kwargs: {
             "completion": object(),
@@ -274,22 +262,18 @@ def test_live_completion_preserves_existing_output_when_validation_fails(
             "gap_manifest": object(),
         },
     )
+    monkeypatch.setattr(adapter, "export_completion_bundle", lambda **_kwargs: None)
     monkeypatch.setattr(
-        runner,
-        "export_completion_bundle",
-        lambda **_kwargs: None,
-    )
-    monkeypatch.setattr(
-        runner,
+        adapter,
         "validate_completion_bundle",
         lambda _path: {"valid": False},
     )
 
     with pytest.raises(RuntimeError, match="validation failed"):
-        runner.run_live_completion(
-            request={"schema_version": "0.3.0-beta"},
-            datapro_connector=SimpleNamespace(code="datapro"),
-            output_dir=output,
+        adapter.run_with_openai4s_datapro(
+            SimpleNamespace(mcp=SimpleNamespace()),
+            {"schema_version": "0.3.0-beta"},
+            output,
         )
 
     assert (output / "existing.txt").read_text("utf-8") == "keep"

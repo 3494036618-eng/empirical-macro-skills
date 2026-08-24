@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "empirical-macro-skills",
-  "version": "0.1.0-beta",
+  "version": "0.2.0-beta",
   "description": "Host-neutral Agent Skills for auditable empirical macro research with Agent Plan 专业数据集 integration.",
   "author": {
     "name": "Empirical Macro Skills contributors"

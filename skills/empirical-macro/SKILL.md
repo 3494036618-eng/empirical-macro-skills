@@ -17,9 +17,10 @@ next.
 ## Entry Boundary
 
 For an initial request that spans two or more workflow stages, load this Skill
-before any atomic Skill and call `route()` before web search, data retrieval,
-estimation, robustness checks, or report generation. Loading several atomic
-Skills is not a substitute for a `RouteDecision`.
+before any atomic Skill and call `empirical-macro.kernel.run()`. The total
+controller performs initial routing, research design, the first stage gate,
+and workflow-state persistence in one call. Loading several atomic Skills is
+not a substitute for running the total controller.
 
 Direct atomic-Skill use remains valid for a clearly scoped single-stage request
 whose required upstream Artifacts are already available.
@@ -36,15 +37,18 @@ Nowcasting, structural-model, or other unimplemented methods.
 
 ## Required Flow
 
-1. Compile the user request into a candidate `ResearchIntent`.
-2. Validate it against `schemas/research-intent.schema.json`.
-3. Call `scripts/route_empirical_macro.py`.
-4. Obey the returned `RouteDecision`.
-5. Call only the target atomic Skill through its public interface.
-6. Validate its Artifact before advancing workflow state.
-7. Persist state only through `scripts/run_workflow.py`.
+1. Determine the requested `method_family`.
+2. Compile method-specific facts into `method_inputs`.
+3. Call `empirical-macro.kernel.run()` once for the initial end-to-end request.
+4. Obey the returned `status`, `next_action`, and `target_skill`.
+5. A `stopped` result ends the current workflow run. Do not create or present
+   downstream outputs as validated results of that run.
+6. Continue an active workflow only from its validated
+   `workflow-state.json`; never infer a passed stage from prose or an existing
+   directory.
+7. Validate every new Artifact before advancing workflow state.
+8. Persist later state changes only through `scripts/run_workflow.py`.
 
-Never infer a passed stage from prose, HTTP success, or an existing directory.
 Never mutate `workflow-state.json` directly.
 
 ## Hard Method Gate
@@ -116,29 +120,35 @@ Never install dependencies with `pip`, `uv`, or `host.bash`, and never create a
 virtual environment inside this Skill.
 
 For a new end-to-end supported shock-response study with no existing
-Artifacts, use this exact routing candidate:
+Artifacts, call `router.run()` exactly once:
 
 ```python
-intent = {
-    "schema_version": "0.1.0-beta",
-    "domain": "empirical_macro",
-    "request_kind": "research_idea",
-    "method_family": "dynamic_shock_response",
-    "has_research_plan": False,
-    "has_macro_data_bundle": False,
-    "has_estimator_bundle": False,
-    "has_robustness_bundle": False,
-    "has_workflow_state": False,
-}
-decision = router.route(intent)
-print(decision)
+result = router.run(
+    user_question=user_question,
+    method_family="dynamic_shock_response",
+    method_inputs={
+        "outcome": "美国消费者价格通胀",
+        "policy_variable": "美联储货币政策收紧",
+        "entity": "USA",
+        "start": "1969-01",
+        "end": "2023-12",
+        "frequency": "M",
+        "horizon": 16,
+        "intended_claim": "causal",
+        "shock_identification": "unresolved",
+    },
+    output_dir="output/empirical-macro",
+)
+print(result)
 ```
 
-`ResearchIntent` contains only routing metadata. Do not add research variables,
-sample dates, or identification details; those belong to `research-design`.
-Do not call private helpers or inspect private module source. The public
-`route()` function validates the contract.
+Do not call private helpers or inspect private module source. Do not replace
+`shock_identification="unresolved"` with a narrative, external-instrument,
+statistical, or structural identification strategy unless the user supplied
+that evidence.
 
-Call `route()` before preparing downstream dependencies, loading atomic Skills,
-invoking web or DataPro tools, writing files, or running an estimator. Obey the
-returned action and execute only its `target_skill`.
+If `result["status"] == "stopped"`, return the structured reason and do not
+continue that workflow or label later work as its validated output. The host
+Agent decides whether to continue the conversation or route a later user
+request. `route()` and `decide_after_stage()` remain public only for
+single-stage compatibility and diagnostics.

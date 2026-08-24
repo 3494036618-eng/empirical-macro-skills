@@ -10,6 +10,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 
 from time_series_dynamics.models import ClaimPolicy, DynamicsRequest, HorizonEstimate
+from time_series_dynamics.time_axis import horizon_unit
 
 COLORS = {
     "identified_shock_irf": "#2563eb",
@@ -40,7 +41,11 @@ def write_dynamic_path(
     axis.fill_between(horizons, lower, upper, color=color, alpha=0.14, linewidth=0)
     axis.plot(horizons, values, color=color, linewidth=2.2)
     axis.axhline(0.0, color="#6b7280", linewidth=1.0, linestyle=(0, (4, 4)))
-    axis.set_xlabel("Horizon (quarters)", color="#374151", labelpad=12)
+    axis.set_xlabel(
+        f"Horizon ({horizon_unit(request.frequency)})",
+        color="#374151",
+        labelpad=12,
+    )
     axis.set_ylabel(request.output_unit, color="#374151", labelpad=12)
     axis.set_xticks(horizons[:: max(1, len(horizons) // 9)])
     axis.grid(axis="y", color="#e5e7eb", linewidth=0.8)

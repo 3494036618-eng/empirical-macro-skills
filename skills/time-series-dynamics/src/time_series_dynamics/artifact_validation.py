@@ -23,6 +23,10 @@ def _macro_issues(
             or result.get("research_use") != "dynamic_response"
         ):
             issues.add("macro_bundle_not_analysis_ready")
+        if result.get("frequency") != request.get("frequency"):
+            issues.add("frequency_mismatch")
+        if result.get("frequency") != request.get("frequency"):
+            issues.add("frequency_mismatch")
         if request.get("data_profile") == "canonical_long_table":
             if result.get("evidence_kind") != "macro_data_association":
                 issues.add("association_macro_evidence_kind_mismatch")
@@ -49,6 +53,10 @@ def _shock_issues(
     validate_document("shock_artifact", shock_artifact)
     if shock_artifact.get("shock_id") != request.get("shock_identification_artifact_ref"):
         return {"shock_artifact_required"}
+    if shock_artifact.get("frequency") != request.get("frequency"):
+        return {"frequency_mismatch"}
+    if shock_artifact.get("frequency") != request.get("frequency"):
+        return {"frequency_mismatch"}
     checksums = {
         str(item.get("source_checksum"))
         for item in macro_results

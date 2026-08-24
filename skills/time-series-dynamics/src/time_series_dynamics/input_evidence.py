@@ -83,7 +83,11 @@ def _source_errors(
     }
     if macro_period != expected_period or shock_period != expected_period:
         errors.append("sample_window_mismatch")
-    if macro.get("frequency") != "Q" or shock.get("frequency") != "Q":
+    frequencies = {macro.get("frequency"), shock.get("frequency")}
+    source_frequency = source.get("frequency")
+    if source_frequency is not None:
+        frequencies.add(source_frequency)
+    if len(frequencies) != 1 or next(iter(frequencies)) not in {"M", "Q"}:
         errors.append("frequency_mismatch")
     source_license = source.get("license")
     shock_license = shock.get("license")

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from time_series_dynamics.claim_policy import assert_summary_language
 from time_series_dynamics.models import ClaimPolicy, DynamicsRequest, HorizonEstimate
+from time_series_dynamics.time_axis import horizon_unit_zh
 
 
 def technical_summary(
@@ -52,7 +53,8 @@ def plain_language_summary(
         f"# {policy.title_zh}\n\n"
         f"{policy.required_disclaimer_zh}\n\n"
         "## 主要数值\n\n"
-        f"估计路径中绝对值最大的系数出现在第 {extreme.horizon} 个季度，"
+        f"估计路径中绝对值最大的系数出现在第 {extreme.horizon} "
+        f"{horizon_unit_zh(request.frequency)}，"
         f"点估计为 {extreme.estimate:.3f} {request.output_unit}，"
         f"{request.confidence_level:.0%} 区间为 "
         f"[{extreme.confidence_lower:.3f}, {extreme.confidence_upper:.3f}]。"

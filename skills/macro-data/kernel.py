@@ -33,15 +33,28 @@ def _workspace_path(value: str, *, must_exist: bool = False) -> Path:
 
 def plan(request: dict[str, object]) -> dict[str, object]:
     from macro_data.contracts import validate_document
+    from macro_data.datapro_batch_plan import (
+        BatchPolicy,
+        build_datapro_batch_plan,
+    )
     from macro_data.observation_matrix import build_expected_matrix
 
     validate_document("request", request)
     matrix = build_expected_matrix(request)
+    batches = build_datapro_batch_plan(
+        request,
+        BatchPolicy(
+            maximum_periods={"M": 12, "Q": 8, "A": 10},
+            maximum_calls=200,
+        ),
+    )
     return {
         "status": "dry_run",
         "planned_primary_provider": "datapro",
         "expected_observation_count": len(matrix.cells),
         "matrix_id": matrix.matrix_id,
+        "batch_count": len(batches),
+        "batches": [batch.as_document() for batch in batches],
     }
 
 
@@ -51,13 +64,12 @@ def run_with_datapro(
     *,
     output_dir: str,
 ) -> dict[str, object]:
-    from macro_data.live_completion import run_live_completion
-    from macro_data.openai4s_host_bridge import OpenAI4SDataProConnector
+    from macro_data.openai4s_datapro import run_with_openai4s_datapro
 
-    return run_live_completion(
-        request=request,
-        datapro_connector=OpenAI4SDataProConnector(host),
-        output_dir=_workspace_path(output_dir),
+    return run_with_openai4s_datapro(
+        host,
+        request,
+        _workspace_path(output_dir),
     )
 
 
